@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Free Small Business Calculators | CanadianSME</title>
+<meta name="description" content="Free GST/HST, payroll deductions, cash-flow and loan calculators built on current Canadian federal and provincial rates. No sign-up." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: #fff; color: #101828; font-family: "IBM Plex Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  h1, h2, h3, h4, p, ul, ol, li, figure, blockquote, table { margin: 0; padding: 0; }
+  ul, ol { list-style: none; }
+  a { color: #D71920; text-decoration: none; }
+  a:hover { color: #A5121A; }
+  button, input, select { font: inherit; color: inherit; }
+  table { border-collapse: collapse; width: 100%; }
+</style>
+</helmet>
+
+<div style="display:flex;flex-direction:column;min-height:100vh">
+
+<header style="position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid #E4E7EC">
+  <div style="background:#101828;color:#C8CDD6">
+    <div style="max-width:1180px;margin:0 auto;padding:9px 24px;display:flex;gap:16px;align-items:center;font-size:12px">
+      <span style="font-family:Sora,sans-serif;font-weight:600">Free for Canadian small business owners — no sign-up, no email required</span>
+      <a href="CanadianSME Homepage.dc.html" style="margin-left:auto;color:#C8CDD6;font-family:Sora,sans-serif;font-weight:600" style-hover="color:#fff">← Back to CanadianSME</a>
+    </div>
+  </div>
+  <div style="max-width:1180px;margin:0 auto;padding:18px 24px;display:flex;align-items:center;gap:26px;flex-wrap:wrap">
+    <a href="CanadianSME Homepage.dc.html" style="display:flex;align-items:baseline;gap:2px;font-family:Sora,sans-serif;font-weight:800;font-size:20px;letter-spacing:-0.02em;color:#101828" style-hover="color:#101828"><span style="color:#D71920">Canadian</span><span>SME</span></a>
+    <span style="width:1px;height:26px;background:#E4E7EC"></span>
+    <span style="font-family:Sora,sans-serif;font-weight:700;font-size:15px">Business Tools</span>
+  </div>
+  <nav aria-label="Calculators" style="border-top:1px solid #F0F2F5">
+    <div style="max-width:1180px;margin:0 auto;padding:0 24px;display:flex;gap:4px;overflow-x:auto">
+      <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="5">
+        <a href="{{ t.hash }}" style="padding:14px 14px 12px;border-bottom:3px solid {{ t.border }};font-family:Sora,sans-serif;font-weight:600;font-size:13.5px;color:{{ t.color }};white-space:nowrap" style-hover="color:#D71920">{{ t.label }}</a>
+      </sc-for>
+    </div>
+  </nav>
+</header>
+
+<main style="flex:1">
+
+<sc-if value="{{ showCalc }}" hint-placeholder-val="{{ false }}">
+  <div role="note" style="background:#FFFAEB;border-bottom:1px solid #FEC84B">
+    <div style="max-width:1180px;margin:0 auto;padding:16px 24px;display:flex;gap:13px;align-items:flex-start">
+      <span aria-hidden="true" style="font-family:Sora,sans-serif;font-weight:800;font-size:14px;color:#B54708;flex-shrink:0;line-height:1.5">!</span>
+      <p style="font-size:14px;line-height:1.65;color:#7A2E0E;max-width:92ch;text-wrap:pretty"><strong style="font-weight:600">Example and reference only.</strong> This calculator produces illustrative estimates to help you plan. Figures are not exact, do not account for your full circumstances, and must not be used to file, remit, or make financial commitments. Confirm every amount with the CRA, Revenu Québec, or your accountant before acting on it. Nothing here is tax, accounting, or financial advice.</p>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ showIndex }}" hint-placeholder-val="{{ true }}">
+  <div>
+    <section style="border-bottom:1px solid #E4E7EC;background:#F4F6F8">
+      <div style="max-width:1180px;margin:0 auto;padding:64px 24px">
+        <span style="display:block;font-family:Sora,sans-serif;font-weight:700;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#D71920;margin-bottom:12px">Free tools</span>
+        <h1 style="font-family:Sora,sans-serif;font-weight:700;font-size:clamp(30px,4vw,46px);line-height:1.08;letter-spacing:-0.025em;max-width:22ch;margin-bottom:16px;text-wrap:pretty">Calculators Built for Canadian Rules</h1>
+        <p style="font-size:17px;line-height:1.7;color:#667085;max-width:60ch;text-wrap:pretty">Every calculator here uses current federal and provincial rates — not a generic template with a Canadian flag on it. Nothing is stored, and nothing asks for your email. Results are illustrative examples for reference only.</p>
+      </div>
+    </section>
+    <section style="max-width:1180px;margin:0 auto;padding:56px 24px 80px">
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:22px">
+        <sc-for list="{{ tools }}" as="t" hint-placeholder-count="4">
+          <a href="{{ t.hash }}" style="border:1px solid #E4E7EC;border-radius:10px;padding:26px;display:flex;flex-direction:column;gap:11px;background:#fff;transition:box-shadow .18s ease,transform .18s ease" style-hover="box-shadow:0 12px 28px rgba(16,24,40,0.10);transform:translateY(-3px);border-color:#D71920">
+            <span style="font-family:Sora,sans-serif;font-weight:800;font-size:24px;color:#D71920;line-height:1">{{ t.mark }}</span>
+            <h2 style="font-family:Sora,sans-serif;font-weight:700;font-size:17.5px;line-height:1.28;color:#101828;text-wrap:pretty">{{ t.title }}</h2>
+            <p style="font-size:14px;line-height:1.6;color:#667085;text-wrap:pretty">{{ t.desc }}</p>
+            <span style="margin-top:auto;padding-top:10px;font-family:Sora,sans-serif;font-weight:700;font-size:13px;color:#D71920">Open calculator →</span>
+          </a>
+        </sc-for>
+      </div>
+      <div role="note" style="margin-top:44px;padding:24px 26px;background:#FFFAEB;border-left:3px solid #FEC84B;max-width:82ch">
+        <strong style="display:block;font-family:Sora,sans-serif;font-weight:700;font-size:13px;letter-spacing:0.06em;text-transform:uppercase;color:#B54708;margin-bottom:10px">Example and reference only</strong>
+        <p style="font-size:14.5px;line-height:1.7;color:#7A2E0E;text-wrap:pretty">These calculators are illustrative planning aids built on published {{ taxYear }} federal and provincial rates. They use simplified assumptions, do not account for your full circumstances, and their results are not exact. Do not use them to file a return, remit deductions, or commit to financing. Confirm payroll amounts against the CRA Payroll Deductions Online Calculator, and check any figure with your accountant or the relevant tax authority before you act on it. Nothing here is tax, accounting, or financial advice.</p>
+      </div>
+    </section>
+  </div>
+</sc-if>
+
+<sc-if value="{{ showGst }}" hint-placeholder-val="{{ false }}">
+  <div style="max-width:1180px;margin:0 auto;padding:52px 24px 80px">
+    <span style="display:block;font-family:Sora,sans-serif;font-weight:700;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#D71920;margin-bottom:12px">Sales tax</span>
+    <h1 style="font-family:Sora,sans-serif;font-weight:700;font-size:clamp(28px,3.4vw,40px);line-height:1.1;letter-spacing:-0.02em;margin-bottom:14px;text-wrap:pretty">GST/HST Calculator</h1>
+    <p style="font-size:16.5px;line-height:1.7;color:#667085;max-width:62ch;margin-bottom:38px;text-wrap:pretty">Work out what to charge, or back out the tax from a total you have already been paid. Covers GST, HST, and the provinces that run a separate PST, RST, or QST.</p>
+
+    <div style="display:grid;grid-template-columns:minmax(280px,0.85fr) minmax(300px,1.15fr);gap:34px;align-items:start">
+      <form style="border:1px solid #E4E7EC;border-radius:10px;padding:26px;display:flex;flex-direction:column;gap:20px;background:#fff" onSubmit="{{ noSubmit }}">
+        <label style="display:flex;flex-direction:column;gap:7px">
+          <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Province or territory</span>
+          <select value="{{ gstProv }}" onChange="{{ onGstProv }}" style="padding:12px 13px;border:1.5px solid #D0D5DD;border-radius:8px;font-size:15px;background:#fff">
+            <sc-for list="{{ provinceNames }}" as="p" hint-placeholder-count="13"><option>{{ p }}</option></sc-for>
+          </select>
+        </label>
+        <fieldset style="border:0;padding:0;margin:0;display:flex;flex-direction:column;gap:7px">
+          <legend style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085;padding:0;margin-bottom:2px">Amount entered is</legend>
+          <div style="display:flex;gap:8px">
+            <button type="button" onClick="{{ setGstAdd }}" aria-pressed="{{ gstAddOn }}" style="flex:1;padding:11px 10px;border-radius:8px;border:1.5px solid {{ gstAddBorder }};background:{{ gstAddBg }};color:{{ gstAddFg }};font-family:Sora,sans-serif;font-weight:600;font-size:13.5px;cursor:pointer">Before tax</button>
+            <button type="button" onClick="{{ setGstRemove }}" aria-pressed="{{ gstRemoveOn }}" style="flex:1;padding:11px 10px;border-radius:8px;border:1.5px solid {{ gstRemBorder }};background:{{ gstRemBg }};color:{{ gstRemFg }};font-family:Sora,sans-serif;font-weight:600;font-size:13.5px;cursor:pointer">Tax included</button>
+          </div>
+        </fieldset>
+        <label style="display:flex;flex-direction:column;gap:7px">
+          <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Amount (CAD)</span>
+          <input type="number" min="0" step="0.01" value="{{ gstAmount }}" onChange="{{ onGstAmount }}" onInput="{{ onGstAmount }}" style="padding:12px 13px;border:1.5px solid #D0D5DD;border-radius:8px;font-size:15px" />
+        </label>
+      </form>
+
+      <div style="display:flex;flex-direction:column;gap:18px">
+        <div style="background:#101828;color:#fff;border-radius:10px;padding:28px">
+          <span style="display:block;font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#98A2B3;margin-bottom:8px">{{ gstTotalLabel }}</span>
+          <strong style="display:block;font-family:Sora,sans-serif;font-weight:800;font-size:clamp(30px,4vw,44px);letter-spacing:-0.02em;line-height:1.05">{{ gstTotal }}</strong>
+          <span style="display:block;margin-top:10px;font-size:14.5px;color:#C8CDD6">{{ gstRateNote }}</span>
+        </div>
+        <table style="border:1px solid #E4E7EC;border-radius:10px;overflow:hidden">
+          <caption style="text-align:left;padding:16px 20px;background:#F4F6F8;border-bottom:1px solid #E4E7EC;font-family:Sora,sans-serif;font-weight:700;font-size:13px;letter-spacing:0.04em;text-transform:uppercase;color:#101828">Breakdown</caption>
+          <tbody>
+            <sc-for list="{{ gstRows }}" as="r" hint-placeholder-count="4">
+              <tr style="border-bottom:1px solid #F0F2F5">
+                <th scope="row" style="text-align:left;padding:14px 20px;font-weight:{{ r.weight }};font-size:14.5px;color:#475467">{{ r.label }}</th>
+                <td style="text-align:right;padding:14px 20px;font-family:Sora,sans-serif;font-weight:{{ r.weight }};font-size:15px;color:#101828">{{ r.value }}</td>
+              </tr>
+            </sc-for>
+          </tbody>
+        </table>
+        <p style="font-size:14px;line-height:1.7;color:#667085;text-wrap:pretty">{{ gstGuidance }}</p>
+      </div>
+    </div>
+
+    <section style="margin-top:56px;border-top:1px solid #E4E7EC;padding-top:36px">
+      <h2 style="font-family:Sora,sans-serif;font-weight:700;font-size:21px;margin-bottom:18px">Rates across Canada</h2>
+      <div style="border:1px solid #E4E7EC;border-radius:10px;overflow:hidden">
+        <table>
+          <thead>
+            <tr style="background:#F4F6F8">
+              <th scope="col" style="text-align:left;padding:13px 18px;font-family:Sora,sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.08em;text-transform:uppercase;color:#667085;border-bottom:1px solid #E4E7EC">Province / territory</th>
+              <th scope="col" style="text-align:left;padding:13px 18px;font-family:Sora,sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.08em;text-transform:uppercase;color:#667085;border-bottom:1px solid #E4E7EC">System</th>
+              <th scope="col" style="text-align:right;padding:13px 18px;font-family:Sora,sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.08em;text-transform:uppercase;color:#667085;border-bottom:1px solid #E4E7EC">Total rate</th>
+            </tr>
+          </thead>
+          <tbody>
+            <sc-for list="{{ gstTable }}" as="row" hint-placeholder-count="13">
+              <tr style="border-bottom:1px solid #F0F2F5;background:{{ row.bg }}">
+                <th scope="row" style="text-align:left;padding:13px 18px;font-weight:600;font-size:14.5px;color:#101828">{{ row.name }}</th>
+                <td style="padding:13px 18px;font-size:14px;color:#667085">{{ row.system }}</td>
+                <td style="text-align:right;padding:13px 18px;font-family:Sora,sans-serif;font-weight:600;font-size:14.5px;color:#101828">{{ row.rate }}</td>
+              </tr>
+            </sc-for>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top:20px;font-size:14px;line-height:1.7;color:#667085;max-width:78ch;text-wrap:pretty">You must register for GST/HST once your worldwide taxable revenue passes $30,000 in a single calendar quarter or over four consecutive quarters. Registering voluntarily below that threshold lets you claim input tax credits on your own purchases.</p>
+    </section>
+  </div>
+</sc-if>
+
+<sc-if value="{{ showPayroll }}" hint-placeholder-val="{{ false }}">
+  <div style="max-width:1180px;margin:0 auto;padding:52px 24px 80px">
+    <span style="display:block;font-family:Sora,sans-serif;font-weight:700;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#D71920;margin-bottom:12px">Payroll</span>
+    <h1 style="font-family:Sora,sans-serif;font-weight:700;font-size:clamp(28px,3.4vw,40px);line-height:1.1;letter-spacing:-0.02em;margin-bottom:14px;text-wrap:pretty">Payroll Deductions Estimator</h1>
+    <p style="font-size:16.5px;line-height:1.7;color:#667085;max-width:64ch;margin-bottom:38px;text-wrap:pretty">Estimate CPP, EI, and income tax withheld per pay period, plus the employer contributions that land on top of the salary. Uses {{ taxYear }} ceilings.</p>
+
+    <div style="display:grid;grid-template-columns:minmax(280px,0.85fr) minmax(320px,1.15fr);gap:34px;align-items:start">
+      <form style="border:1px solid #E4E7EC;border-radius:10px;padding:26px;display:flex;flex-direction:column;gap:20px" onSubmit="{{ noSubmit }}">
+        <fieldset style="border:0;padding:0;margin:0;display:flex;flex-direction:column;gap:7px">
+          <legend style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085;padding:0;margin-bottom:2px">This employee is paid</legend>
+          <div style="display:flex;gap:8px">
+            <button type="button" onClick="{{ setPaySalary }}" aria-pressed="{{ payIsSalary }}" style="flex:1;padding:11px 10px;border-radius:8px;border:1.5px solid {{ paySalBorder }};background:{{ paySalBg }};color:{{ paySalFg }};font-family:Sora,sans-serif;font-weight:600;font-size:13.5px;cursor:pointer">Salary</button>
+            <button type="button" onClick="{{ setPayHourly }}" aria-pressed="{{ payIsHourly }}" style="flex:1;padding:11px 10px;border-radius:8px;border:1.5px solid {{ payHrBorder }};background:{{ payHrBg }};color:{{ payHrFg }};font-family:Sora,sans-serif;font-weight:600;font-size:13.5px;cursor:pointer">Hourly</button>
+          </div>
+        </fieldset>
+        <sc-if value="{{ payIsSalary }}" hint-placeholder-val="{{ true }}">
+          <label style="display:flex;flex-direction:column;gap:7px">
+            <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Annual gross salary (CAD)</span>
+            <input type="number" min="0" step="500" value="{{ payGross }}" onChange="{{ onPayGross }}" onInput="{{ onPayGross }}" style="padding:12px 13px;border:1.5px solid #D0D5DD;border-radius:8px;font-size:15px" />
+          </label>
+        </sc-if>
+        <sc-if value="{{ payIsHourly }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;gap:12px">
+            <label style="display:flex;flex-direction:column;gap:7px;flex:1">
+              <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Hourly rate</span>
+              <input type="number" min="0" step="0.25" value="{{ payRate }}" onChange="{{ onPayRate }}" onInput="{{ onPayRate }}" style="padding:12px 13px;border:1.5px solid #D0D5DD;border-radius:8px;font-size:15px" />
+            </label>
+            <label style="display:flex;flex-direction:column;gap:7px;flex:1">
+              <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Hours a week</span>
+              <input type="number" min="0" max="80" step="0.5" value="{{ payHours }}" onChange="{{ onPayHours }}" onInput="{{ onPayHours }}" style="padding:12px 13px;border:1.5px solid #D0D5DD;border-radius:8px;font-size:15px" />
+            </label>
+          </div>
+          <p style="font-size:13px;line-height:1.6;color:#667085;text-wrap:pretty">{{ payGrossNote }}</p>
+        </sc-if>
+        <label style="display:flex;flex-direction:column;gap:7px">
+          <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Province of employment</span>
+          <select value="{{ payProv }}" onChange="{{ onPayProv }}" style="padding:12px 13px;border:1.5px solid #D0D5DD;border-radius:8px;font-size:15px;background:#fff">
+            <sc-for list="{{ provinceNames }}" as="p" hint-placeholder-count="13"><option>{{ p }}</option></sc-for>
+          </select>
+        </label>
+        <label style="display:flex;flex-direction:column;gap:7px">
+          <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Pay frequency</span>
+          <select value="{{ payFreq }}" onChange="{{ onPayFreq }}" style="padding:12px 13px;border:1.5px solid #D0D5DD;border-radius:8px;font-size:15px;background:#fff">
+            <sc-for list="{{ freqNames }}" as="f" hint-placeholder-count="4"><option>{{ f }}</option></sc-for>
+          </select>
+        </label>
+        <p style="font-size:13px;line-height:1.65;color:#98A2B3;text-wrap:pretty">Assumes the basic personal amount only, no additional TD1 credits, no taxable benefits, and no employer pension or union deductions.</p>
+      </form>
+
+      <div style="display:flex;flex-direction:column;gap:18px">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px">
+          <div style="background:#101828;color:#fff;border-radius:10px;padding:24px">
+            <span style="display:block;font-family:Sora,sans-serif;font-weight:600;font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:#98A2B3;margin-bottom:8px">Net pay per period</span>
+            <strong style="display:block;font-family:Sora,sans-serif;font-weight:800;font-size:clamp(26px,3vw,34px);letter-spacing:-0.02em;line-height:1.05">{{ payNet }}</strong>
+            <span style="display:block;margin-top:8px;font-size:13.5px;color:#C8CDD6">{{ payPeriodNote }}</span>
+            <span style="display:block;margin-top:4px;font-size:12.5px;color:#98A2B3">{{ payHourlyEquiv }}</span>
+          </div>
+          <div style="border:1px solid #E4E7EC;border-radius:10px;padding:24px">
+            <span style="display:block;font-family:Sora,sans-serif;font-weight:600;font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:#98A2B3;margin-bottom:8px">True cost to employer</span>
+            <strong style="display:block;font-family:Sora,sans-serif;font-weight:800;font-size:clamp(26px,3vw,34px);letter-spacing:-0.02em;line-height:1.05;color:#101828">{{ payEmployerCost }}</strong>
+            <span style="display:block;margin-top:8px;font-size:13.5px;color:#667085">{{ payEmployerNote }}</span>
+          </div>
+        </div>
+
+        <table style="border:1px solid #E4E7EC;border-radius:10px;overflow:hidden">
+          <caption style="text-align:left;padding:16px 20px;background:#F4F6F8;border-bottom:1px solid #E4E7EC;font-family:Sora,sans-serif;font-weight:700;font-size:13px;letter-spacing:0.04em;text-transform:uppercase;color:#101828">Per pay period</caption>
+          <thead>
+            <tr>
+              <th scope="col" style="text-align:left;padding:11px 20px;font-family:Sora,sans-serif;font-weight:700;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#98A2B3;border-bottom:1px solid #F0F2F5">Item</th>
+              <th scope="col" style="text-align:right;padding:11px 20px;font-family:Sora,sans-serif;font-weight:700;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#98A2B3;border-bottom:1px solid #F0F2F5">Employee</th>
+              <th scope="col" style="text-align:right;padding:11px 20px;font-family:Sora,sans-serif;font-weight:700;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#98A2B3;border-bottom:1px solid #F0F2F5">Employer</th>
+            </tr>
+          </thead>
+          <tbody>
+            <sc-for list="{{ payRows }}" as="r" hint-placeholder-count="6">
+              <tr style="border-bottom:1px solid #F0F2F5;background:{{ r.bg }}">
+                <th scope="row" style="text-align:left;padding:13px 20px;font-weight:{{ r.weight }};font-size:14.5px;color:#475467">{{ r.label }}</th>
+                <td style="text-align:right;padding:13px 20px;font-family:Sora,sans-serif;font-weight:{{ r.weight }};font-size:14.5px;color:#101828">{{ r.employee }}</td>
+                <td style="text-align:right;padding:13px 20px;font-family:Sora,sans-serif;font-weight:{{ r.weight }};font-size:14.5px;color:#667085">{{ r.employer }}</td>
+              </tr>
+            </sc-for>
+          </tbody>
+        </table>
+
+        <div style="border:1px solid #E4E7EC;border-radius:10px;padding:22px 24px">
+          <h2 style="font-family:Sora,sans-serif;font-weight:700;font-size:14px;letter-spacing:0.04em;text-transform:uppercase;color:#101828;margin-bottom:14px">{{ taxYear }} ceilings used</h2>
+          <ul style="display:flex;flex-direction:column;gap:9px">
+            <sc-for list="{{ payCeilings }}" as="c" hint-placeholder-count="4">
+              <li style="display:flex;justify-content:space-between;gap:16px;font-size:14px;color:#475467;border-bottom:1px solid #F0F2F5;padding-bottom:9px"><span>{{ c.label }}</span><span style="font-family:Sora,sans-serif;font-weight:600;color:#101828;white-space:nowrap">{{ c.value }}</span></li>
+            </sc-for>
+          </ul>
+        </div>
+
+        <p style="padding:20px 22px;background:#F4F6F8;border-left:3px solid #D4A72C;font-size:14px;line-height:1.7;color:#475467;text-wrap:pretty">{{ payRemitNote }}</p>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ showCash }}" hint-placeholder-val="{{ false }}">
+  <div style="max-width:1180px;margin:0 auto;padding:52px 24px 80px">
+    <span style="display:block;font-family:Sora,sans-serif;font-weight:700;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#D71920;margin-bottom:12px">Cash flow</span>
+    <h1 style="font-family:Sora,sans-serif;font-weight:700;font-size:clamp(28px,3.4vw,40px);line-height:1.1;letter-spacing:-0.02em;margin-bottom:14px;text-wrap:pretty">13-Week Cash-Flow Forecaster</h1>
+    <p style="font-size:16.5px;line-height:1.7;color:#667085;max-width:64ch;margin-bottom:38px;text-wrap:pretty">A quarter is the horizon most owners can actually see. This projects your bank balance week by week and flags the week you run out — including the remittances that catch people off guard.</p>
+
+    <div style="display:grid;grid-template-columns:minmax(280px,0.8fr) minmax(340px,1.2fr);gap:34px;align-items:start">
+      <form style="border:1px solid #E4E7EC;border-radius:10px;padding:26px;display:flex;flex-direction:column;gap:19px" onSubmit="{{ noSubmit }}">
+        <label style="display:flex;flex-direction:column;gap:7px">
+          <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Opening bank balance</span>
+          <input type="number" step="500" value="{{ cashOpening }}" onChange="{{ onCashOpening }}" onInput="{{ onCashOpening }}" style="padding:12px 13px;border:1.5px solid #D0D5DD;border-radius:8px;font-size:15px" />
+        </label>
+        <label style="display:flex;flex-direction:column;gap:7px">
+          <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Average weekly collections</span>
+          <input type="number" min="0" step="250" value="{{ cashIn }}" onChange="{{ onCashIn }}" onInput="{{ onCashIn }}" style="padding:12px 13px;border:1.5px solid #D0D5DD;border-radius:8px;font-size:15px" />
+        </label>
+        <label style="display:flex;flex-direction:column;gap:7px">
+          <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Average weekly operating costs</span>
+          <input type="number" min="0" step="250" value="{{ cashOut }}" onChange="{{ onCashOut }}" onInput="{{ onCashOut }}" style="padding:12px 13px;border:1.5px solid #D0D5DD;border-radius:8px;font-size:15px" />
+        </label>
+        <label style="display:flex;flex-direction:column;gap:7px">
+          <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Payroll per run</span>
+          <input type="number" min="0" step="250" value="{{ cashPayroll }}" onChange="{{ onCashPayroll }}" onInput="{{ onCashPayroll }}" style="padding:12px 13px;border:1.5px solid #D0D5DD;border-radius:8px;font-size:15px" />
+        </label>
+        <label style="display:flex;flex-direction:column;gap:7px">
+          <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Payroll runs</span>
+          <select value="{{ cashPayrollFreq }}" onChange="{{ onCashPayrollFreq }}" style="padding:12px 13px;border:1.5px solid #D0D5DD;border-radius:8px;font-size:15px;background:#fff">
+            <option>Weekly</option>
+            <option>Every two weeks</option>
+            <option>Twice a month</option>
+            <option>Monthly</option>
+          </select>
+        </label>
+        <label style="display:flex;flex-direction:column;gap:7px">
+          <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Quarterly GST/HST remittance</span>
+          <input type="number" min="0" step="250" value="{{ cashGst }}" onChange="{{ onCashGst }}" onInput="{{ onCashGst }}" style="padding:12px 13px;border:1.5px solid #D0D5DD;border-radius:8px;font-size:15px" />
+        </label>
+        <label style="display:flex;flex-direction:column;gap:7px">
+          <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Other one-off cost</span>
+          <input type="number" min="0" step="250" value="{{ cashOneOff }}" onChange="{{ onCashOneOff }}" onInput="{{ onCashOneOff }}" style="padding:12px 13px;border:1.5px solid #D0D5DD;border-radius:8px;font-size:15px" />
+        </label>
+        <label style="display:flex;flex-direction:column;gap:7px">
+          <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Week it lands</span>
+          <input type="number" min="1" max="13" step="1" value="{{ cashOneOffWeek }}" onChange="{{ onCashOneOffWeek }}" onInput="{{ onCashOneOffWeek }}" style="padding:12px 13px;border:1.5px solid #D0D5DD;border-radius:8px;font-size:15px" />
+        </label>
+      </form>
+
+      <div style="display:flex;flex-direction:column;gap:18px">
+        <div style="background:{{ cashVerdictBg }};color:{{ cashVerdictFg }};border-radius:10px;padding:28px;border:1px solid {{ cashVerdictBorder }}">
+          <span style="display:block;font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;opacity:0.75;margin-bottom:8px">Lowest point in 13 weeks</span>
+          <strong style="display:block;font-family:Sora,sans-serif;font-weight:800;font-size:clamp(28px,3.6vw,40px);letter-spacing:-0.02em;line-height:1.05">{{ cashLow }}</strong>
+          <span style="display:block;margin-top:10px;font-size:15px;line-height:1.6;text-wrap:pretty">{{ cashVerdict }}</span>
+        </div>
+
+        <div style="border:1px solid #E4E7EC;border-radius:10px;overflow:hidden">
+          <table>
+            <caption style="text-align:left;padding:16px 20px;background:#F4F6F8;border-bottom:1px solid #E4E7EC;font-family:Sora,sans-serif;font-weight:700;font-size:13px;letter-spacing:0.04em;text-transform:uppercase;color:#101828">Week by week</caption>
+            <thead>
+              <tr>
+                <th scope="col" style="text-align:left;padding:11px 18px;font-family:Sora,sans-serif;font-weight:700;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#98A2B3;border-bottom:1px solid #F0F2F5">Week</th>
+                <th scope="col" style="text-align:right;padding:11px 18px;font-family:Sora,sans-serif;font-weight:700;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#98A2B3;border-bottom:1px solid #F0F2F5">In</th>
+                <th scope="col" style="text-align:right;padding:11px 18px;font-family:Sora,sans-serif;font-weight:700;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#98A2B3;border-bottom:1px solid #F0F2F5">Out</th>
+                <th scope="col" style="text-align:right;padding:11px 18px;font-family:Sora,sans-serif;font-weight:700;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#98A2B3;border-bottom:1px solid #F0F2F5">Balance</th>
+              </tr>
+            </thead>
+            <tbody>
+              <sc-for list="{{ cashRows }}" as="w" hint-placeholder-count="13">
+                <tr style="border-bottom:1px solid #F0F2F5;background:{{ w.bg }}">
+                  <th scope="row" style="text-align:left;padding:12px 18px;font-weight:600;font-size:14px;color:#101828">{{ w.week }}<span style="display:block;font-weight:400;font-size:12px;color:#98A2B3">{{ w.note }}</span></th>
+                  <td style="text-align:right;padding:12px 18px;font-family:Sora,sans-serif;font-size:14px;color:#12805C">{{ w.inflow }}</td>
+                  <td style="text-align:right;padding:12px 18px;font-family:Sora,sans-serif;font-size:14px;color:#667085">{{ w.outflow }}</td>
+                  <td style="text-align:right;padding:12px 18px;font-family:Sora,sans-serif;font-weight:700;font-size:14.5px;color:{{ w.color }}">{{ w.balance }}</td>
+                </tr>
+              </sc-for>
+            </tbody>
+          </table>
+        </div>
+        <p style="padding:20px 22px;background:#F4F6F8;border-left:3px solid #D4A72C;font-size:14px;line-height:1.7;color:#475467;text-wrap:pretty">Remittances are money you collected on the government's behalf, not revenue. If the forecast only works because the GST/HST sitting in your account hasn't been remitted yet, the business is short — move it to a separate account and forecast without it.</p>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ showLoan }}" hint-placeholder-val="{{ false }}">
+  <div style="max-width:1180px;margin:0 auto;padding:52px 24px 80px">
+    <span style="display:block;font-family:Sora,sans-serif;font-weight:700;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#D71920;margin-bottom:12px">Financing</span>
+    <h1 style="font-family:Sora,sans-serif;font-weight:700;font-size:clamp(28px,3.4vw,40px);line-height:1.1;letter-spacing:-0.02em;margin-bottom:14px;text-wrap:pretty">Loan Payment Calculator</h1>
+    <p style="font-size:16.5px;line-height:1.7;color:#667085;max-width:64ch;margin-bottom:38px;text-wrap:pretty">Compare what the same borrowing costs as a term loan, an operating line, or equipment financing — and what each does to your monthly cash requirement.</p>
+
+    <div style="display:grid;grid-template-columns:minmax(280px,0.8fr) minmax(340px,1.2fr);gap:34px;align-items:start">
+      <form style="border:1px solid #E4E7EC;border-radius:10px;padding:26px;display:flex;flex-direction:column;gap:20px" onSubmit="{{ noSubmit }}">
+        <label style="display:flex;flex-direction:column;gap:7px">
+          <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Amount borrowed</span>
+          <input type="number" min="0" step="1000" value="{{ loanAmount }}" onChange="{{ onLoanAmount }}" onInput="{{ onLoanAmount }}" style="padding:12px 13px;border:1.5px solid #D0D5DD;border-radius:8px;font-size:15px" />
+        </label>
+        <label style="display:flex;flex-direction:column;gap:7px">
+          <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Annual interest rate — {{ loanRateLabel }}</span>
+          <input type="range" min="3" max="16" step="0.25" value="{{ loanRate }}" onChange="{{ onLoanRate }}" onInput="{{ onLoanRate }}" style="accent-color:#D71920" />
+        </label>
+        <label style="display:flex;flex-direction:column;gap:7px">
+          <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Term — {{ loanTermLabel }}</span>
+          <input type="range" min="1" max="15" step="1" value="{{ loanYears }}" onChange="{{ onLoanYears }}" onInput="{{ onLoanYears }}" style="accent-color:#D71920" />
+        </label>
+        <div style="border-top:1px solid #F0F2F5;padding-top:18px;display:flex;flex-direction:column;gap:10px">
+          <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Typical starting points</span>
+          <sc-for list="{{ loanPresets }}" as="p" hint-placeholder-count="3">
+            <button type="button" onClick="{{ p.apply }}" style="text-align:left;padding:13px 15px;border:1.5px solid #E4E7EC;border-radius:8px;background:#fff;cursor:pointer;display:flex;flex-direction:column;gap:3px" style-hover="border-color:#D71920">
+              <span style="font-family:Sora,sans-serif;font-weight:700;font-size:13.5px;color:#101828">{{ p.label }}</span>
+              <span style="font-size:12.5px;color:#667085">{{ p.detail }}</span>
+            </button>
+          </sc-for>
+        </div>
+      </form>
+
+      <div style="display:flex;flex-direction:column;gap:18px">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:14px">
+          <div style="background:#101828;color:#fff;border-radius:10px;padding:24px">
+            <span style="display:block;font-family:Sora,sans-serif;font-weight:600;font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:#98A2B3;margin-bottom:8px">Monthly payment</span>
+            <strong style="display:block;font-family:Sora,sans-serif;font-weight:800;font-size:clamp(24px,2.8vw,32px);letter-spacing:-0.02em;line-height:1.05">{{ loanMonthly }}</strong>
+          </div>
+          <div style="border:1px solid #E4E7EC;border-radius:10px;padding:24px">
+            <span style="display:block;font-family:Sora,sans-serif;font-weight:600;font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:#98A2B3;margin-bottom:8px">Total interest</span>
+            <strong style="display:block;font-family:Sora,sans-serif;font-weight:800;font-size:clamp(24px,2.8vw,32px);letter-spacing:-0.02em;line-height:1.05;color:#101828">{{ loanInterest }}</strong>
+          </div>
+          <div style="border:1px solid #E4E7EC;border-radius:10px;padding:24px">
+            <span style="display:block;font-family:Sora,sans-serif;font-weight:600;font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:#98A2B3;margin-bottom:8px">Total repaid</span>
+            <strong style="display:block;font-family:Sora,sans-serif;font-weight:800;font-size:clamp(24px,2.8vw,32px);letter-spacing:-0.02em;line-height:1.05;color:#101828">{{ loanTotal }}</strong>
+          </div>
+        </div>
+
+        <table style="border:1px solid #E4E7EC;border-radius:10px;overflow:hidden">
+          <caption style="text-align:left;padding:16px 20px;background:#F4F6F8;border-bottom:1px solid #E4E7EC;font-family:Sora,sans-serif;font-weight:700;font-size:13px;letter-spacing:0.04em;text-transform:uppercase;color:#101828">Same money, three structures</caption>
+          <thead>
+            <tr>
+              <th scope="col" style="text-align:left;padding:11px 18px;font-family:Sora,sans-serif;font-weight:700;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#98A2B3;border-bottom:1px solid #F0F2F5">Structure</th>
+              <th scope="col" style="text-align:right;padding:11px 18px;font-family:Sora,sans-serif;font-weight:700;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#98A2B3;border-bottom:1px solid #F0F2F5">Monthly</th>
+              <th scope="col" style="text-align:right;padding:11px 18px;font-family:Sora,sans-serif;font-weight:700;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#98A2B3;border-bottom:1px solid #F0F2F5">Interest cost</th>
+            </tr>
+          </thead>
+          <tbody>
+            <sc-for list="{{ loanCompare }}" as="c" hint-placeholder-count="3">
+              <tr style="border-bottom:1px solid #F0F2F5">
+                <th scope="row" style="text-align:left;padding:14px 18px;font-weight:600;font-size:14.5px;color:#101828">{{ c.name }}<span style="display:block;font-weight:400;font-size:12.5px;color:#667085;line-height:1.5;margin-top:3px;text-wrap:pretty">{{ c.note }}</span></th>
+                <td style="text-align:right;padding:14px 18px;font-family:Sora,sans-serif;font-weight:700;font-size:14.5px;color:#101828;vertical-align:top">{{ c.monthly }}</td>
+                <td style="text-align:right;padding:14px 18px;font-family:Sora,sans-serif;font-size:14.5px;color:#667085;vertical-align:top">{{ c.interest }}</td>
+              </tr>
+            </sc-for>
+          </tbody>
+        </table>
+
+        <div style="border:1px solid #E4E7EC;border-radius:10px;padding:24px">
+          <h2 style="font-family:Sora,sans-serif;font-weight:700;font-size:14px;letter-spacing:0.04em;text-transform:uppercase;color:#101828;margin-bottom:14px">Before you sign</h2>
+          <ul style="display:flex;flex-direction:column;gap:11px">
+            <sc-for list="{{ loanChecklist }}" as="c" hint-placeholder-count="4">
+              <li style="display:flex;gap:11px;font-size:14.5px;line-height:1.65;color:#475467;text-wrap:pretty"><span style="color:#D71920;font-family:Sora,sans-serif;font-weight:700;flex-shrink:0">→</span><span>{{ c }}</span></li>
+            </sc-for>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+</main>
+
+<footer style="background:#101828;color:#98A2B3;margin-top:auto">
+  <div style="max-width:1180px;margin:0 auto;padding:44px 24px;display:flex;gap:30px;flex-wrap:wrap;justify-content:space-between;align-items:flex-start">
+    <div style="max-width:52ch">
+      <span style="display:block;font-family:Sora,sans-serif;font-weight:800;font-size:16px;color:#fff;margin-bottom:10px">CanadianSME Business Tools</span>
+      <p style="font-size:13.5px;line-height:1.7;text-wrap:pretty">For example and reference only. Illustrative estimates based on published {{ taxYear }} federal and provincial rates, using simplified assumptions — not exact figures. Do not use them to file, remit, or commit to financing. Confirm payroll amounts against the CRA Payroll Deductions Online Calculator and check any figure with your accountant. Not tax, accounting, or financial advice.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:9px">
+      <sc-for list="{{ tools }}" as="t" hint-placeholder-count="4">
+        <a href="{{ t.hash }}" style="font-size:13.5px;color:#98A2B3" style-hover="color:#fff">{{ t.title }}</a>
+      </sc-for>
+    </div>
+  </div>
+  <div style="border-top:1px solid #33394A">
+    <div style="max-width:1180px;margin:0 auto;padding:18px 24px;font-size:12.5px">Published by Cmarketing Inc., Mississauga, Ontario.</div>
+  </div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  // ── 2026 federal figures ──────────────────────────────────────────
+  static YEAR = 2026;
+  static CPP = { rate: 0.0595, exempt: 3500, ympe: 74600, yampe: 85000, rate2: 0.04 };
+  static QPP = { rate: 0.0640, exempt: 3500, ympe: 74600, yampe: 85000, rate2: 0.04 };
+  static EI = { rate: 0.0163, employerFactor: 1.4, mie: 68900 };
+  static EI_QC = { rate: 0.0130, employerFactor: 1.4, mie: 68900 };
+  static FED = {
+    bpa: 16452,
+    brackets: [[58523, 0.14], [117045, 0.205], [181440, 0.26], [258482, 0.29], [Infinity, 0.33]]
+  };
+
+  // ── Provinces: sales tax + simplified income tax ──────────────────
+  static PROVINCES = [
+    { name: 'Alberta', gst: 5, extra: 0, extraLabel: '', system: 'GST only', bpa: 22323, brackets: [[60000, 0.08], [151234, 0.10], [181481, 0.12], [241975, 0.13], [362962, 0.14], [Infinity, 0.15]] },
+    { name: 'British Columbia', gst: 5, extra: 7, extraLabel: 'PST', system: 'GST + 7% PST', bpa: 12932, brackets: [[49900, 0.0506], [99820, 0.077], [114600, 0.105], [139100, 0.1229], [188400, 0.147], [262460, 0.168], [Infinity, 0.205]] },
+    { name: 'Manitoba', gst: 5, extra: 7, extraLabel: 'RST', system: 'GST + 7% RST', bpa: 15969, brackets: [[47900, 0.108], [102150, 0.1275], [Infinity, 0.174]] },
+    { name: 'New Brunswick', gst: 0, extra: 15, extraLabel: 'HST', system: '15% HST', bpa: 13396, brackets: [[51300, 0.094], [102614, 0.14], [190060, 0.16], [Infinity, 0.195]] },
+    { name: 'Newfoundland and Labrador', gst: 0, extra: 15, extraLabel: 'HST', system: '15% HST', bpa: 11067, brackets: [[44200, 0.087], [88400, 0.145], [157900, 0.158], [220900, 0.178], [282200, 0.198], [564500, 0.208], [1128500, 0.213], [Infinity, 0.218]] },
+    { name: 'Northwest Territories', gst: 5, extra: 0, extraLabel: '', system: 'GST only', bpa: 17842, brackets: [[51900, 0.059], [103800, 0.086], [168800, 0.122], [Infinity, 0.1405]] },
+    { name: 'Nova Scotia', gst: 0, extra: 14, extraLabel: 'HST', system: '14% HST', bpa: 11744, brackets: [[30500, 0.0879], [61000, 0.1495], [95900, 0.1667], [154650, 0.175], [Infinity, 0.21]] },
+    { name: 'Nunavut', gst: 5, extra: 0, extraLabel: '', system: 'GST only', bpa: 19274, brackets: [[54700, 0.04], [109400, 0.07], [177900, 0.09], [Infinity, 0.115]] },
+    { name: 'Ontario', gst: 0, extra: 13, extraLabel: 'HST', system: '13% HST', bpa: 12747, brackets: [[53000, 0.0505], [106000, 0.0915], [150000, 0.1116], [220000, 0.1216], [Infinity, 0.1316]] },
+    { name: 'Prince Edward Island', gst: 0, extra: 15, extraLabel: 'HST', system: '15% HST', bpa: 14650, brackets: [[33300, 0.095], [66600, 0.1347], [105000, 0.166], [140000, 0.1762], [Infinity, 0.19]] },
+    { name: 'Quebec', gst: 5, extra: 9.975, extraLabel: 'QST', system: 'GST + 9.975% QST', bpa: 18571, brackets: [[54400, 0.14], [108800, 0.19], [132600, 0.24], [Infinity, 0.2575]] },
+    { name: 'Saskatchewan', gst: 5, extra: 6, extraLabel: 'PST', system: 'GST + 6% PST', bpa: 19491, brackets: [[55500, 0.105], [158700, 0.125], [Infinity, 0.145]] },
+    { name: 'Yukon', gst: 5, extra: 0, extraLabel: '', system: 'GST only', bpa: 16452, brackets: [[58523, 0.064], [117045, 0.09], [181440, 0.109], [500000, 0.128], [Infinity, 0.15]] }
+  ];
+
+  static FREQ = [
+    { name: 'Weekly (52 per year)', per: 52 },
+    { name: 'Every two weeks (26 per year)', per: 26 },
+    { name: 'Twice a month (24 per year)', per: 24 },
+    { name: 'Monthly (12 per year)', per: 12 }
+  ];
+
+  static TOOLS = [
+    { key: 'gst', mark: '%', title: 'GST/HST Calculator', desc: 'Provincial and federal rates for every province and territory, including HST provinces.' },
+    { key: 'payroll', mark: '$', title: 'Payroll Deductions Estimator', desc: 'CPP, EI, and income tax withheld per pay period, by province.' },
+    { key: 'cashflow', mark: '≈', title: 'Cash-Flow Forecaster', desc: 'Project 13 weeks of inflows and outflows, including remittance dates.' },
+    { key: 'loan', mark: '⌾', title: 'Loan Payment Calculator', desc: 'Compare BDC term loan, operating line, and equipment financing scenarios.' }
+  ];
+
+  state = {
+    view: 'index',
+    gstProv: 'Ontario', gstMode: 'add', gstAmount: 1000,
+    payGross: 65000, payProv: 'Ontario', payFreq: 'Every two weeks (26 per year)',
+    payBasis: 'salary', payRate: 24, payHours: 40,
+    cashOpening: 40000, cashIn: 14000, cashOut: 9000, cashPayroll: 12000,
+    cashPayrollFreq: 'Every two weeks', cashGst: 9500, cashOneOff: 0, cashOneOffWeek: 6,
+    loanAmount: 150000, loanRate: 8.5, loanYears: 5
+  };
+
+  componentDidMount() {
+    this.sync = () => {
+      const h = (location.hash || '').replace('#', '');
+      const keys = Component.TOOLS.map(t => t.key);
+      this.setState({ view: keys.includes(h) ? h : 'index' });
+      if (typeof window !== 'undefined') window.scrollTo(0, 0);
+    };
+    this.sync();
+    window.addEventListener('hashchange', this.sync);
+  }
+  componentWillUnmount() { window.removeEventListener('hashchange', this.sync); }
+
+  prov(name) { return Component.PROVINCES.find(p => p.name === name) || Component.PROVINCES[8]; }
+  money(n) {
+    const v = Math.round((Number(n) || 0) * 100) / 100;
+    return (v < 0 ? '−$' : '$') + Math.abs(v).toLocaleString('en-CA', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+  money0(n) {
+    const v = Math.round(Number(n) || 0);
+    return (v < 0 ? '−$' : '$') + Math.abs(v).toLocaleString('en-CA');
+  }
+  bracketTax(income, brackets) {
+    let tax = 0, floor = 0;
+    for (const [cap, rate] of brackets) {
+      if (income <= floor) break;
+      tax += (Math.min(income, cap) - floor) * rate;
+      floor = cap;
+    }
+    return tax;
+  }
+  num(e) { const v = parseFloat(e.target.value); return isNaN(v) ? 0 : v; }
+
+  // ── GST/HST ───────────────────────────────────────────────────────
+  gst() {
+    const p = this.prov(this.state.gstProv);
+    const federal = p.gst, extra = p.extra;
+    const totalRate = federal + extra;
+    const amt = Math.max(0, Number(this.state.gstAmount) || 0);
+    let base, tax;
+    if (this.state.gstMode === 'add') { base = amt; tax = amt * totalRate / 100; }
+    else { base = amt / (1 + totalRate / 100); tax = amt - base; }
+    const fedPart = base * federal / 100, extraPart = base * extra / 100;
+    return { p, federal, extra, totalRate, base, tax, total: base + tax, fedPart, extraPart };
+  }
+
+  // ── Payroll ───────────────────────────────────────────────────────
+  payroll() {
+    const p = this.prov(this.state.payProv);
+    const qc = p.name === 'Quebec';
+    const freq = Component.FREQ.find(f => f.name === this.state.payFreq) || Component.FREQ[1];
+    const per = freq.per;
+    const hourly = this.state.payBasis === 'hourly';
+    const rate = Math.max(0, Number(this.state.payRate) || 0);
+    const hours = Math.max(0, Number(this.state.payHours) || 0);
+    const gross = hourly ? rate * hours * 52 : Math.max(0, Number(this.state.payGross) || 0);
+
+    const pen = qc ? Component.QPP : Component.CPP;
+    const cpp1 = Math.min(Math.max(gross - pen.exempt, 0), pen.ympe - pen.exempt) * pen.rate;
+    const cpp2 = Math.min(Math.max(gross - pen.ympe, 0), pen.yampe - pen.ympe) * pen.rate2;
+    const cpp = cpp1 + cpp2;
+
+    const ei = qc ? Component.EI_QC : Component.EI;
+    const eiPrem = Math.min(gross, ei.mie) * ei.rate;
+    const eiEmployer = eiPrem * ei.employerFactor;
+
+    const taxable = Math.max(0, gross - cpp2 * 1);
+    const fedGross = this.bracketTax(taxable, Component.FED.brackets);
+    const fedCredit = Component.FED.bpa * Component.FED.brackets[0][1] + (cpp1 + eiPrem) * Component.FED.brackets[0][1];
+    const federal = Math.max(0, fedGross - fedCredit);
+
+    const provGross = this.bracketTax(taxable, p.brackets);
+    const provCredit = p.bpa * p.brackets[0][1] + (cpp1 + eiPrem) * p.brackets[0][1];
+    const provincial = Math.max(0, provGross - provCredit);
+
+    const totalDed = cpp + eiPrem + federal + provincial;
+    const net = gross - totalDed;
+    const employerTotal = gross + cpp + eiEmployer;
+
+    return { p, qc, gross, per, hourly, rate, hours, cpp, cpp1, cpp2, eiPrem, eiEmployer, federal, provincial, totalDed, net, employerTotal, penName: qc ? 'QPP' : 'CPP' };
+  }
+
+  // ── Cash flow ─────────────────────────────────────────────────────
+  cash() {
+    const open = Number(this.state.cashOpening) || 0;
+    const inflow = Math.max(0, Number(this.state.cashIn) || 0);
+    const opex = Math.max(0, Number(this.state.cashOut) || 0);
+    const pay = Math.max(0, Number(this.state.cashPayroll) || 0);
+    const gstAmt = Math.max(0, Number(this.state.cashGst) || 0);
+    const oneOff = Math.max(0, Number(this.state.cashOneOff) || 0);
+    const oneOffWeek = Math.min(13, Math.max(1, Math.round(Number(this.state.cashOneOffWeek) || 1)));
+
+    const freqMap = { 'Weekly': 1, 'Every two weeks': 2, 'Twice a month': 2, 'Monthly': 4 };
+    const step = freqMap[this.state.cashPayrollFreq] || 2;
+
+    let bal = open, low = open, lowWeek = 0, firstNeg = 0;
+    const rows = [];
+    for (let w = 1; w <= 13; w++) {
+      let out = opex;
+      const notes = [];
+      if (w % step === 0) { out += pay; notes.push('Payroll'); }
+      if (w === 13 && gstAmt > 0) { out += gstAmt; notes.push('GST/HST remittance'); }
+      if (w === oneOffWeek && oneOff > 0) { out += oneOff; notes.push('One-off cost'); }
+      bal += inflow - out;
+      if (bal < low) { low = bal; lowWeek = w; }
+      if (bal < 0 && firstNeg === 0) firstNeg = w;
+      rows.push({
+        week: 'Week ' + w,
+        note: notes.join(' · '),
+        inflow: this.money0(inflow),
+        outflow: this.money0(out),
+        balance: this.money0(bal),
+        color: bal < 0 ? '#D71920' : bal < inflow ? '#B54708' : '#101828',
+        bg: bal < 0 ? '#FEF3F2' : w % 2 === 0 ? '#FCFCFD' : '#fff'
+      });
+    }
+    return { rows, low, lowWeek, firstNeg, closing: bal, inflow };
+  }
+
+  // ── Loan ──────────────────────────────────────────────────────────
+  payment(principal, annualRate, years) {
+    const r = annualRate / 100 / 12, n = years * 12;
+    if (principal <= 0 || n <= 0) return 0;
+    if (r === 0) return principal / n;
+    return principal * r / (1 - Math.pow(1 + r, -n));
+  }
+
+  renderVals() {
+    const v = this.state.view;
+    const provinceNames = Component.PROVINCES.map(p => p.name);
+    const tabs = [{ key: 'index', label: 'All tools', hash: '#index' }].concat(
+      Component.TOOLS.map(t => ({ key: t.key, label: t.title.replace(' Calculator', '').replace(' Estimator', '').replace(' Forecaster', ''), hash: '#' + t.key }))
+    ).map(t => ({
+      label: t.label, hash: t.hash,
+      border: t.key === v ? '#D71920' : 'transparent',
+      color: t.key === v ? '#D71920' : '#667085'
+    }));
+
+    const g = this.gst();
+    const gstRows = [
+      { label: this.state.gstMode === 'add' ? 'Amount before tax' : 'Amount before tax (backed out)', value: this.money(g.base), weight: '400' }
+    ];
+    if (g.federal > 0) gstRows.push({ label: 'GST at ' + g.federal + '%', value: this.money(g.fedPart), weight: '400' });
+    if (g.extra > 0) gstRows.push({ label: g.p.extraLabel + ' at ' + g.extra + '%', value: this.money(g.extraPart), weight: '400' });
+    gstRows.push({ label: 'Total tax', value: this.money(g.tax), weight: '600' });
+    gstRows.push({ label: 'Total charged', value: this.money(g.total), weight: '700' });
+
+    const pay = this.payroll();
+    const d = n => this.money(n / pay.per);
+    const payRows = [
+      { label: pay.hourly ? 'Gross pay (' + (pay.hours * (52 / pay.per)).toFixed(1) + ' h)' : 'Gross pay', employee: d(pay.gross), employer: '—', weight: '400', bg: '#fff' },
+      { label: pay.penName + ' contribution', employee: d(pay.cpp), employer: d(pay.cpp), weight: '400', bg: '#FCFCFD' },
+      { label: pay.qc ? 'EI premium (Quebec rate)' : 'EI premium', employee: d(pay.eiPrem), employer: d(pay.eiEmployer), weight: '400', bg: '#fff' },
+      { label: 'Federal income tax', employee: d(pay.federal), employer: '—', weight: '400', bg: '#FCFCFD' },
+      { label: pay.p.name + ' income tax', employee: d(pay.provincial), employer: '—', weight: '400', bg: '#fff' },
+      { label: 'Total deductions', employee: d(pay.totalDed), employer: d(pay.cpp + pay.eiEmployer), weight: '600', bg: '#F4F6F8' },
+      { label: 'Net pay', employee: d(pay.net), employer: '—', weight: '700', bg: '#F4F6F8' }
+    ];
+    const pen = pay.qc ? Component.QPP : Component.CPP;
+    const eiCfg = pay.qc ? Component.EI_QC : Component.EI;
+    const payCeilings = [
+      { label: pay.penName + ' rate and ceiling', value: (pen.rate * 100).toFixed(2) + '% to $' + pen.ympe.toLocaleString('en-CA') },
+      { label: pay.penName + '2 rate and band', value: '4.00% from $' + pen.ympe.toLocaleString('en-CA') + ' to $' + pen.yampe.toLocaleString('en-CA') },
+      { label: 'Basic exemption', value: '$' + pen.exempt.toLocaleString('en-CA') },
+      { label: 'EI rate and maximum insurable', value: (eiCfg.rate * 100).toFixed(2) + '% to $' + eiCfg.mie.toLocaleString('en-CA') },
+      { label: 'Federal basic personal amount', value: '$' + Component.FED.bpa.toLocaleString('en-CA') },
+      { label: pay.p.name + ' basic personal amount', value: '$' + pay.p.bpa.toLocaleString('en-CA') }
+    ];
+
+    const c = this.cash();
+    const shortfall = c.low < 0;
+    const tight = !shortfall && c.low < c.inflow;
+
+    const amt = Math.max(0, Number(this.state.loanAmount) || 0);
+    const rate = Number(this.state.loanRate) || 0;
+    const yrs = Math.max(1, Math.round(Number(this.state.loanYears) || 1));
+    const monthly = this.payment(amt, rate, yrs);
+    const totalPaid = monthly * yrs * 12;
+    const lineMonthly = amt * (rate + 1.5) / 100 / 12;
+    const equipMonthly = this.payment(amt, rate - 1, Math.min(yrs, 7));
+
+    const setLoan = (a, r, y) => () => this.setState({ loanAmount: a, loanRate: r, loanYears: y });
+
+    return {
+      taxYear: Component.YEAR,
+      tabs, provinceNames,
+      tools: Component.TOOLS.map(t => ({ ...t, hash: '#' + t.key })),
+      freqNames: Component.FREQ.map(f => f.name),
+      noSubmit: e => e.preventDefault(),
+
+      showIndex: v === 'index',
+      showCalc: v !== 'index',
+      showGst: v === 'gst',
+      showPayroll: v === 'payroll',
+      showCash: v === 'cashflow',
+      showLoan: v === 'loan',
+
+      // GST
+      gstProv: this.state.gstProv,
+      gstAmount: this.state.gstAmount,
+      onGstProv: e => this.setState({ gstProv: e.target.value }),
+      onGstAmount: e => this.setState({ gstAmount: this.num(e) }),
+      setGstAdd: () => this.setState({ gstMode: 'add' }),
+      setGstRemove: () => this.setState({ gstMode: 'remove' }),
+      gstAddOn: this.state.gstMode === 'add',
+      gstRemoveOn: this.state.gstMode === 'remove',
+      gstAddBorder: this.state.gstMode === 'add' ? '#D71920' : '#D0D5DD',
+      gstAddBg: this.state.gstMode === 'add' ? '#D71920' : '#fff',
+      gstAddFg: this.state.gstMode === 'add' ? '#fff' : '#475467',
+      gstRemBorder: this.state.gstMode === 'remove' ? '#D71920' : '#D0D5DD',
+      gstRemBg: this.state.gstMode === 'remove' ? '#D71920' : '#fff',
+      gstRemFg: this.state.gstMode === 'remove' ? '#fff' : '#475467',
+      gstTotalLabel: this.state.gstMode === 'add' ? 'Total to charge the customer' : 'Tax inside that total',
+      gstTotal: this.state.gstMode === 'add' ? this.money(g.total) : this.money(g.tax),
+      gstRateNote: g.p.system + ' — ' + g.totalRate.toFixed(g.totalRate % 1 === 0 ? 0 : 3) + '% combined',
+      gstRows,
+      gstGuidance: g.extra > 0 && g.federal > 0
+        ? g.p.extraLabel + ' is administered by ' + g.p.name + ', separately from GST. You file and remit the two taxes to different authorities on different schedules.'
+        : g.federal === 0
+          ? 'HST combines the federal and provincial portions into one tax, filed and remitted to the CRA in a single return.'
+          : 'No provincial sales tax applies here — you charge the 5% GST only, and remit it to the CRA.',
+      gstTable: Component.PROVINCES.map((p, i) => ({
+        name: p.name, system: p.system,
+        rate: (p.gst + p.extra).toFixed((p.gst + p.extra) % 1 === 0 ? 0 : 3) + '%',
+        bg: p.name === this.state.gstProv ? '#FEF3F2' : i % 2 === 0 ? '#fff' : '#FCFCFD'
+      })),
+
+      // Payroll
+      payGross: this.state.payGross,
+      payProv: this.state.payProv,
+      payFreq: this.state.payFreq,
+      payRate: this.state.payRate,
+      payHours: this.state.payHours,
+      payIsHourly: pay.hourly,
+      payIsSalary: !pay.hourly,
+      paySalBorder: pay.hourly ? '#D0D5DD' : '#D71920',
+      paySalBg: pay.hourly ? '#fff' : '#D71920',
+      paySalFg: pay.hourly ? '#475467' : '#fff',
+      payHrBorder: pay.hourly ? '#D71920' : '#D0D5DD',
+      payHrBg: pay.hourly ? '#D71920' : '#fff',
+      payHrFg: pay.hourly ? '#fff' : '#475467',
+      setPaySalary: () => this.setState({ payBasis: 'salary' }),
+      setPayHourly: () => this.setState({ payBasis: 'hourly' }),
+      onPayRate: e => this.setState({ payRate: this.num(e) }),
+      onPayHours: e => this.setState({ payHours: this.num(e) }),
+      payGrossNote: pay.hourly
+        ? this.money(pay.rate) + ' × ' + pay.hours + ' h a week = ' + this.money0(pay.gross) + ' a year'
+        : this.money(pay.gross / pay.per) + ' gross each pay period',
+      payHourlyEquiv: pay.hourly
+        ? 'Equivalent salary ' + this.money0(pay.gross)
+        : 'About ' + this.money(pay.gross / 2080) + ' an hour at 40 h a week',
+      onPayGross: e => this.setState({ payGross: this.num(e) }),
+      onPayProv: e => this.setState({ payProv: e.target.value }),
+      onPayFreq: e => this.setState({ payFreq: e.target.value }),
+      payNet: this.money(pay.net / pay.per),
+      payPeriodNote: pay.per + ' pay periods a year · ' + this.money0(pay.net) + ' net annually',
+      payEmployerCost: this.money(pay.employerTotal / pay.per),
+      payEmployerNote: this.money0(pay.employerTotal - pay.gross) + ' a year above salary',
+      payRows, payCeilings,
+      payRemitNote: pay.qc
+        ? 'Quebec employers remit QPP, QPIP, and Quebec income tax to Revenu Québec, and federal income tax and EI to the CRA. Two remittances, two schedules.'
+        : 'New employers usually remit monthly, by the 15th of the month after you withheld the deductions. The CRA moves you to accelerated remitting once your average monthly withholding passes $25,000.',
+
+      // Cash flow
+      cashOpening: this.state.cashOpening,
+      cashIn: this.state.cashIn,
+      cashOut: this.state.cashOut,
+      cashPayroll: this.state.cashPayroll,
+      cashPayrollFreq: this.state.cashPayrollFreq,
+      cashGst: this.state.cashGst,
+      cashOneOff: this.state.cashOneOff,
+      cashOneOffWeek: this.state.cashOneOffWeek,
+      onCashOpening: e => this.setState({ cashOpening: this.num(e) }),
+      onCashIn: e => this.setState({ cashIn: this.num(e) }),
+      onCashOut: e => this.setState({ cashOut: this.num(e) }),
+      onCashPayroll: e => this.setState({ cashPayroll: this.num(e) }),
+      onCashPayrollFreq: e => this.setState({ cashPayrollFreq: e.target.value }),
+      onCashGst: e => this.setState({ cashGst: this.num(e) }),
+      onCashOneOff: e => this.setState({ cashOneOff: this.num(e) }),
+      onCashOneOffWeek: e => this.setState({ cashOneOffWeek: this.num(e) }),
+      cashRows: c.rows,
+      cashLow: this.money0(c.low),
+      cashVerdict: shortfall
+        ? 'You run out of cash in week ' + c.firstNeg + ', bottoming out at ' + this.money0(c.low) + ' in week ' + c.lowWeek + '. Line up an operating line, delay a discretionary cost, or tighten collections before then — arranging credit is far easier while the balance is still positive.'
+        : tight
+          ? 'Tightest in week ' + c.lowWeek + ', with less than one week of collections in reserve. That is survivable but leaves no room for a late-paying customer.'
+          : 'You stay positive across the quarter, with your tightest week at ' + this.money0(c.low) + ' in week ' + c.lowWeek + ' and closing at ' + this.money0(c.closing) + '. Worth stress-testing: cut weekly collections by 20% and see what happens.',
+      cashVerdictBg: shortfall ? '#FEF3F2' : tight ? '#FFFAEB' : '#101828',
+      cashVerdictFg: shortfall ? '#912018' : tight ? '#7A2E0E' : '#fff',
+      cashVerdictBorder: shortfall ? '#FDA29B' : tight ? '#FEC84B' : '#101828',
+
+      // Loan
+      loanAmount: this.state.loanAmount,
+      loanRate: this.state.loanRate,
+      loanYears: this.state.loanYears,
+      loanRateLabel: rate.toFixed(2) + '%',
+      loanTermLabel: yrs + (yrs === 1 ? ' year' : ' years'),
+      onLoanAmount: e => this.setState({ loanAmount: this.num(e) }),
+      onLoanRate: e => this.setState({ loanRate: this.num(e) }),
+      onLoanYears: e => this.setState({ loanYears: this.num(e) }),
+      loanMonthly: this.money(monthly),
+      loanInterest: this.money0(totalPaid - amt),
+      loanTotal: this.money0(totalPaid),
+      loanCompare: [
+        { name: 'Term loan', note: 'Fixed amortizing payment over ' + yrs + (yrs === 1 ? ' year' : ' years') + '. Predictable, and the balance actually goes down.', monthly: this.money(monthly), interest: this.money0(totalPaid - amt) },
+        { name: 'Operating line of credit', note: 'Interest-only on what you draw, typically 1–2% above a term rate. Cheap monthly, but the principal never clears itself.', monthly: this.money(lineMonthly), interest: this.money0(lineMonthly * 12) + ' a year, ongoing' },
+        { name: 'Equipment financing', note: 'Secured against the asset, so often a point cheaper — but tied to that purchase and capped near the asset life.', monthly: this.money(equipMonthly), interest: this.money0(equipMonthly * Math.min(yrs, 7) * 12 - amt) }
+      ],
+      loanPresets: [
+        { label: 'BDC small business loan', detail: '$100,000 over 5 years, around 8.5%', apply: setLoan(100000, 8.5, 5) },
+        { label: 'Equipment purchase', detail: '$250,000 over 7 years, around 7.25%', apply: setLoan(250000, 7.25, 7) },
+        { label: 'Working capital top-up', detail: '$50,000 over 3 years, around 10.5%', apply: setLoan(50000, 10.5, 3) }
+      ],
+      loanChecklist: [
+        'Ask for the total cost of borrowing in dollars, not just the rate — setup fees, standby charges, and insurance are often quoted separately.',
+        'Check the prepayment terms. Some term loans charge three months of interest to pay out early, which matters if you expect a strong year.',
+        'Confirm whether a personal guarantee is required, and for how much. This is the single most consequential clause for an owner-operator.',
+        'Run the payment against your worst quarter, not your average one. Debt service is due whether the season cooperates or not.',
+        'If the rate is variable, model it two points higher before you sign.'
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

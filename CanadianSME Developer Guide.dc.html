@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>CanadianSME Website — Developer Handoff Guide</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="./doc-page.js"></script>
+<style>
+  doc-page:not(:defined){visibility:hidden}
+  body { margin:0; color:#101828; font-family:"IBM Plex Sans",system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+  h1,h2,h3,p,pre { margin:0; }
+  a { color:#D71920; text-decoration:none; }
+  a:hover { color:#A5121A; text-decoration:underline; }
+  table { border-collapse:collapse; width:100%; font-size:9.5pt; margin:6px 0 14px; }
+  th { text-align:left; padding:5px 7px; border-bottom:1.5px solid #101828; font-family:Sora,sans-serif; font-size:8pt; letter-spacing:0.06em; text-transform:uppercase; }
+  td { padding:5px 7px; border-bottom:1px solid #E4E7EC; vertical-align:top; line-height:1.45; }
+  code { font-family:"IBM Plex Mono",monospace; font-size:0.9em; background:#F4F6F8; padding:1px 4px; border-radius:3px; }
+  tr, figure, pre { break-inside:avoid; }
+</style>
+</helmet>
+<doc-page size="letter" margin="0.7in" style="font-family:'IBM Plex Sans',system-ui,sans-serif">
+<div slot="footer" style="display:flex;justify-content:space-between;font-size:9pt;color:#667085;border-top:1px solid #E4E7EC;padding-top:8px;margin-top:12px"><span>CanadianSME Website · Developer Handoff Guide</span><span>v1 · October 2026</span></div>
+
+<div style="display:flex;flex-direction:column;gap:14px;padding-bottom:26px;border-bottom:3px solid #D71920;margin-bottom:26px">
+  <span style="font-family:Sora,sans-serif;font-size:10pt;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#D71920">Developer handoff guide</span>
+  <h1 style="font-family:Sora,sans-serif;font-weight:800;font-size:32pt;line-height:1.05;letter-spacing:-0.02em">CanadianSME Website</h1>
+  <p style="font-size:12.5pt;line-height:1.55;color:#475467;max-width:40em">Everything a developer needs to build the production site from the prototype: tokens, components, page templates, URL map, data model, SEO, integrations, accessibility, performance and the launch checklist. The source of truth is <em>CanadianSME Homepage.dc.html</em> and <em>CanadianSME Tools.dc.html</em>. Where this guide and the prototype disagree, the prototype wins.</p>
+  <p style="font-size:10pt;color:#667085">Publisher: Cmarketing Inc., Mississauga, Ontario · Audience: Canadian small business owners</p>
+</div>
+
+<h2 style="font-family:Sora,sans-serif;font-weight:700;font-size:15pt;margin-bottom:8px">Contents</h2>
+<ol style="margin:0 0 24px;padding-left:20px;font-size:11pt;line-height:1.75">
+  <li>Project overview and deliverables</li>
+  <li>Architecture and stack</li>
+  <li>URL map and templates</li>
+  <li>Design tokens</li>
+  <li>Components and behaviour</li>
+  <li>Homepage, section by section (screenshots)</li>
+  <li>Inner pages (screenshots)</li>
+  <li>Data model</li>
+  <li>SEO specification</li>
+  <li>Forms, integrations and analytics</li>
+  <li>Accessibility</li>
+  <li>Performance</li>
+  <li>QA and launch checklist</li>
+  <li>Open items from the client</li>
+  <li>Leaving WordPress: migration checklist</li>
+  <li>Canada SME News: automated feed</li>
+</ol>
+
+<h2 style="font-family:Sora,sans-serif;font-weight:700;font-size:18pt;margin:8px 0 10px;break-before:page">1. Project overview and deliverables</h2>
+<p style="font-size:10.5pt;line-height:1.6;margin-bottom:10px">The site is an editorial magazine for <strong>Canadian small business owners</strong>. Every decision serves an owner-operator who is short on time: CRA deadlines, federal and provincial funding, BDC/EDC financing, tariffs and provincial rules come before decoration. CanadianSME is the flagship. Sister titles (AmericanSMB, EuropeanSMB, Black Business, Startup Growth, She &amp; Success, Indigenous-SME) must never outrank it visually. Use Canadian spelling throughout (labour, centre, cheque).</p>
+<table>
+  <thead><tr><th style="width:36%">File in the project</th><th>What it is</th></tr></thead>
+  <tbody>
+    <tr><td><code>CanadianSME Homepage.dc.html</code></td><td>The whole site prototype: homepage plus every inner page, switched by URL hash. Contains all real article content (<code>POSTS</code>, 37 articles), province data (<code>PROVINCE_PAGES</code>, 13), legal pages, menus, resources and offers.</td></tr>
+    <tr><td><code>CanadianSME Tools.dc.html</code></td><td>Calculators: GST/HST, payroll deductions, 13-week cash flow, loan payment.</td></tr>
+    <tr><td><code>CanadianSME Design Guide.dc.html</code></td><td>Earlier visual guide for designers. This document supersedes it for build purposes.</td></tr>
+    <tr><td><code>seo/sitemap.xml</code>, <code>seo/robots.txt</code></td><td>Starter sitemap (88 URLs) and robots file, using the production URL scheme in section 3.</td></tr>
+    <tr><td><code>assets/</code></td><td>Logo, magazine covers, sponsor creatives, author photo. Article images are loaded from canadiansme.ca/wp-content/uploads.</td></tr>
+  </tbody>
+</table>
+<p style="font-size:10pt;line-height:1.6;color:#475467">The screenshots in sections 5–7 are live views of the prototype, so they always match the current build. Open the prototype alongside this guide to inspect hover states, motion and responsive behaviour.</p>
+
+<h2 style="font-family:Sora,sans-serif;font-weight:700;font-size:18pt;margin:26px 0 10px;break-before:page">2. Architecture and stack</h2>
+<p style="font-size:10.5pt;line-height:1.6;margin-bottom:10px">The prototype is a single-page app that switches pages with <code>#hash</code> routes. <strong>Do not ship it that way.</strong> Search engines ignore everything after <code>#</code>, so every page must be a real URL that returns server-rendered HTML.</p>
+<table>
+  <thead><tr><th style="width:30%">Layer</th><th>Recommendation</th></tr></thead>
+  <tbody>
+    <tr><td><strong>CMS</strong></td><td><strong>WordPress is being retired at handover.</strong> Use a headless CMS (Sanity, Payload or Strapi) as the editors’ admin. Migrate posts, categories, authors and media into it (section 15). Content types: <code>province</code>, <code>event</code>, <code>resource</code>, <code>offer</code>, <code>issue</code>, <code>episode</code>, <code>sponsored</code>, <code>news_item</code> (fields in section 8).</td></tr>
+    <tr><td><strong>Front end</strong></td><td>Next.js or Astro, using static generation plus incremental revalidation (rebuild a page when the CMS publishes). Every page must be server-rendered.</td></tr>
+    <tr><td><strong>Scheduled jobs</strong></td><td>Vercel Cron or Netlify Scheduled Functions for the news feed (section 16) and nightly hiding of expired offers and past deadlines.</td></tr>
+    <tr><td><strong>Styling</strong></td><td>The CSS custom properties in section 4. The prototype uses inline styles for speed of iteration. Production should use a stylesheet or utility classes built from the same tokens.</td></tr>
+    <tr><td><strong>Search</strong></td><td>The prototype searches articles, provinces, policies and pages on the client. Production: Algolia or Meilisearch for typo tolerance. Results page at <code>/search/?q=</code>, set to <code>noindex</code>.</td></tr>
+    <tr><td><strong>Hosting</strong></td><td>Vercel or Netlify, with a CDN in front of everything. Serve images through a resizing service (WebP/AVIF). Use HTTPS with HSTS.</td></tr>
+    <tr><td><strong>Fonts</strong></td><td>Sora (600, 700, 800) and IBM Plex Sans (400, 500, 600). Self-host as WOFF2 with <code>font-display:swap</code>, and preload Sora 600 and Plex 400.</td></tr>
+  </tbody>
+</table>
+
+<h2 style="font-family:Sora,sans-serif;font-weight:700;font-size:18pt;margin:26px 0 10px;break-before:page">3. URL map and templates</h2>
+<p style="font-size:10.5pt;line-height:1.6;margin-bottom:8px">Use lowercase, hyphenated URLs with trailing slashes. <strong>Keep the existing canadiansme.ca article slugs exactly</strong>, so no ranking is lost. Any URL that changes needs a 301 redirect.</p>
+<table>
+  <thead><tr><th style="width:24%">Template</th><th style="width:30%">Production URL</th><th style="width:22%">Prototype hash</th><th>Data source</th></tr></thead>
+  <tbody>
+    <tr><td>Homepage</td><td><code>/</code></td><td><code>#home</code></td><td>Curated: hero, featured lists</td></tr>
+    <tr><td>Article (full)</td><td><code>/{post-slug}/</code></td><td><code>#post-{slug}</code></td><td>WP post</td></tr>
+    <tr><td>Sponsored article</td><td><code>/sponsored/{slug}/</code></td><td><code>#sponsored-1…3</code></td><td>CPT <code>sponsored</code></td></tr>
+    <tr><td>Category</td><td><code>/category/{slug}/</code></td><td><code>#technology</code> etc.</td><td>WP category</td></tr>
+    <tr><td>Latest</td><td><code>/latest/</code></td><td><code>#latest</code></td><td>All posts, newest first</td></tr>
+    <tr><td>Province (13)</td><td><code>/provinces/{name}/</code></td><td><code>#ontario</code> etc.</td><td>CPT <code>province</code></td></tr>
+    <tr><td>Search</td><td><code>/search/?q=</code></td><td><code>#search</code></td><td>Search index (noindex)</td></tr>
+    <tr><td>Magazine archive / issue</td><td><code>/magazine/</code>, <code>/magazine/{issue}/</code></td><td><code>#magazine</code>, <code>#read-magazine</code></td><td>CPT <code>issue</code></td></tr>
+    <tr><td>Podcast archive / episode</td><td><code>/podcast/</code>, <code>/podcast/{ep}/</code></td><td><code>#podcast</code>, <code>#ep1</code></td><td>CPT <code>episode</code></td></tr>
+    <tr><td>Events / event</td><td><code>/events/</code>, <code>/events/{slug}/</code></td><td><code>#events</code>, <code>#summit</code></td><td>CPT <code>event</code></td></tr>
+    <tr><td>Resources</td><td><code>/resources/</code></td><td><code>#resources</code></td><td>CPT <code>resource</code></td></tr>
+    <tr><td>Exclusive offers</td><td><code>/exclusive-offers/</code></td><td><code>#exclusive-offers</code></td><td>CPT <code>offer</code></td></tr>
+    <tr><td>About / Contributors</td><td><code>/about/</code>, <code>/contributors/</code>, <code>/author/{slug}/</code></td><td><code>#about</code>, <code>#contributors</code></td><td>Pages + WP users</td></tr>
+    <tr><td>Advertise / Contact</td><td><code>/advertise/</code>, <code>/contact/</code></td><td><code>#advertise</code>, <code>#contact</code></td><td>Pages + forms</td></tr>
+    <tr><td>Subscribe</td><td><code>/newsletter/</code></td><td><code>#newsletter-page</code></td><td>Page + form</td></tr>
+    <tr><td>Tools</td><td><code>/tools/</code>, <code>/tools/{calculator}/</code></td><td>Tools file <code>#gst</code> etc.</td><td>Static + JS</td></tr>
+    <tr><td>Legal</td><td><code>/privacy/</code>, <code>/terms/</code>, <code>/accessibility/</code></td><td><code>#privacy</code> etc.</td><td>Pages</td></tr>
+    <tr><td>Sitemap (HTML)</td><td><code>/sitemap/</code></td><td><code>#sitemap</code></td><td>Generated</td></tr>
+    <tr><td>404</td><td>any unknown URL, HTTP 404</td><td>any unknown hash</td><td>Static</td></tr>
+  </tbody>
+</table>
+
+<h2 style="font-family:Sora,sans-serif;font-weight:700;font-size:18pt;margin:26px 0 10px;break-before:page">4. Design tokens</h2>
+<p style="font-size:10.5pt;line-height:1.6;margin-bottom:8px">Copy these into the root stylesheet. Never add new hues or gradients outside the hero slides.</p>
+<pre style="font-family:'IBM Plex Mono',monospace;font-size:8.6pt;line-height:1.5;background:#101828;color:#E4E7EC;padding:14px 16px;border-radius:8px;white-space:pre-wrap;margin-bottom:14px">:root {
+  /* Brand */
+  --red: #D71920;          /* primary actions, links, eyebrows, newsletter band */
+  --red-deep: #A5121A;     /* red hover / pressed */
+  --ink: #101828;          /* text, dark bands (This week, Magazine, Podcast, Footer) */
+  --blue: #1E5AA8;         /* Free download buttons */
+  --blue-deep: #174A8C;    /* blue hover */
+  --navy: #24467A;         /* Sponsored band */
+  --burgundy: #7A1F2B;     /* Business Woman of the Month band */
+  --gold: #D4A72C;         /* focus ring, award accents */
+  /* Neutrals */
+  --slate-700: #475467;    /* secondary text */
+  --slate-500: #667085;    /* meta: dates, bylines */
+  --slate-400: #98A2B3;    /* muted text on dark */
+  --line-strong: #D0D5DD;  /* input borders */
+  --line: #E4E7EC;         /* card borders, dividers */
+  --mist: #F4F6F8;         /* alternating band, breadcrumb bar */
+  /* Tinted section backgrounds (alternate; never stack two dark bands) */
+  --tint-blue: #EEF2F8;    /* AI, Communities */
+  --tint-red: #FDF2F2;     /* Offers, Spotlight, Events */
+  /* Status (Tools and forms only) */
+  --error: #B42318; --warn: #B54708; --success: #0B7A47;
+  /* Type */
+  --font-head: "Sora", sans-serif;         /* 600 headings, 700 labels/buttons */
+  --font-body: "IBM Plex Sans", system-ui;  /* 400–600 */
+  /* Shape */
+  --r-sm: 6px; --r-btn: 8px; --r-card: 10px; --r-panel: 14px; --r-pill: 999px;
+  /* Layout */
+  --max: 1280px; --gutter: 24px; --band-y: 72px; --header-offset: 88px;
+}</pre>
+<table>
+  <thead><tr><th style="width:22%">Type role</th><th style="width:44%">Spec</th><th>Used for</th></tr></thead>
+  <tbody>
+    <tr><td>Page H1</td><td>Sora 600, <code>clamp(30px,3.4vw,48px)</code>, line 1.1, tracking −0.02em</td><td>Inner page titles (one per page)</td></tr>
+    <tr><td>Section H2</td><td>Sora 600, <code>clamp(24px,2.6vw,34px)</code>, line 1.16</td><td>Homepage sections</td></tr>
+    <tr><td>Card H3</td><td>Sora 600, 16.5–20px, line 1.25–1.3</td><td>Article, resource, event cards</td></tr>
+    <tr><td>Eyebrow</td><td>Sora 700, 10.5–11px, uppercase, tracking 0.12–0.16em, red</td><td>Category and section labels</td></tr>
+    <tr><td>Body</td><td>Plex 400, 15–16px, line 1.6. Article body 17–18px, line 1.7, max 720px</td><td>Excerpts, articles</td></tr>
+    <tr><td>Meta</td><td>Plex 400–500, 12.5–13.5px, slate-500</td><td>Date · reading time · author</td></tr>
+    <tr><td>Button</td><td>Sora 600–700, 13–15px</td><td>All buttons</td></tr>
+  </tbody>
+</table>
+<table>
+  <thead><tr><th style="width:22%">Breakpoint</th><th>Behaviour</th></tr></thead>
+  <tbody>
+    <tr><td>≥ 1240px</td><td>Full top navigation: Latest, Business, Technology &amp; AI, plus About Us with everything else nested. Mega menus open on hover or focus.</td></tr>
+    <tr><td>&lt; 1240px</td><td>“Menu” button opens a full-height drawer.</td></tr>
+    <tr><td>&lt; 560px</td><td>Cards stack to one column. Body text is at least 15px, and hit targets are at least 44px.</td></tr>
+    <tr><td>Grids</td><td><code>repeat(auto-fit / auto-fill, minmax(220–320px, 1fr))</code>, so they wrap with no extra breakpoints.</td></tr>
+  </tbody>
+</table>
+
+<h2 style="font-family:Sora,sans-serif;font-weight:700;font-size:18pt;margin:26px 0 10px;break-before:page">5. Components and behaviour</h2>
+<table>
+  <thead><tr><th style="width:24%">Component</th><th>Spec and behaviour</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Header</strong></td><td>Sticky, white, 1px bottom hairline. Logo on the left (preload it with <code>fetchpriority="high"</code>), nav, search field with live suggestions, and a Subscribe button. Press Escape to close the suggestions.</td></tr>
+    <tr><td><strong>Mega menu</strong></td><td>Opens on hover or focus. It has 3–4 link columns and one featured link, and closes on Escape, mouse-out or route change. Use <code>aria-expanded</code> on the trigger.</td></tr>
+    <tr><td><strong>Mobile drawer</strong></td><td>Full-height panel that traps focus and closes on Escape, on overlay click or on navigation.</td></tr>
+    <tr><td><strong>Hero slider</strong></td><td>Four slides, each with a gradient background, logo, headline lines, CTA and cover image. Auto-advances, and pauses on hover and on focus. Uses the <code>aria-roledescription="carousel"</code> pattern, with inactive slides <code>aria-hidden</code>. Respect <code>prefers-reduced-motion</code> by not auto-advancing.</td></tr>
+    <tr><td><strong>Article card</strong></td><td>Image (16:9 or fixed height, <code>object-fit:cover</code>), eyebrow category, H3 title link, excerpt clamped to 2–3 lines, and meta. Hover: title turns red and the card gets a soft shadow. The whole title is the link target, and the image link repeats the same URL.</td></tr>
+    <tr><td><strong>Sponsored label</strong></td><td>Every sponsored card and article shows “Sponsored” plus the partner name, so editorial credibility is protected. Sponsored outbound links use <code>rel="sponsored noopener"</code>.</td></tr>
+    <tr><td><strong>Resource card</strong></td><td>3:4 cover → kind eyebrow → title → description → blue <strong>“↓ Free download”</strong> button pinned to the bottom (<code>margin-top:auto</code> in a flex column), so the buttons in a row line up. Clicking the cover, title or button opens the download gate. Sections are 88px apart.</td></tr>
+    <tr><td><strong>Download gate</strong></td><td>Modal with name, email, province and a newsletter opt-in (checked by default), plus terms/privacy links. Validates inline, then starts the file download.</td></tr>
+    <tr><td><strong>Offer card</strong></td><td>Category filter chips; each card shows partner, value, title, description, expiry and a “Claim” action that reveals the code or link.</td></tr>
+    <tr><td><strong>Subscription pop-up</strong></td><td>Opens after 25s <em>or</em> at 40% scroll, whichever comes first, once per visitor. Dismissal is stored for 7 days (<code>localStorage csme-pop-dismissed</code>). Magazine and newsletter checkboxes. Never shown on legal pages, at checkout, or to users who have already subscribed.</td></tr>
+    <tr><td><strong>Back button</strong></td><td>Floating button on all inner pages that goes back in history (homepage if there is no history).</td></tr>
+    <tr><td><strong>Back to top</strong></td><td>Homepage only. Appears after one screen of scrolling.</td></tr>
+    <tr><td><strong>Breadcrumb</strong></td><td>Mist bar under the header on inner pages, inside <code>nav aria-label="Breadcrumb"</code>, mirrored in BreadcrumbList JSON-LD.</td></tr>
+    <tr><td><strong>Buttons</strong></td><td>Primary: red fill, white text, 8px radius, hover red-deep. Secondary: white, 1.5px ink border, hover ink fill. Download: blue pill. Focus: 3px gold outline, 2px offset.</td></tr>
+    <tr><td><strong>Inputs</strong></td><td>1.5px line-strong border, 8px radius, 44px minimum height, visible label and inline error in <code>--error</code> with <code>aria-live="polite"</code>.</td></tr>
+  </tbody>
+</table>
+
+<h2 style="font-family:Sora,sans-serif;font-weight:700;font-size:18pt;margin:26px 0 10px;break-before:page">6. Homepage, section by section</h2>
+<p style="font-size:10.5pt;line-height:1.6;margin-bottom:8px">Sections appear in this order. Each has an <code>id</code> for deep links, and scrolls with <code>scroll-margin-top:96px</code> under the sticky header.</p>
+<table>
+  <thead><tr><th style="width:26%">Section (id)</th><th style="width:18%">Background</th><th>Content</th></tr></thead>
+  <tbody>
+    <tr><td>Hero slider</td><td>Slide gradients</td><td>4 slides: magazine issue, sister titles, events</td></tr>
+    <tr><td>Sponsored (<code>sponsored</code>)</td><td>Navy #24467A</td><td>3 labelled partner articles (DUCA, UPS, sustainability)</td></tr>
+    <tr><td>This week (<code>this-week</code>)</td><td>Ink</td><td>Next CRA deadline, province picker, newsletter</td></tr>
+    <tr><td>Latest (<code>latest</code>)</td><td>White</td><td>12 real articles, filter chips, Load more, Most Read sidebar</td></tr>
+    <tr><td>AI (<code>ai-coverage</code>)</td><td>Tint blue</td><td>1 lead + 4 related</td></tr>
+    <tr><td>Expert Insights (<code>expert-insights</code>)</td><td>White</td><td>1 lead + 4 related</td></tr>
+    <tr><td>Small Business (<code>small-business</code>)</td><td>Mist</td><td>1 lead + 4 related</td></tr>
+    <tr><td>Exclusive Offers (<code>offers</code>)</td><td>Tint red</td><td>Filters + offer cards</td></tr>
+    <tr><td>Magazine (<code>magazine</code>)</td><td>Ink</td><td>Current cover, subscribe</td></tr>
+    <tr><td>Topics (<code>topics</code>)</td><td>White</td><td>Topic directory grid</td></tr>
+    <tr><td>Entrepreneur Spotlight (<code>spotlight</code>)</td><td>Tint red</td><td>Interview feature, with a quote only if it is real</td></tr>
+    <tr><td>Tools (<code>tools</code>), Deadlines (<code>deadlines</code>)</td><td>Mist / White</td><td>Calculator cards and the CRA deadline list</td></tr>
+    <tr><td>Woman of the Month (<code>woman-of-the-month</code>)</td><td>Burgundy</td><td>Photo, name, role, genuine quote</td></tr>
+    <tr><td>Communities (<code>communities</code>)</td><td>Tint blue</td><td>Each community uses only its own stories</td></tr>
+    <tr><td>Provinces (<code>provinces</code>), Funding finder (<code>funding-finder</code>)</td><td>Mist / White</td><td>13 province links; filter programs by province and need</td></tr>
+    <tr><td>Podcast (<code>podcast</code>)</td><td>Ink</td><td>Latest episode + recent episodes</td></tr>
+    <tr><td>Events (<code>events</code>), Resources, Partners</td><td>Tint red / Mist / White</td><td>Event cards, guides, partner logos</td></tr>
+    <tr><td>Newsletter (<code>newsletter-form</code>) + Footer</td><td>Red / Ink</td><td>Sign-up form; footer links incl. Privacy, Terms, Sitemap, Accessibility, Advertise</td></tr>
+  </tbody>
+</table>
+
+<figure style="margin:14px 0 18px;display:flex;flex-direction:column;gap:6px"><div style="width:681px;height:404px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative"><iframe loading="lazy" src="CanadianSME%20Homepage.dc.html?shot=1" title="Header and hero" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:760px;border:0;transform:scale(0.532);transform-origin:0 0;pointer-events:none"></iframe></div><figcaption style="font-size:9pt;color:#667085">6.1 Header and hero slider · desktop 1280px</figcaption></figure>
+<figure style="margin:14px 0 18px;display:flex;flex-direction:column;gap:6px"><div style="width:681px;height:330px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative"><iframe loading="lazy" src="CanadianSME%20Homepage.dc.html?shot=1&amp;mega=business" title="Mega menu" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:620px;border:0;transform:scale(0.532);transform-origin:0 0;pointer-events:none"></iframe></div><figcaption style="font-size:9pt;color:#667085">6.2 Mega menu: Business</figcaption></figure>
+<figure style="margin:14px 0 18px;display:flex;flex-direction:column;gap:6px"><div style="width:681px;height:404px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative"><iframe loading="lazy" src="CanadianSME%20Homepage.dc.html?shot=1&amp;at=sponsored" title="Sponsored" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:760px;border:0;transform:scale(0.532);transform-origin:0 0;pointer-events:none"></iframe></div><figcaption style="font-size:9pt;color:#667085">6.3 Sponsored band</figcaption></figure>
+<figure style="margin:14px 0 18px;display:flex;flex-direction:column;gap:6px"><div style="width:681px;height:404px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative"><iframe loading="lazy" src="CanadianSME%20Homepage.dc.html?shot=1&amp;at=this-week" title="This week and Latest" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:760px;border:0;transform:scale(0.532);transform-origin:0 0;pointer-events:none"></iframe></div><figcaption style="font-size:9pt;color:#667085">6.4 This week strip and Latest Articles</figcaption></figure>
+<figure style="margin:14px 0 18px;display:flex;flex-direction:column;gap:6px"><div style="width:681px;height:404px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative"><iframe loading="lazy" src="CanadianSME%20Homepage.dc.html?shot=1&amp;at=ai-coverage" title="AI section" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:760px;border:0;transform:scale(0.532);transform-origin:0 0;pointer-events:none"></iframe></div><figcaption style="font-size:9pt;color:#667085">6.5 Content section pattern (AI): 1 lead + 4 related</figcaption></figure>
+<figure style="margin:14px 0 18px;display:flex;flex-direction:column;gap:6px"><div style="width:681px;height:404px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative"><iframe loading="lazy" src="CanadianSME%20Homepage.dc.html?shot=1&amp;at=offers" title="Exclusive offers" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:760px;border:0;transform:scale(0.532);transform-origin:0 0;pointer-events:none"></iframe></div><figcaption style="font-size:9pt;color:#667085">6.6 Exclusive Offers</figcaption></figure>
+<figure style="margin:14px 0 18px;display:flex;flex-direction:column;gap:6px"><div style="width:681px;height:404px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative"><iframe loading="lazy" src="CanadianSME%20Homepage.dc.html?shot=1&amp;at=magazine" title="Magazine and Topics" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:760px;border:0;transform:scale(0.532);transform-origin:0 0;pointer-events:none"></iframe></div><figcaption style="font-size:9pt;color:#667085">6.7 Magazine band and Topics</figcaption></figure>
+<figure style="margin:14px 0 18px;display:flex;flex-direction:column;gap:6px"><div style="width:681px;height:404px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative"><iframe loading="lazy" src="CanadianSME%20Homepage.dc.html?shot=1&amp;at=woman-of-the-month" title="Woman of the Month" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:760px;border:0;transform:scale(0.532);transform-origin:0 0;pointer-events:none"></iframe></div><figcaption style="font-size:9pt;color:#667085">6.8 Business Woman of the Month and Communities</figcaption></figure>
+<figure style="margin:14px 0 18px;display:flex;flex-direction:column;gap:6px"><div style="width:681px;height:404px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative"><iframe loading="lazy" src="CanadianSME%20Homepage.dc.html?shot=1&amp;at=provinces" title="Provinces and funding finder" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:760px;border:0;transform:scale(0.532);transform-origin:0 0;pointer-events:none"></iframe></div><figcaption style="font-size:9pt;color:#667085">6.9 Provinces and Funding finder</figcaption></figure>
+<figure style="margin:14px 0 18px;display:flex;flex-direction:column;gap:6px"><div style="width:681px;height:404px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative"><iframe loading="lazy" src="CanadianSME%20Homepage.dc.html?shot=1&amp;at=podcast" title="Podcast and events" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:760px;border:0;transform:scale(0.532);transform-origin:0 0;pointer-events:none"></iframe></div><figcaption style="font-size:9pt;color:#667085">6.10 Podcast and Events</figcaption></figure>
+<figure style="margin:14px 0 18px;display:flex;flex-direction:column;gap:6px"><div style="width:681px;height:479px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative"><iframe loading="lazy" src="CanadianSME%20Homepage.dc.html?shot=1&amp;at=newsletter-form" title="Newsletter and footer" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:900px;border:0;transform:scale(0.532);transform-origin:0 0;pointer-events:none"></iframe></div><figcaption style="font-size:9pt;color:#667085">6.11 Newsletter band and footer</figcaption></figure>
+<div style="display:flex;gap:18px;margin:14px 0 18px;break-inside:avoid">
+  <figure style="margin:0;display:flex;flex-direction:column;gap:6px"><div style="width:195px;height:422px;overflow:hidden;border:1px solid #D0D5DD;border-radius:14px;background:#F4F6F8;position:relative"><iframe loading="lazy" src="CanadianSME%20Homepage.dc.html?shot=1" title="Mobile homepage" scrolling="no" style="position:absolute;top:0;left:0;width:390px;height:844px;border:0;transform:scale(0.5);transform-origin:0 0;pointer-events:none"></iframe></div><figcaption style="font-size:9pt;color:#667085">Mobile 390px</figcaption></figure>
+  <figure style="margin:0;display:flex;flex-direction:column;gap:6px"><div style="width:195px;height:422px;overflow:hidden;border:1px solid #D0D5DD;border-radius:14px;background:#F4F6F8;position:relative"><iframe loading="lazy" src="CanadianSME%20Homepage.dc.html?shot=1&amp;drawer=1" title="Mobile drawer" scrolling="no" style="position:absolute;top:0;left:0;width:390px;height:844px;border:0;transform:scale(0.5);transform-origin:0 0;pointer-events:none"></iframe></div><figcaption style="font-size:9pt;color:#667085">Menu drawer</figcaption></figure>
+  <figure style="margin:0;display:flex;flex-direction:column;gap:6px"><div style="width:195px;height:422px;overflow:hidden;border:1px solid #D0D5DD;border-radius:14px;background:#F4F6F8;position:relative"><iframe loading="lazy" src="CanadianSME%20Homepage.dc.html?shot=1#post-beyond-the-tariff-rate" title="Mobile article" scrolling="no" style="position:absolute;top:0;left:0;width:390px;height:844px;border:0;transform:scale(0.5);transform-origin:0 0;pointer-events:none"></iframe></div><figcaption style="font-size:9pt;color:#667085">Mobile article</figcaption></figure>
+</div>
+
+<h2 style="font-family:Sora,sans-serif;font-weight:700;font-size:18pt;margin:26px 0 10px;break-before:page">7. Inner pages</h2>
+<p style="font-size:10.5pt;line-height:1.6;margin-bottom:8px">Every inner page has the header, breadcrumb bar, one H1, the floating Back button and the footer. Reading copy is at most about 720px wide.</p>
+<h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:12.5pt;margin:16px 0 4px">Article</h3>
+<p style="font-size:10pt;line-height:1.6;color:#475467">Full article on site: category, H1, standfirst, featured image with alt text, author, dates, reading time, share buttons, body, author box, related articles. The source link back to canadiansme.ca becomes the canonical in production.</p>
+<figure style="margin:10px 0 18px;display:flex;flex-direction:column;gap:6px"><div style="width:681px;height:404px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative"><iframe loading="lazy" src="CanadianSME%20Homepage.dc.html?shot=1#post-beyond-the-tariff-rate" title="Article" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:760px;border:0;transform:scale(0.532);transform-origin:0 0;pointer-events:none"></iframe></div><figcaption style="font-size:9pt;color:#667085">/beyond-the-tariff-rate/</figcaption></figure>
+<h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:12.5pt;margin:16px 0 4px">Province</h3>
+<p style="font-size:10pt;line-height:1.6;color:#475467">Intro, key statistics, premier and small-business minister photos, industries, compliance and funding lists, “How to start a business” step guide, business networks and long-form description. The same template serves all 13 provinces and territories.</p>
+<figure style="margin:10px 0 18px;display:flex;flex-direction:column;gap:6px"><div style="width:681px;height:404px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative"><iframe loading="lazy" src="CanadianSME%20Homepage.dc.html?shot=1#ontario" title="Province" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:760px;border:0;transform:scale(0.532);transform-origin:0 0;pointer-events:none"></iframe></div><figcaption style="font-size:9pt;color:#667085">/provinces/ontario/</figcaption></figure>
+<h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:12.5pt;margin:16px 0 4px">Category and search</h3>
+<figure style="margin:10px 0 18px;display:flex;flex-direction:column;gap:6px"><div style="width:681px;height:404px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative"><iframe loading="lazy" src="CanadianSME%20Homepage.dc.html?shot=1#technology" title="Category" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:760px;border:0;transform:scale(0.532);transform-origin:0 0;pointer-events:none"></iframe></div><figcaption style="font-size:9pt;color:#667085">/category/technology/</figcaption></figure>
+<figure style="margin:10px 0 18px;display:flex;flex-direction:column;gap:6px"><div style="width:681px;height:404px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative"><iframe loading="lazy" src="CanadianSME%20Homepage.dc.html?shot=1#search" title="Search" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:760px;border:0;transform:scale(0.532);transform-origin:0 0;pointer-events:none"></iframe></div><figcaption style="font-size:9pt;color:#667085">/search/?q= (noindex)</figcaption></figure>
+<h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:12.5pt;margin:16px 0 4px">Resources</h3>
+<p style="font-size:10pt;line-height:1.6;color:#475467">Grouped by business stage. A 2px ink rule under each group heading, 88px between groups, and the Free download button aligned at the bottom of every card.</p>
+<figure style="margin:10px 0 18px;display:flex;flex-direction:column;gap:6px"><div style="width:681px;height:404px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative"><iframe loading="lazy" src="CanadianSME%20Homepage.dc.html?shot=1#resources" title="Resources" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:760px;border:0;transform:scale(0.532);transform-origin:0 0;pointer-events:none"></iframe></div><figcaption style="font-size:9pt;color:#667085">/resources/</figcaption></figure>
+<h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:12.5pt;margin:16px 0 4px">Events, magazine, podcast</h3>
+<figure style="margin:10px 0 18px;display:flex;flex-direction:column;gap:6px"><div style="width:681px;height:404px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative"><iframe loading="lazy" src="CanadianSME%20Homepage.dc.html?shot=1#summit" title="Event" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:760px;border:0;transform:scale(0.532);transform-origin:0 0;pointer-events:none"></iframe></div><figcaption style="font-size:9pt;color:#667085">/events/summit/</figcaption></figure>
+<figure style="margin:10px 0 18px;display:flex;flex-direction:column;gap:6px"><div style="width:681px;height:404px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative"><iframe loading="lazy" src="CanadianSME%20Homepage.dc.html?shot=1#magazine" title="Magazine archive" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:760px;border:0;transform:scale(0.532);transform-origin:0 0;pointer-events:none"></iframe></div><figcaption style="font-size:9pt;color:#667085">/magazine/</figcaption></figure>
+<figure style="margin:10px 0 18px;display:flex;flex-direction:column;gap:6px"><div style="width:681px;height:404px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative"><iframe loading="lazy" src="CanadianSME%20Homepage.dc.html?shot=1#podcast" title="Podcast archive" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:760px;border:0;transform:scale(0.532);transform-origin:0 0;pointer-events:none"></iframe></div><figcaption style="font-size:9pt;color:#667085">/podcast/</figcaption></figure>
+<h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:12.5pt;margin:16px 0 4px">Offers, About, Contributors</h3>
+<figure style="margin:10px 0 18px;display:flex;flex-direction:column;gap:6px"><div style="width:681px;height:404px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative"><iframe loading="lazy" src="CanadianSME%20Homepage.dc.html?shot=1#exclusive-offers" title="Offers" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:760px;border:0;transform:scale(0.532);transform-origin:0 0;pointer-events:none"></iframe></div><figcaption style="font-size:9pt;color:#667085">/exclusive-offers/</figcaption></figure>
+<figure style="margin:10px 0 18px;display:flex;flex-direction:column;gap:6px"><div style="width:681px;height:404px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative"><iframe loading="lazy" src="CanadianSME%20Homepage.dc.html?shot=1#about" title="About" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:760px;border:0;transform:scale(0.532);transform-origin:0 0;pointer-events:none"></iframe></div><figcaption style="font-size:9pt;color:#667085">/about/: mission and “What we run” (5 programs, portrait)</figcaption></figure>
+<figure style="margin:10px 0 18px;display:flex;flex-direction:column;gap:6px"><div style="width:681px;height:404px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative"><iframe loading="lazy" src="CanadianSME%20Homepage.dc.html?shot=1#contributors" title="Contributors" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:760px;border:0;transform:scale(0.532);transform-origin:0 0;pointer-events:none"></iframe></div><figcaption style="font-size:9pt;color:#667085">/contributors/: profile, recent work and Top Contributors (20 photos, 4 per row)</figcaption></figure>
+<h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:12.5pt;margin:16px 0 4px">Advertise, contact, legal, 404</h3>
+<figure style="margin:10px 0 18px;display:flex;flex-direction:column;gap:6px"><div style="width:681px;height:404px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative"><iframe loading="lazy" src="CanadianSME%20Homepage.dc.html?shot=1#advertise" title="Advertise" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:760px;border:0;transform:scale(0.532);transform-origin:0 0;pointer-events:none"></iframe></div><figcaption style="font-size:9pt;color:#667085">/advertise/</figcaption></figure>
+<figure style="margin:10px 0 18px;display:flex;flex-direction:column;gap:6px"><div style="width:681px;height:404px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative"><iframe loading="lazy" src="CanadianSME%20Homepage.dc.html?shot=1#contact" title="Contact" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:760px;border:0;transform:scale(0.532);transform-origin:0 0;pointer-events:none"></iframe></div><figcaption style="font-size:9pt;color:#667085">/contact/</figcaption></figure>
+<figure style="margin:10px 0 18px;display:flex;flex-direction:column;gap:6px"><div style="width:681px;height:404px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative"><iframe loading="lazy" src="CanadianSME%20Homepage.dc.html?shot=1#privacy" title="Privacy" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:760px;border:0;transform:scale(0.532);transform-origin:0 0;pointer-events:none"></iframe></div><figcaption style="font-size:9pt;color:#667085">/privacy/ (same template for Terms and Accessibility)</figcaption></figure>
+<figure style="margin:10px 0 18px;display:flex;flex-direction:column;gap:6px"><div style="width:681px;height:404px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative"><iframe loading="lazy" src="CanadianSME%20Homepage.dc.html?shot=1#zzz-missing" title="404" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:760px;border:0;transform:scale(0.532);transform-origin:0 0;pointer-events:none"></iframe></div><figcaption style="font-size:9pt;color:#667085">404: must return HTTP status 404, not 200</figcaption></figure>
+<h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:12.5pt;margin:16px 0 4px">Tools</h3>
+<figure style="margin:10px 0 18px;display:flex;flex-direction:column;gap:6px"><div style="width:681px;height:404px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative"><iframe loading="lazy" src="CanadianSME%20Tools.dc.html#gst" title="GST/HST calculator" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:760px;border:0;transform:scale(0.532);transform-origin:0 0;pointer-events:none"></iframe></div><figcaption style="font-size:9pt;color:#667085">/tools/gst-hst-calculator/: inputs on the left, results on the right, rate source and tax year shown on every result</figcaption></figure>
+
+<h2 style="font-family:Sora,sans-serif;font-weight:700;font-size:18pt;margin:26px 0 10px;break-before:page">8. Data model</h2>
+<p style="font-size:10.5pt;line-height:1.6;margin-bottom:8px">These field names mirror the prototype’s data objects. Define these as schemas in the headless CMS. <strong>Never fabricate content</strong>: if a field is empty, hide the element rather than filling it with placeholder text.</p>
+<table>
+  <thead><tr><th style="width:20%">Type</th><th>Fields</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Post</strong></td><td>title, slug, category, date, modified, author → Author, featured image + alt, excerpt (used as meta description, 150–158 chars), body HTML, reading time (calculated), source URL, <code>sponsored</code> flag + partner</td></tr>
+    <tr><td><strong>Author</strong></td><td>name, role, bio, photo, profile URL, social links</td></tr>
+    <tr><td><strong>Province</strong></td><td>code (ON), name, intro, facts[] (label, value, source), industries[], premier (name, photo), cabinet, small-business minister (name, photo), compliance[], funding[] (name, URL), start guide steps[], networks[], long-form about, related article</td></tr>
+    <tr><td><strong>Event</strong></td><td>name, slug, start/end datetime (ISO, America/Toronto), venue name + address, description, register URL, price, status</td></tr>
+    <tr><td><strong>Resource</strong></td><td>group (Start &amp; structure, Money, tax &amp; funding, …), kind (Guide, Template, Checklist), title, description, cover image, file, gated (bool)</td></tr>
+    <tr><td><strong>Offer</strong></td><td>category, partner name, logo, value, title, description, code or URL, expiry date (auto-hide when expired), terms</td></tr>
+    <tr><td><strong>Issue</strong></td><td>number, month/year, cover, Issuu/PDF URL, “inside this issue” list</td></tr>
+    <tr><td><strong>Episode</strong></td><td>number, title, guest, duration, date, audio URL, Spotify/Apple links, notes</td></tr>
+    <tr><td><strong>Deadline</strong></td><td>date, title, who it applies to, CRA source URL. Drives the This week countdown, which hides past dates automatically.</td></tr>
+    <tr><td><strong>News item</strong></td><td>headline (≤ 90 chars), summary (2 sentences, “what it means for your business”), topic (Rates &amp; lending, Tax &amp; CRA, Grants &amp; funding, Trade &amp; tariffs, Regulation, Labour), provinces[] (or “Federal”), deadline date (optional), source name, source URL, source published date, status (draft / approved / rejected), approved by, approved at, AI model + prompt version</td></tr>
+    <tr><td><strong>Funding program</strong></td><td>name, agency, provinces[], needs[] (loans, export, tech, hire), URL. Drives the Funding finder.</td></tr>
+  </tbody>
+</table>
+
+<h2 style="font-family:Sora,sans-serif;font-weight:700;font-size:18pt;margin:26px 0 10px;break-before:page">9. SEO specification</h2>
+<p style="font-size:10.5pt;line-height:1.6;margin-bottom:8px">The prototype already sets all of the following per page (see <code>applySeo()</code> in the homepage file). Production must output the same tags <strong>in the server HTML</strong>, not only through JavaScript. Generate them in the framework’s metadata layer from CMS fields.</p>
+<h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:12.5pt;margin:14px 0 4px">9.1 Tags on every page</h3>
+<table>
+  <thead><tr><th style="width:26%">Tag</th><th>Rule</th></tr></thead>
+  <tbody>
+    <tr><td><code>&lt;html lang&gt;</code></td><td><code>en-CA</code>. If a French edition launches, add <code>hreflang</code> en-CA / fr-CA pairs.</td></tr>
+    <tr><td><code>&lt;title&gt;</code></td><td><code>{Page title} | CanadianSME</code>, at most about 60 characters before the brand. Homepage: “CanadianSME Small Business Magazine | Canadian Business Insights”.</td></tr>
+    <tr><td>meta description</td><td>Unique per page, 150–158 characters. Articles use the excerpt, provinces the intro, categories a templated line.</td></tr>
+    <tr><td>canonical</td><td>Absolute, https, trailing slash, no tracking parameters. Paginated archives point to themselves (do not canonicalise page 2 to page 1).</td></tr>
+    <tr><td>robots</td><td><code>index, follow, max-image-preview:large</code>. Search results and 404s: <code>noindex, follow</code>. Staging: <code>noindex</code> on everything plus HTTP basic auth.</td></tr>
+    <tr><td>Open Graph / Twitter</td><td><code>og:site_name, og:locale=en_CA, og:type (article | website), og:title, og:description, og:url, og:image (1200×630)</code> and <code>twitter:card=summary_large_image</code>.</td></tr>
+    <tr><td>Headings</td><td>Exactly one H1 per page. The homepage has a visually hidden H1 because the slider headlines rotate. Keep heading levels in order: H2 for sections, H3 for cards.</td></tr>
+    <tr><td>Images</td><td>Descriptive alt text on every content image (empty <code>alt=""</code> on decorative ones), explicit width/height, <code>loading="lazy"</code> below the fold, and WebP/AVIF output.</td></tr>
+  </tbody>
+</table>
+<h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:12.5pt;margin:14px 0 4px">9.2 Structured data (JSON-LD)</h3>
+<table>
+  <thead><tr><th style="width:26%">Where</th><th>Schema</th></tr></thead>
+  <tbody>
+    <tr><td>Every page</td><td><code>NewsMediaOrganization</code> (CanadianSME, parent Cmarketing Inc., Mississauga ON, sameAs sister properties) and <code>WebSite</code> with a <code>SearchAction</code> pointing to <code>/search/?q=</code></td></tr>
+    <tr><td>Article</td><td><code>NewsArticle</code>: headline (≤110 chars), image, datePublished, dateModified, author (Person, or Organization for the newsroom), publisher, articleSection. Sponsored posts state the sponsor in the content and in <code>sponsor</code>.</td></tr>
+    <tr><td>Inner pages</td><td><code>BreadcrumbList</code> matching the visible breadcrumb</td></tr>
+    <tr><td>Category / Latest</td><td><code>CollectionPage</code></td></tr>
+    <tr><td>Province</td><td><code>WebPage</code> about an <code>AdministrativeArea</code> in Canada</td></tr>
+    <tr><td>Event</td><td><code>Event</code> with startDate, endDate, location (Place + PostalAddress), organizer, offers (URL, price, CAD), eventStatus</td></tr>
+    <tr><td>Podcast episode</td><td><code>PodcastEpisode</code> with associatedMedia and partOfSeries</td></tr>
+    <tr><td>Author page</td><td><code>ProfilePage</code> with a <code>Person</code></td></tr>
+    <tr><td>Resources</td><td>Guides that answer questions can add <code>HowTo</code> (step guides on province pages). Validate with Google’s Rich Results Test.</td></tr>
+  </tbody>
+</table>
+<h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:12.5pt;margin:14px 0 4px">9.3 Crawling and indexing</h3>
+<ul style="margin:0 0 10px;padding-left:18px;font-size:10pt;line-height:1.6">
+  <li><code>/sitemap.xml</code>: a sitemap index, split into posts, pages, provinces, events and categories, with real <code>lastmod</code> dates. A Google News sitemap covers posts from the last 48 hours. The starter file is <code>seo/sitemap.xml</code>.</li>
+  <li><code>/robots.txt</code>: starter in <code>seo/robots.txt</code> (blocks <code>/search</code> and <code>/wp-admin/</code>, and declares the sitemap).</li>
+  <li>Submit to Google Search Console and Bing Webmaster Tools. Verify both the www and apex domains, and redirect one to the other with a 301.</li>
+  <li>An RSS feed at <code>/feed/</code>, linked in the head.</li>
+  <li>Redirects: map every current canadiansme.ca URL that changes to its new URL with a 301. Crawl the live site before launch and keep the redirect map in the repo.</li>
+  <li>Internal linking: related articles, breadcrumbs, category and province links on every article. No orphan pages, and the HTML sitemap at <code>/sitemap/</code> lists everything.</li>
+  <li>Outbound links to partners and sponsors: <code>rel="sponsored"</code>. User-submitted links: <code>rel="ugc"</code>. Government sources (CRA, BDC, EDC, canada.ca) stay followed.</li>
+</ul>
+<h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:12.5pt;margin:14px 0 4px">9.4 Content SEO for editors</h3>
+<ul style="margin:0 0 10px;padding-left:18px;font-size:10pt;line-height:1.6">
+  <li>Target queries Canadian owners actually search: “GST/HST filing deadline”, “Ontario small business grants”, “BDC loan”, “how to register a business in Alberta”. Put the province or programme name in the title and first paragraph.</li>
+  <li>Show updated dates on time-sensitive pages (deadlines, rates, grants) and actually refresh them.</li>
+  <li>Province pages and tools are evergreen ranking assets. Link to them from every relevant article.</li>
+</ul>
+
+<h2 style="font-family:Sora,sans-serif;font-weight:700;font-size:18pt;margin:26px 0 10px;break-before:page">10. Forms, integrations and analytics</h2>
+<table>
+  <thead><tr><th style="width:24%">Form</th><th style="width:34%">Fields</th><th>Sends to</th></tr></thead>
+  <tbody>
+    <tr><td>Newsletter (band, This week, Subscribe page)</td><td>first name, email, province, business stage, consent</td><td>Email platform list + CRM contact. Double opt-in.</td></tr>
+    <tr><td>Subscription pop-up</td><td>email, magazine ☐, newsletter ☐</td><td>Same list, tagged by interest</td></tr>
+    <tr><td>Download gate</td><td>name, email, province, newsletter opt-in</td><td>CRM lead tagged with the resource, then file delivery</td></tr>
+    <tr><td>Offer claim</td><td>email (optional)</td><td>Reveal the code; log the claim per partner for reporting</td></tr>
+    <tr><td>Contact</td><td>name, email, topic, message</td><td>Routed by topic: editorial, advertising, events</td></tr>
+    <tr><td>Media kit / Advertise</td><td>name, company, email, interest</td><td>Sales CRM pipeline</td></tr>
+  </tbody>
+</table>
+<ul style="margin:0 0 10px;padding-left:18px;font-size:10pt;line-height:1.6">
+  <li><strong>CASL compliance:</strong> express consent checkbox (unticked unless the purpose is the download itself), sender identification (Cmarketing Inc., Mississauga, ON), unsubscribe in every email, and consent records stored with a timestamp.</li>
+  <li><strong>Privacy:</strong> PIPEDA, and Quebec Law 25 for Quebec visitors, so show a cookie consent banner before analytics or ad pixels load.</li>
+  <li><strong>Spam:</strong> honeypot field plus Cloudflare Turnstile or reCAPTCHA v3. Rate-limit server-side.</li>
+  <li><strong>Analytics (GA4 events):</strong> <code>newsletter_signup</code>, <code>popup_view</code> / <code>popup_signup</code>, <code>resource_download</code> (resource id), <code>offer_claim</code> (partner), <code>sponsored_click</code> (partner), <code>search</code> (term), <code>tool_use</code> (calculator), <code>province_view</code>.</li>
+</ul>
+
+<h2 style="font-family:Sora,sans-serif;font-weight:700;font-size:18pt;margin:26px 0 10px">11. Accessibility (WCAG 2.2 AA, AODA)</h2>
+<ul style="margin:0 0 10px;padding-left:18px;font-size:10pt;line-height:1.6">
+  <li>Ontario’s AODA requires WCAG 2.0 AA. Target 2.2 AA.</li>
+  <li>A skip link to <code>#main</code>, landmark elements (header, nav, main, footer), and one H1 per page.</li>
+  <li>Text contrast of at least 4.5:1. Never grey text on red, and never red body text on ink.</li>
+  <li>Every control is keyboard-reachable and shows the gold focus ring. Menus, drawer and modals close on Escape, and modals trap and restore focus.</li>
+  <li>The carousel has pause controls and doesn’t auto-advance under <code>prefers-reduced-motion</code>.</li>
+  <li>Forms have visible labels, errors announced through <code>aria-live</code>, and 44px targets.</li>
+</ul>
+
+<h2 style="font-family:Sora,sans-serif;font-weight:700;font-size:18pt;margin:26px 0 10px">12. Performance</h2>
+<ul style="margin:0 0 10px;padding-left:18px;font-size:10pt;line-height:1.6">
+  <li>Core Web Vitals targets at the 75th percentile on mobile: LCP under 2.5s, INP under 200ms, CLS under 0.1.</li>
+  <li>Render only the current page. The prototype originally mounted all 22 page templates at once, which caused lag. That is now fixed and must stay that way in production.</li>
+  <li>The hero image or first slide is the LCP element. Preload it, and don’t lazy-load it. Everything below the fold gets <code>loading="lazy"</code>.</li>
+  <li>Responsive images through <code>srcset</code>/<code>sizes</code>, with width and height always set to prevent layout shift.</li>
+  <li>Defer non-critical JavaScript (slider, pop-up, search suggestions). Load analytics after consent.</li>
+  <li>Cache HTML at the CDN and purge on publish. Static assets are immutable and fingerprinted.</li>
+</ul>
+
+<h2 style="font-family:Sora,sans-serif;font-weight:700;font-size:18pt;margin:26px 0 10px;break-before:page">13. QA and launch checklist</h2>
+<ul style="margin:0 0 10px;padding-left:18px;font-size:10pt;line-height:1.75">
+  <li>☐ Every route in section 3 returns 200 with server-rendered HTML. Unknown URLs return 404.</li>
+  <li>☐ Unique title, description and canonical on every page (crawl with Screaming Frog).</li>
+  <li>☐ JSON-LD validates in the Rich Results Test for an article, an event, a province page and the homepage.</li>
+  <li>☐ Sitemap submitted, robots.txt live, staging <code>noindex</code> removed.</li>
+  <li>☐ 301 redirect map tested against the old site crawl.</li>
+  <li>☐ Lighthouse mobile: Performance ≥ 90, Accessibility ≥ 95, SEO 100.</li>
+  <li>☐ Keyboard-only and screen-reader pass (NVDA + VoiceOver) on the homepage, an article, a form and the pop-up.</li>
+  <li>☐ Forms deliver to the email platform and CRM, with double opt-in and consent stored.</li>
+  <li>☐ Sponsored content labelled everywhere, and sponsor links carry <code>rel="sponsored"</code>.</li>
+  <li>☐ Expired offers and past deadlines hide automatically.</li>
+  <li>☐ Tested in Chrome, Safari, Firefox and Edge, plus iOS Safari and Android Chrome, at 390px, 768px, 1280px and 1440px.</li>
+</ul>
+
+<h2 style="font-family:Sora,sans-serif;font-weight:700;font-size:18pt;margin:26px 0 10px">14. Open items from the client</h2>
+<ul style="margin:0 0 10px;padding-left:18px;font-size:10pt;line-height:1.6">
+  <li>Confirm the 12 small-business minister names for the provinces and territories outside Ontario.</li>
+  <li>Review the long-form province content for accuracy.</li>
+  <li>Supply real partner offers (names, codes, links, end dates).</li>
+  <li>Email platform and CRM credentials for the subscription and download forms.</li>
+  <li>Real photos for Top Contributors.</li>
+  <li>The third sponsored article link.</li>
+  <li>Current redirect map or a crawl of the live canadiansme.ca.</li>
+  <li>Name the editor(s) who approve the daily news queue.</li>
+  <li>Claude API account and billing for the news feed.</li>
+  <li>Advertise With Us (<code>/advertise-with-us/</code>): approved media kit file (set <code>ADV_MEDIA_KIT_URL</code>), inquiry form handler (set <code>ADV_FORM_ENDPOINT</code>, POST JSON, route to partnerships + CRM), approved audience figures with source and date (<code>ADV_METRICS</code>), real campaign examples to replace the illustrative previews, confirmation of the budget ranges in the form, and a 301 from <code>/advertise/</code>.</li>
+</ul>
+
+<h2 style="font-family:Sora,sans-serif;font-weight:700;font-size:18pt;margin:26px 0 10px;break-before:page">15. Leaving WordPress: migration checklist</h2>
+<p style="font-size:10.5pt;line-height:1.6;margin-bottom:8px">The live site runs on WordPress. The new build does not. <strong>Losing URLs loses Google rankings</strong>, so treat redirects as launch-blocking.</p>
+<ul style="margin:0 0 10px;padding-left:18px;font-size:10pt;line-height:1.6;line-height:1.75">
+  <li>☐ Crawl the live canadiansme.ca (Screaming Frog) and export every indexed URL before anything changes.</li>
+  <li>☐ Export all posts, pages, categories, tags, authors and media (WP REST API or WXR export). Import into the CMS, preserving slugs, publish dates and authors.</li>
+  <li>☐ Copy every image from <code>/wp-content/uploads/</code> to the new image host. Rewrite image URLs in article bodies.</li>
+  <li>☐ Clean the body HTML: strip shortcodes, page-builder markup and inline styles.</li>
+  <li>☐ Build the 301 redirect map: every old URL → its new URL (including <code>/category/</code>, <code>/tag/</code>, <code>/author/</code>, <code>/page/2/</code> and <code>?p=123</code> forms). Never redirect everything to the homepage.</li>
+  <li>☐ Replace each plugin: SEO (metadata layer), forms (email platform + CRM, section 10), ads and sponsor slots, newsletter pop-up, caching (CDN).</li>
+  <li>☐ Keep RSS: <code>/feed/</code> must still work (redirect or regenerate) for existing subscribers.</li>
+  <li>☐ After launch: resubmit the sitemap in Google Search Console, watch the Coverage and 404 reports daily for two weeks, keep the old WordPress read-only for 30 days, then shut it down.</li>
+</ul>
+
+<h2 style="font-family:Sora,sans-serif;font-weight:700;font-size:18pt;margin:26px 0 10px;break-before:page">16. Canada SME News: automated feed (deferred, not in launch scope)</h2>
+<p style="font-size:10.5pt;line-height:1.6;margin-bottom:8px;padding:10px 12px;background:#FEF3F2;border:1px solid #FECDCA;border-radius:6px"><strong>On hold.</strong> The News page and homepage strip have been removed from the prototype. Do not build this section, or add <code>/news/</code> to the sitemap, until the client confirms an editor to own it. The spec below is kept for later.</p>
+<p style="font-size:10.5pt;line-height:1.6;margin-bottom:8px">Short, dated news items for owners: rate decisions, CRA changes, grant intakes, tariffs and provincial rules. Shown on <code>/news/</code> (prototype <code>#news</code>), the homepage “Canada SME News” strip (5 latest), matching province pages and the Tuesday newsletter. <strong>AI drafts, a human approves. Nothing auto-publishes.</strong></p>
+<h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:12.5pt;margin:14px 0 4px">16.1 Pipeline</h3>
+<table>
+  <thead><tr><th style="width:18%">Step</th><th>What happens</th></tr></thead>
+  <tbody>
+    <tr><td><strong>1. Fetch</strong></td><td>Scheduled job every 60 minutes. Pull the RSS/Atom feeds and newsroom pages listed in 16.2. Skip any item whose source URL is already stored.</td></tr>
+    <tr><td><strong>2. Filter</strong></td><td>Send title + first 2,000 characters to the Claude API. It returns <code>relevant: true/false</code> plus a reason. Keep only items that change what a Canadian owner-operator must do, pay or can apply for.</td></tr>
+    <tr><td><strong>3. Summarise</strong></td><td>Second call returns JSON: <code>headline</code>, <code>summary</code>, <code>topic</code>, <code>provinces[]</code>, <code>deadline</code> (ISO or null), <code>confidence</code>. Validate against a schema; reject on failure.</td></tr>
+    <tr><td><strong>4. Draft</strong></td><td>Save as a <code>news_item</code> with status <code>draft</code>. Notify the editor (email or Slack) with a daily digest.</td></tr>
+    <tr><td><strong>5. Review</strong></td><td>Editor checks every number and date against the source, edits if needed, approves or rejects. Target: 10 minutes a day.</td></tr>
+    <tr><td><strong>6. Publish</strong></td><td>On approve, the CMS webhook revalidates <code>/news/</code>, the homepage and affected province pages.</td></tr>
+  </tbody>
+</table>
+<h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:12.5pt;margin:14px 0 4px">16.2 Sources (official only)</h3>
+<p style="font-size:10.5pt;line-height:1.6;margin-bottom:8px">Bank of Canada, Canada Revenue Agency, Department of Finance Canada, ISED, Statistics Canada (The Daily), CBSA, Global Affairs Canada (trade), BDC, EDC, and the 13 provincial and territorial government newsrooms. Do not ingest other publishers’ news sites. Confirm each feed URL at build time and store them in a CMS-editable list.</p>
+<h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:12.5pt;margin:14px 0 4px">16.3 AI instructions (system prompt outline)</h3>
+<ul style="margin:0 0 10px;padding-left:18px;font-size:10pt;line-height:1.6">
+  <li>Audience: a Canadian small business owner who is short on time. Plain language, Canadian spelling, no hype.</li>
+  <li>Use only facts in the supplied source text. Never infer amounts, rates or dates. If unsure, set <code>confidence: low</code>.</li>
+  <li>Headline states the change, not the announcement (“CRA extends T2 filing deadline to …”, not “CRA announces update”).</li>
+  <li>Summary sentence 2 always answers “what this means for your business”.</li>
+  <li>Never copy more than one short phrase from the source.</li>
+</ul>
+<h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:12.5pt;margin:14px 0 4px">16.4 Rules</h3>
+<ul style="margin:0 0 10px;padding-left:18px;font-size:10pt;line-height:1.6">
+  <li>Every item shows source name, source date and a link to the original. Summaries only, never full text.</li>
+  <li><code>confidence: low</code> items are flagged in the review queue and can’t be bulk-approved.</li>
+  <li>Items with a deadline also appear in the This week strip until the date passes.</li>
+  <li>Disclosure line on <code>/news/</code>: items are summarised with AI and checked by an editor.</li>
+  <li>Structured data: each item is a <code>NewsArticle</code>; <code>/news/</code> is a <code>CollectionPage</code>. Add <code>/news/</code> to the sitemap with <code>changefreq: hourly</code> (done in <code>seo/sitemap.xml</code>).</li>
+  <li>Log model, prompt version, tokens and cost per item. Expected cost is low at this volume; confirm current API pricing.</li>
+</ul>
+<h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:12.5pt;margin:14px 0 4px">16.5 Front end</h3>
+<ul style="margin:0 0 10px;padding-left:18px;font-size:10pt;line-height:1.6">
+  <li>Filters: topic chips and a province select (All of Canada, Federal only, 13 provinces/territories). Reflect filters in the URL (<code>/news/?topic=tax&amp;province=ontario</code>, <code>noindex</code> for filtered views).</li>
+  <li>Row: topic + province tags, headline, 2-line summary, deadline badge if set, source · date. No images.</li>
+  <li>The prototype shows grey placeholder rows. Replace them with live items; if the feed is empty, hide the homepage strip.</li>
+</ul>
+</doc-page>
+</x-dc>
+</body>
+</html>

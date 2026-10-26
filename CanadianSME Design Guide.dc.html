@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>CanadianSME Website — Design Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="./doc-page.js"></script>
+<style>
+  doc-page:not(:defined){visibility:hidden}
+  body { margin:0; color:#101828; font-family:"IBM Plex Sans",system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+  h1,h2,h3,p { margin:0; }
+  a { color:#D71920; text-decoration:none; }
+  a:hover { color:#A5121A; text-decoration:underline; }
+  table { border-collapse:collapse; width:100%; }
+  [data-keep] { break-inside:avoid; }
+</style>
+</helmet>
+<doc-page size="letter" margin="0.7in" style="font-family:'IBM Plex Sans',system-ui,sans-serif">
+<div slot="footer" style="display:flex;justify-content:space-between;font-size:9pt;color:#667085;border-top:1px solid #E4E7EC;padding-top:8px;margin-top:12px"><span>CanadianSME Website · Design Guide</span><span>v1 · October 2026</span></div>
+
+<div style="display:flex;flex-direction:column;gap:14px;padding-bottom:28px;border-bottom:3px solid #D71920;margin-bottom:28px">
+  <span style="font-family:Sora,sans-serif;font-size:10pt;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#D71920">Design guide · for designers</span>
+  <h1 style="font-family:Sora,sans-serif;font-weight:800;font-size:34pt;line-height:1.05;letter-spacing:-0.02em">CanadianSME Website</h1>
+  <p style="font-size:13pt;line-height:1.55;color:#475467;max-width:40em">The visual system and page-by-page specs for canadiansme.ca. Everything here is taken from the current prototype (<em>CanadianSME Homepage</em> and <em>CanadianSME Tools</em>). Where the guide and the prototype disagree, the prototype wins.</p>
+  <p style="font-size:10.5pt;color:#667085">Publisher: Cmarketing Inc., Mississauga, Ontario</p>
+</div>
+
+<h2 style="font-family:Sora,sans-serif;font-weight:700;font-size:15pt;margin-bottom:10px">Contents</h2>
+<ol style="margin:0 0 28px;padding-left:20px;font-size:11.5pt;line-height:1.8">
+  <li>Principles and audience</li>
+  <li>Foundations: colour, type, layout, shape</li>
+  <li>Core components</li>
+  <li>Global elements: header, navigation, footer</li>
+  <li>Homepage, section by section</li>
+  <li>Inner page templates</li>
+  <li>Tools (calculators)</li>
+  <li>Content, imagery and accessibility rules</li>
+  <li>Open items before launch</li>
+</ol>
+
+<h2 style="font-family:Sora,sans-serif;font-weight:700;font-size:18pt;margin:8px 0 10px">1. Principles and audience</h2>
+<p style="font-size:11pt;line-height:1.65;margin-bottom:12px">Every page is for <strong>Canadian small business owners</strong>: owner-operators who are short on time. They aren't investors, enterprise readers or a general business audience. Design for someone checking a CRA deadline between customers.</p>
+<ul style="margin:0 0 16px;padding-left:18px;font-size:11pt;line-height:1.65">
+  <li><strong>Useful first.</strong> Deadlines, grants, rates and tools take priority over decoration.</li>
+  <li><strong>Editorial, not corporate.</strong> The site should feel like a magazine. Headlines and real photography do the work, not gradients or illustrations.</li>
+  <li><strong>Calm and scannable.</strong> Strong headings, short excerpts and clear dates and reading times.</li>
+  <li><strong>CanadianSME is the flagship.</strong> Sister titles (AmericanSMB, EuropeanSMB, Black Business, Startup Growth, She &amp; Success, Indigenous-SME) are always visually secondary.</li>
+  <li><strong>Canadian spelling</strong> everywhere: labour, centre, organisation (when the brand uses it), cheque.</li>
+</ul>
+
+<h2 style="font-family:Sora,sans-serif;font-weight:700;font-size:18pt;margin:26px 0 10px;break-before:page">2. Foundations</h2>
+
+<h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:13pt;margin:6px 0 8px">2.1 Colour</h3>
+<p style="font-size:11pt;line-height:1.6;margin-bottom:10px">The palette is red, ink and neutrals. Use red sparingly, for actions, links, labels and the one red newsletter band. Large areas are white, Mist or Ink.</p>
+<table style="font-size:10pt;margin-bottom:14px">
+  <thead><tr>
+    <th style="text-align:left;padding:6px 8px;border-bottom:1.5px solid #101828;font-family:Sora,sans-serif;font-size:8.5pt;letter-spacing:0.08em;text-transform:uppercase;width:34%">Name / hex</th>
+    <th style="text-align:left;padding:6px 8px;border-bottom:1.5px solid #101828;font-family:Sora,sans-serif;font-size:8.5pt;letter-spacing:0.08em;text-transform:uppercase">Use</th>
+  </tr></thead>
+  <tbody>
+    <tr><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC"><div style="display:flex;gap:8px;align-items:center"><span style="width:16px;height:16px;border-radius:4px;background:#D71920;flex-shrink:0"></span><span><strong>Maple Red</strong> #D71920</span></div></td><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC">Primary buttons, links, eyebrow labels, active nav, play buttons, newsletter band</td></tr>
+    <tr><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC"><div style="display:flex;gap:8px;align-items:center"><span style="width:16px;height:16px;border-radius:4px;background:#A5121A;flex-shrink:0"></span><span><strong>Red Deep</strong> #A5121A</span></div></td><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC">Hover and pressed states for red</td></tr>
+    <tr><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC"><div style="display:flex;gap:8px;align-items:center"><span style="width:16px;height:16px;border-radius:4px;background:#101828;flex-shrink:0"></span><span><strong>Ink</strong> #101828</span></div></td><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC">Headings, body text, dark bands (This week, Magazine, Woman of the Month, Podcast, Footer)</td></tr>
+    <tr><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC"><div style="display:flex;gap:8px;align-items:center"><span style="width:16px;height:16px;border-radius:4px;background:#475467;flex-shrink:0"></span><span><strong>Slate 700</strong> #475467</span></div></td><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC">Secondary text, excerpts, standfirsts</td></tr>
+    <tr><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC"><div style="display:flex;gap:8px;align-items:center"><span style="width:16px;height:16px;border-radius:4px;background:#667085;flex-shrink:0"></span><span><strong>Slate 500</strong> #667085</span></div></td><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC">Meta: dates, reading time, bylines, captions</td></tr>
+    <tr><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC"><div style="display:flex;gap:8px;align-items:center"><span style="width:16px;height:16px;border-radius:4px;background:#98A2B3;flex-shrink:0"></span><span><strong>Slate 400</strong> #98A2B3</span></div></td><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC">Muted text on dark bands, placeholders, disabled</td></tr>
+    <tr><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC"><div style="display:flex;gap:8px;align-items:center"><span style="width:16px;height:16px;border-radius:4px;background:#D0D5DD;flex-shrink:0"></span><span><strong>Line Strong</strong> #D0D5DD</span></div></td><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC">Input borders, light labels on dark backgrounds</td></tr>
+    <tr><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC"><div style="display:flex;gap:8px;align-items:center"><span style="width:16px;height:16px;border-radius:4px;background:#E4E7EC;flex-shrink:0"></span><span><strong>Line</strong> #E4E7EC</span></div></td><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC">Card borders, dividers, section edges</td></tr>
+    <tr><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC"><div style="display:flex;gap:8px;align-items:center"><span style="width:16px;height:16px;border-radius:4px;background:#F4F6F8;border:1px solid #E4E7EC;flex-shrink:0"></span><span><strong>Mist</strong> #F4F6F8</span></div></td><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC">Alternating section background, image fill, breadcrumb bar</td></tr>
+    <tr><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC"><div style="display:flex;gap:8px;align-items:center"><span style="width:16px;height:16px;border-radius:4px;background:#D4A72C;flex-shrink:0"></span><span><strong>Award Gold</strong> #D4A72C</span></div></td><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC">Keyboard focus ring, awards and Woman of the Month accents only</td></tr>
+    <tr><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC"><div style="display:flex;gap:8px;align-items:center"><span style="width:16px;height:16px;border-radius:4px;background:#FDF8EC;border:1px solid #E8D79B;flex-shrink:0"></span><span><strong>Gold Tint</strong> #FDF8EC</span></div></td><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC">Award and highlight surfaces (with #E8D79B border)</td></tr>
+  </tbody>
+</table>
+<p style="font-size:10pt;line-height:1.6;color:#475467;margin-bottom:6px"><strong style="color:#101828">Status colours (Tools only):</strong> warning #FFFAEB surface / #B54708 text, error #FEF3F2 / #B42318, success #0B7A47. Never use these for decoration.</p>
+<p style="font-size:10pt;line-height:1.6;color:#475467"><strong style="color:#101828">Don't:</strong> add new hues, gradients or tinted red backgrounds. Don't put grey text on red, and don't set body text in red.</p>
+
+<h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:13pt;margin:22px 0 8px">2.2 Typography</h3>
+<p style="font-size:11pt;line-height:1.6;margin-bottom:10px">There are two families, both free on Google Fonts. <strong>Sora</strong> (600–800) is for headings, labels, buttons and numbers. <strong>IBM Plex Sans</strong> (400–600) is for body text, excerpts, forms and meta.</p>
+<table style="font-size:10pt;margin-bottom:10px">
+  <thead><tr>
+    <th style="text-align:left;padding:6px 8px;border-bottom:1.5px solid #101828;font-family:Sora,sans-serif;font-size:8.5pt;letter-spacing:0.08em;text-transform:uppercase">Role</th>
+    <th style="text-align:left;padding:6px 8px;border-bottom:1.5px solid #101828;font-family:Sora,sans-serif;font-size:8.5pt;letter-spacing:0.08em;text-transform:uppercase">Spec (desktop → mobile)</th>
+    <th style="text-align:left;padding:6px 8px;border-bottom:1.5px solid #101828;font-family:Sora,sans-serif;font-size:8.5pt;letter-spacing:0.08em;text-transform:uppercase">Where</th>
+  </tr></thead>
+  <tbody>
+    <tr><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC;font-family:Sora,sans-serif;font-weight:800;font-size:15pt;letter-spacing:-0.02em">Display</td><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC">Sora 800, 54 → 34px, line 1.07, tracking −0.02em</td><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC">Homepage hero headline</td></tr>
+    <tr><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC;font-family:Sora,sans-serif;font-weight:800;font-size:13pt;letter-spacing:-0.02em">Page title</td><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC">Sora 800, 50 → 32px, line 1.08</td><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC">H1 on article, issue, event and other inner pages</td></tr>
+    <tr><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC;font-family:Sora,sans-serif;font-weight:700;font-size:12pt;letter-spacing:-0.02em">Section heading</td><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC">Sora 700, 40 → 28px, line 1.12</td><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC">“Latest Business Insights” and other homepage sections</td></tr>
+    <tr><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC;font-family:Sora,sans-serif;font-weight:700;font-size:11pt">Sub-section</td><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC">Sora 700, 34 → 24px, line 1.16</td><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC">Sponsored, article H2s</td></tr>
+    <tr><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC;font-family:Sora,sans-serif;font-weight:700;font-size:10.5pt">Card title</td><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC">Sora 700, 17–20px (lead cards 22–26px), line 1.25</td><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC">Article, episode, event cards</td></tr>
+    <tr><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC;font-family:Sora,sans-serif;font-weight:700;font-size:8pt;letter-spacing:0.12em;text-transform:uppercase;color:#D71920">Eyebrow</td><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC">Sora 700, 10–11px, uppercase, tracking 0.12–0.14em, Maple Red</td><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC">Category and section labels</td></tr>
+    <tr><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC">Body</td><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC">Plex 400, 15–16px, line 1.6 (articles 17–18px, line 1.7)</td><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC">Excerpts, article copy</td></tr>
+    <tr><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC;color:#667085">Meta</td><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC">Plex 400–500, 12.5–13.5px, Slate 500</td><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC">Date · reading time · author</td></tr>
+  </tbody>
+</table>
+<p style="font-size:10pt;line-height:1.6;color:#475467">Headlines use sentence or title case, never all caps. Balance wrapping on headings and keep excerpts to about 2–3 lines. Minimum text size is 11px, used only for labels.</p>
+
+<h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:13pt;margin:22px 0 8px">2.3 Layout and spacing</h3>
+<ul style="margin:0 0 10px;padding-left:18px;font-size:10.5pt;line-height:1.65">
+  <li><strong>Content width:</strong> 1280px max on the main site and 1180px on Tools, with 24px side padding on all sizes.</li>
+  <li><strong>Section padding:</strong> 64–72px top and bottom, and 26–40px for slim bands (This week, Trending topics, sponsor banners).</li>
+  <li><strong>Grid:</strong> 12-column feel, built as auto-fit card grids (min 220–280px per card) so they wrap naturally. The Latest section is main column + 320px sidebar.</li>
+  <li><strong>Spacing steps:</strong> 4, 8, 12, 16, 22, 28, 44, 64, 72px. Use gaps between items, not one-off margins.</li>
+  <li><strong>Breakpoints:</strong> full navigation at 1240px and wider. Below that it switches to the Menu button and drawer. Cards stack to one column under 560px.</li>
+  <li><strong>Sticky elements:</strong> the header is always sticky. Sidebars stick 96px from the top.</li>
+</ul><h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:13pt;margin:22px 0 6px">2.4 Shape, lines and elevation</h3><ul style="margin:0 0 10px;padding-left:18px;font-size:10.5pt;line-height:1.6"><li><strong>Radius:</strong> 8px for buttons and inputs, 10px for cards and panels, 999px for pills and chips, 50% for avatars and play buttons, 4–6px for small tags.</li><li><strong>Borders:</strong> 1px Line (#E4E7EC) on cards. Inputs use a 1.5px Line Strong border.</li><li><strong>Shadow:</strong> almost none. The header has a 1px hairline shadow. Cards rely on borders, not shadows.</li><li><strong>Focus:</strong> 3px Award Gold outline with a 2px offset on every interactive element.</li></ul><h2 style="font-family:Sora,sans-serif;font-weight:700;font-size:18pt;margin:26px 0 10px;break-before:page">3. Core components</h2><table style="font-size:10pt;margin:6px 0 12px"><tbody><tr><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC;vertical-align:top;width:28%"><strong>Primary button</strong></td><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC;vertical-align:top">Maple Red fill, white Sora 700 14–15px, 12×20px padding, 8px radius. Hover: Red Deep. Examples: “Subscribe Free”, “Register”.</td></tr><tr><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC;vertical-align:top;width:28%"><strong>Secondary button</strong></td><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC;vertical-align:top">White fill, 1px Line border, Ink text. Hover: Mist fill. Used for Menu, Share and Copy link.</td></tr><tr><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC;vertical-align:top;width:28%"><strong>Text link</strong></td><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC;vertical-align:top">Maple Red, no underline. Underline and Red Deep on hover. Arrow (→) for “see all” links.</td></tr><tr><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC;vertical-align:top;width:28%"><strong>Category pill</strong></td><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC;vertical-align:top">Red fill, white uppercase Sora 700 10–11px, 4px radius. One per card, and only on lead stories.</td></tr><tr><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC;vertical-align:top;width:28%"><strong>Eyebrow</strong></td><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC;vertical-align:top">Red uppercase Sora label above a heading. It names the section. It does not repeat the heading.</td></tr><tr><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC;vertical-align:top;width:28%"><strong>Article card</strong></td><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC;vertical-align:top">Image 180px tall (16:10 on lead cards), eyebrow category, title, 2-line excerpt, meta row “Aug 18, 2026 · 5 min read”. The whole title is the link.</td></tr><tr><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC;vertical-align:top;width:28%"><strong>Filter chips</strong></td><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC;vertical-align:top">999px pills, Line border. Active: Ink fill with white text. Generated from the real categories in the data.</td></tr><tr><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC;vertical-align:top;width:28%"><strong>Dark band</strong></td><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC;vertical-align:top">Ink background, white headings, #D0D5DD supporting text, red or #FF6B72 eyebrow. Use at most one dark band in a row.</td></tr><tr><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC;vertical-align:top;width:28%"><strong>Form field</strong></td><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC;vertical-align:top">Label above, 12×13px padding, 1.5px #D0D5DD border, 8px radius, 15px text. Errors in #B42318 below the field.</td></tr><tr><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC;vertical-align:top;width:28%"><strong>Image slot</strong></td><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC;vertical-align:top">Mist placeholder with a dashed outline until a real photo is supplied. Never use stock or generated images.</td></tr><tr><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC;vertical-align:top;width:28%"><strong>Sponsored marker</strong></td><td style="padding:6px 8px;border-bottom:1px solid #E4E7EC;vertical-align:top">Every sponsored item carries a visible “Sponsored” label and the partner name.</td></tr></tbody></table><h2 style="font-family:Sora,sans-serif;font-weight:700;font-size:18pt;margin:26px 0 10px;break-before:page">4. Global elements</h2><p style="font-size:10.5pt;line-height:1.6;margin-bottom:8px">These appear on every page: a top utility bar (date, tagline, social links, search), the main header (logo, navigation, “Subscribe Free”), the breadcrumb bar on inner pages and the footer.</p><h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:13pt;margin:22px 0 6px">Header, desktop</h3><figure data-keep style="margin:14px 0 18px;display:flex;flex-direction:column;gap:6px">
+  <div style="width:681px;height:298px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative">
+    <iframe src="CanadianSME%20Homepage.dc.html" title="Header and homepage top, desktop 1280px" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:560px;border:0;transform:scale(0.5320);transform-origin:0 0;pointer-events:none"></iframe>
+  </div>
+  <figcaption style="font-size:9pt;color:#667085">Header and homepage top, desktop 1280px</figcaption>
+</figure><h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:13pt;margin:22px 0 6px">Mega menus</h3><p style="font-size:10.5pt;line-height:1.6;margin-bottom:8px">Business, Technology, Leadership and Finance open a mega menu on hover or focus. Each has 3–4 link columns and one featured story. Close it on Escape, on mouse-out and on route change.</p><figure data-keep style="margin:14px 0 18px;display:flex;flex-direction:column;gap:6px">
+  <div style="width:681px;height:330px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative">
+    <iframe src="CanadianSME%20Homepage.dc.html?mega=business" title="Mega menu — Business" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:620px;border:0;transform:scale(0.5320);transform-origin:0 0;pointer-events:none"></iframe>
+  </div>
+  <figcaption style="font-size:9pt;color:#667085">Mega menu — Business</figcaption>
+</figure><figure data-keep style="margin:14px 0 18px;display:flex;flex-direction:column;gap:6px">
+  <div style="width:681px;height:330px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative">
+    <iframe src="CanadianSME%20Homepage.dc.html?mega=technology" title="Mega menu — Technology" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:620px;border:0;transform:scale(0.5320);transform-origin:0 0;pointer-events:none"></iframe>
+  </div>
+  <figcaption style="font-size:9pt;color:#667085">Mega menu — Technology</figcaption>
+</figure><figure data-keep style="margin:14px 0 18px;display:flex;flex-direction:column;gap:6px">
+  <div style="width:681px;height:330px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative">
+    <iframe src="CanadianSME%20Homepage.dc.html?mega=leadership" title="Mega menu — Leadership" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:620px;border:0;transform:scale(0.5320);transform-origin:0 0;pointer-events:none"></iframe>
+  </div>
+  <figcaption style="font-size:9pt;color:#667085">Mega menu — Leadership</figcaption>
+</figure><figure data-keep style="margin:14px 0 18px;display:flex;flex-direction:column;gap:6px">
+  <div style="width:681px;height:330px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative">
+    <iframe src="CanadianSME%20Homepage.dc.html?mega=finance" title="Mega menu — Finance" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:620px;border:0;transform:scale(0.5320);transform-origin:0 0;pointer-events:none"></iframe>
+  </div>
+  <figcaption style="font-size:9pt;color:#667085">Mega menu — Finance</figcaption>
+</figure><h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:13pt;margin:22px 0 6px">Mobile header and drawer</h3><p style="font-size:10.5pt;line-height:1.6;margin-bottom:8px">Below 1240px the navigation folds into a “Menu” button that opens a full-height drawer. Hit targets must be at least 44px.</p><div data-keep style="display:flex;gap:18px;margin:14px 0 18px"><figure style="margin:0;display:flex;flex-direction:column;gap:6px">
+  <div style="width:195px;height:422px;overflow:hidden;border:1px solid #D0D5DD;border-radius:14px;background:#F4F6F8;position:relative">
+    <iframe src="CanadianSME%20Homepage.dc.html" title="Mobile homepage, 390px" scrolling="no" style="position:absolute;top:0;left:0;width:390px;height:844px;border:0;transform:scale(0.5);transform-origin:0 0;pointer-events:none"></iframe>
+  </div>
+  <figcaption style="font-size:9pt;color:#667085;max-width:195px">Mobile homepage, 390px</figcaption>
+</figure><figure style="margin:0;display:flex;flex-direction:column;gap:6px">
+  <div style="width:195px;height:422px;overflow:hidden;border:1px solid #D0D5DD;border-radius:14px;background:#F4F6F8;position:relative">
+    <iframe src="CanadianSME%20Homepage.dc.html?drawer=1" title="Menu drawer open" scrolling="no" style="position:absolute;top:0;left:0;width:390px;height:844px;border:0;transform:scale(0.5);transform-origin:0 0;pointer-events:none"></iframe>
+  </div>
+  <figcaption style="font-size:9pt;color:#667085;max-width:195px">Menu drawer open</figcaption>
+</figure><figure style="margin:0;display:flex;flex-direction:column;gap:6px">
+  <div style="width:195px;height:422px;overflow:hidden;border:1px solid #D0D5DD;border-radius:14px;background:#F4F6F8;position:relative">
+    <iframe src="CanadianSME%20Homepage.dc.html#ai-roadmap" title="Mobile article" scrolling="no" style="position:absolute;top:0;left:0;width:390px;height:844px;border:0;transform:scale(0.5);transform-origin:0 0;pointer-events:none"></iframe>
+  </div>
+  <figcaption style="font-size:9pt;color:#667085;max-width:195px">Mobile article</figcaption>
+</figure></div><h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:13pt;margin:22px 0 6px">Footer</h3><figure data-keep style="margin:14px 0 18px;display:flex;flex-direction:column;gap:6px">
+  <div style="width:681px;height:479px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative">
+    <iframe src="CanadianSME%20Homepage.dc.html?at=newsletter-form" title="Newsletter band and footer" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:900px;border:0;transform:scale(0.5320);transform-origin:0 0;pointer-events:none"></iframe>
+  </div>
+  <figcaption style="font-size:9pt;color:#667085">Newsletter band and footer</figcaption>
+</figure><h2 style="font-family:Sora,sans-serif;font-weight:700;font-size:18pt;margin:26px 0 10px;break-before:page">5. Homepage, section by section</h2><p style="font-size:10.5pt;line-height:1.6;margin-bottom:8px">Sections in order. Alternate white and Mist backgrounds, and use dark Ink bands for Magazine, Woman of the Month and Podcast. Never stack two dark bands.</p><h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:13pt;margin:22px 0 6px">Hero, This week and Trending</h3><p style="font-size:10.5pt;line-height:1.6;margin-bottom:8px">One lead story: category pill, meta, display headline, excerpt, image on the right. Then four under-hero stories. The dark “This week” band shows the next CRA deadline with a live countdown, the GST/HST calculator, provincial funding and the newsletter. Trending topics is a slim Mist strip.</p><figure data-keep style="margin:14px 0 18px;display:flex;flex-direction:column;gap:6px">
+  <div style="width:681px;height:458px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative">
+    <iframe src="CanadianSME%20Homepage.dc.html" title="Hero, This week and Trending" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:860px;border:0;transform:scale(0.5320);transform-origin:0 0;pointer-events:none"></iframe>
+  </div>
+  <figcaption style="font-size:9pt;color:#667085">Hero, This week and Trending</figcaption>
+</figure><h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:13pt;margin:22px 0 6px">Latest Business Insights</h3><p style="font-size:10.5pt;line-height:1.6;margin-bottom:8px">Filter chips, a card grid of ten articles with “Load more”, and a sticky sidebar with Most Read. Reading time is calculated from real word counts.</p><figure data-keep style="margin:14px 0 18px;display:flex;flex-direction:column;gap:6px">
+  <div style="width:681px;height:458px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative">
+    <iframe src="CanadianSME%20Homepage.dc.html?at=latest" title="Latest Business Insights" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:860px;border:0;transform:scale(0.5320);transform-origin:0 0;pointer-events:none"></iframe>
+  </div>
+  <figcaption style="font-size:9pt;color:#667085">Latest Business Insights</figcaption>
+</figure><h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:13pt;margin:22px 0 6px">Sponsored content and sponsor banners</h3><p style="font-size:10.5pt;line-height:1.6;margin-bottom:8px">Three partner cards, always labelled Sponsored. A Mist strip of sponsor logos below. These are placeholders until partner material is supplied.</p><figure data-keep style="margin:14px 0 18px;display:flex;flex-direction:column;gap:6px">
+  <div style="width:681px;height:458px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative">
+    <iframe src="CanadianSME%20Homepage.dc.html?at=sponsored" title="Sponsored content and sponsor banners" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:860px;border:0;transform:scale(0.5320);transform-origin:0 0;pointer-events:none"></iframe>
+  </div>
+  <figcaption style="font-size:9pt;color:#667085">Sponsored content and sponsor banners</figcaption>
+</figure><h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:13pt;margin:22px 0 6px">Magazine</h3><p style="font-size:10.5pt;line-height:1.6;margin-bottom:8px">Dark band. The latest cover large, “Read the issue” and subscribe actions, and recent covers.</p><figure data-keep style="margin:14px 0 18px;display:flex;flex-direction:column;gap:6px">
+  <div style="width:681px;height:458px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative">
+    <iframe src="CanadianSME%20Homepage.dc.html?at=magazine" title="Magazine" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:860px;border:0;transform:scale(0.5320);transform-origin:0 0;pointer-events:none"></iframe>
+  </div>
+  <figcaption style="font-size:9pt;color:#667085">Magazine</figcaption>
+</figure><h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:13pt;margin:22px 0 6px">AI coverage and Topics</h3><p style="font-size:10.5pt;line-height:1.6;margin-bottom:8px">One lead and two supporting AI stories, then the topic directory.</p><figure data-keep style="margin:14px 0 18px;display:flex;flex-direction:column;gap:6px">
+  <div style="width:681px;height:458px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative">
+    <iframe src="CanadianSME%20Homepage.dc.html?at=ai-coverage" title="AI coverage and Topics" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:860px;border:0;transform:scale(0.5320);transform-origin:0 0;pointer-events:none"></iframe>
+  </div>
+  <figcaption style="font-size:9pt;color:#667085">AI coverage and Topics</figcaption>
+</figure><h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:13pt;margin:22px 0 6px">Entrepreneur Spotlight</h3><p style="font-size:10.5pt;line-height:1.6;margin-bottom:8px">Mist band. A featured interview with photo, name, company and a pull quote, used only if the quote exists in the article.</p><figure data-keep style="margin:14px 0 18px;display:flex;flex-direction:column;gap:6px">
+  <div style="width:681px;height:458px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative">
+    <iframe src="CanadianSME%20Homepage.dc.html?at=spotlight" title="Entrepreneur Spotlight" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:860px;border:0;transform:scale(0.5320);transform-origin:0 0;pointer-events:none"></iframe>
+  </div>
+  <figcaption style="font-size:9pt;color:#667085">Entrepreneur Spotlight</figcaption>
+</figure><h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:13pt;margin:22px 0 6px">Free tools and CRA deadlines</h3><p style="font-size:10.5pt;line-height:1.6;margin-bottom:8px">Calculator cards linking to the Tools page, then the upcoming deadline list.</p><figure data-keep style="margin:14px 0 18px;display:flex;flex-direction:column;gap:6px">
+  <div style="width:681px;height:458px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative">
+    <iframe src="CanadianSME%20Homepage.dc.html?at=tools" title="Free tools and CRA deadlines" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:860px;border:0;transform:scale(0.5320);transform-origin:0 0;pointer-events:none"></iframe>
+  </div>
+  <figcaption style="font-size:9pt;color:#667085">Free tools and CRA deadlines</figcaption>
+</figure><h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:13pt;margin:22px 0 6px">Business Woman of the Month</h3><p style="font-size:10.5pt;line-height:1.6;margin-bottom:8px">Dark band with gold accents. Photo, name, role, company and a genuine quote from the article.</p><figure data-keep style="margin:14px 0 18px;display:flex;flex-direction:column;gap:6px">
+  <div style="width:681px;height:458px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative">
+    <iframe src="CanadianSME%20Homepage.dc.html?at=woman-of-the-month" title="Business Woman of the Month" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:860px;border:0;transform:scale(0.5320);transform-origin:0 0;pointer-events:none"></iframe>
+  </div>
+  <figcaption style="font-size:9pt;color:#667085">Business Woman of the Month</figcaption>
+</figure><h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:13pt;margin:22px 0 6px">Communities</h3><p style="font-size:10.5pt;line-height:1.6;margin-bottom:8px">Four blocks (Women, Black, Indigenous, 2SLGBTQI+). Each has a lead and two secondary stories from its own dataset only. Never mix communities.</p><figure data-keep style="margin:14px 0 18px;display:flex;flex-direction:column;gap:6px">
+  <div style="width:681px;height:458px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative">
+    <iframe src="CanadianSME%20Homepage.dc.html?at=communities" title="Communities" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:860px;border:0;transform:scale(0.5320);transform-origin:0 0;pointer-events:none"></iframe>
+  </div>
+  <figcaption style="font-size:9pt;color:#667085">Communities</figcaption>
+</figure><h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:13pt;margin:22px 0 6px">Province picker</h3><p style="font-size:10.5pt;line-height:1.6;margin-bottom:8px">Mist band. Pick a province to filter grants, rules and resources.</p><figure data-keep style="margin:14px 0 18px;display:flex;flex-direction:column;gap:6px">
+  <div style="width:681px;height:458px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative">
+    <iframe src="CanadianSME%20Homepage.dc.html?at=provinces" title="Province picker" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:860px;border:0;transform:scale(0.5320);transform-origin:0 0;pointer-events:none"></iframe>
+  </div>
+  <figcaption style="font-size:9pt;color:#667085">Province picker</figcaption>
+</figure><h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:13pt;margin:22px 0 6px">Podcast</h3><p style="font-size:10.5pt;line-height:1.6;margin-bottom:8px">Dark band. The latest episode with a red play button, and recent episodes.</p><figure data-keep style="margin:14px 0 18px;display:flex;flex-direction:column;gap:6px">
+  <div style="width:681px;height:458px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative">
+    <iframe src="CanadianSME%20Homepage.dc.html?at=podcast" title="Podcast" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:860px;border:0;transform:scale(0.5320);transform-origin:0 0;pointer-events:none"></iframe>
+  </div>
+  <figcaption style="font-size:9pt;color:#667085">Podcast</figcaption>
+</figure><h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:13pt;margin:22px 0 6px">Events, Resources and Partners</h3><p style="font-size:10.5pt;line-height:1.6;margin-bottom:8px">Event cards with dates and Register, resource guides, then partner logos.</p><figure data-keep style="margin:14px 0 18px;display:flex;flex-direction:column;gap:6px">
+  <div style="width:681px;height:458px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative">
+    <iframe src="CanadianSME%20Homepage.dc.html?at=events" title="Events, Resources and Partners" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:860px;border:0;transform:scale(0.5320);transform-origin:0 0;pointer-events:none"></iframe>
+  </div>
+  <figcaption style="font-size:9pt;color:#667085">Events, Resources and Partners</figcaption>
+</figure><h2 style="font-family:Sora,sans-serif;font-weight:700;font-size:18pt;margin:26px 0 10px;break-before:page">6. Inner page templates</h2><p style="font-size:10.5pt;line-height:1.6;margin-bottom:8px">All inner pages share the header, a Mist breadcrumb bar, a Sora 800 H1 (50 → 32px) and the footer. Body content sits at a maximum width of 1280px. Long reading copy is narrower, about 720px.</p><h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:13pt;margin:22px 0 6px">Article</h3><p style="font-size:10.5pt;line-height:1.6;margin-bottom:8px">Category pill, H1, standfirst, author with avatar, published and updated dates, reading time, share buttons, then a 720px body. Sidebar: “In this article” contents, newsletter sign-up. Related articles at the end.</p><figure data-keep style="margin:14px 0 18px;display:flex;flex-direction:column;gap:6px">
+  <div style="width:681px;height:426px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative">
+    <iframe src="CanadianSME%20Homepage.dc.html#ai-roadmap" title="Article — #ai-roadmap" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:800px;border:0;transform:scale(0.5320);transform-origin:0 0;pointer-events:none"></iframe>
+  </div>
+  <figcaption style="font-size:9pt;color:#667085">Article — #ai-roadmap</figcaption>
+</figure><h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:13pt;margin:22px 0 6px">Category</h3><p style="font-size:10.5pt;line-height:1.6;margin-bottom:8px">H1 with the category name, filter chips, a card grid and pagination.</p><figure data-keep style="margin:14px 0 18px;display:flex;flex-direction:column;gap:6px">
+  <div style="width:681px;height:426px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative">
+    <iframe src="CanadianSME%20Homepage.dc.html#technology" title="Category — #technology" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:800px;border:0;transform:scale(0.5320);transform-origin:0 0;pointer-events:none"></iframe>
+  </div>
+  <figcaption style="font-size:9pt;color:#667085">Category — #technology</figcaption>
+</figure><h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:13pt;margin:22px 0 6px">Search results</h3><p style="font-size:10.5pt;line-height:1.6;margin-bottom:8px">Large search field, result count, mixed results (articles, podcasts, resources, events).</p><figure data-keep style="margin:14px 0 18px;display:flex;flex-direction:column;gap:6px">
+  <div style="width:681px;height:426px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative">
+    <iframe src="CanadianSME%20Homepage.dc.html#search" title="Search results — #search" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:800px;border:0;transform:scale(0.5320);transform-origin:0 0;pointer-events:none"></iframe>
+  </div>
+  <figcaption style="font-size:9pt;color:#667085">Search results — #search</figcaption>
+</figure><h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:13pt;margin:22px 0 6px">Magazine archive</h3><p style="font-size:10.5pt;line-height:1.6;margin-bottom:8px">A grid of covers, newest first, with issue number and month.</p><figure data-keep style="margin:14px 0 18px;display:flex;flex-direction:column;gap:6px">
+  <div style="width:681px;height:426px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative">
+    <iframe src="CanadianSME%20Homepage.dc.html#magazine" title="Magazine archive — #magazine" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:800px;border:0;transform:scale(0.5320);transform-origin:0 0;pointer-events:none"></iframe>
+  </div>
+  <figcaption style="font-size:9pt;color:#667085">Magazine archive — #magazine</figcaption>
+</figure><h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:13pt;margin:22px 0 6px">Magazine issue</h3><p style="font-size:10.5pt;line-height:1.6;margin-bottom:8px">Cover, issue title, “Inside this issue” list, read and subscribe actions.</p><figure data-keep style="margin:14px 0 18px;display:flex;flex-direction:column;gap:6px">
+  <div style="width:681px;height:426px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative">
+    <iframe src="CanadianSME%20Homepage.dc.html#read-magazine" title="Magazine issue — #read-magazine" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:800px;border:0;transform:scale(0.5320);transform-origin:0 0;pointer-events:none"></iframe>
+  </div>
+  <figcaption style="font-size:9pt;color:#667085">Magazine issue — #read-magazine</figcaption>
+</figure><h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:13pt;margin:22px 0 6px">Podcast archive</h3><p style="font-size:10.5pt;line-height:1.6;margin-bottom:8px">Episode list with play buttons, guest, duration and date.</p><figure data-keep style="margin:14px 0 18px;display:flex;flex-direction:column;gap:6px">
+  <div style="width:681px;height:426px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative">
+    <iframe src="CanadianSME%20Homepage.dc.html#podcast" title="Podcast archive — #podcast" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:800px;border:0;transform:scale(0.5320);transform-origin:0 0;pointer-events:none"></iframe>
+  </div>
+  <figcaption style="font-size:9pt;color:#667085">Podcast archive — #podcast</figcaption>
+</figure><h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:13pt;margin:22px 0 6px">Podcast episode</h3><p style="font-size:10.5pt;line-height:1.6;margin-bottom:8px">Player, episode title, guest, episode notes.</p><figure data-keep style="margin:14px 0 18px;display:flex;flex-direction:column;gap:6px">
+  <div style="width:681px;height:426px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative">
+    <iframe src="CanadianSME%20Homepage.dc.html#ep1" title="Podcast episode — #ep1" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:800px;border:0;transform:scale(0.5320);transform-origin:0 0;pointer-events:none"></iframe>
+  </div>
+  <figcaption style="font-size:9pt;color:#667085">Podcast episode — #ep1</figcaption>
+</figure><h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:13pt;margin:22px 0 6px">Events listing</h3><p style="font-size:10.5pt;line-height:1.6;margin-bottom:8px">Upcoming events (Summit, Awards, Expo) with dates, location and Register.</p><figure data-keep style="margin:14px 0 18px;display:flex;flex-direction:column;gap:6px">
+  <div style="width:681px;height:426px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative">
+    <iframe src="CanadianSME%20Homepage.dc.html#events" title="Events listing — #events" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:800px;border:0;transform:scale(0.5320);transform-origin:0 0;pointer-events:none"></iframe>
+  </div>
+  <figcaption style="font-size:9pt;color:#667085">Events listing — #events</figcaption>
+</figure><h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:13pt;margin:22px 0 6px">Event detail</h3><p style="font-size:10.5pt;line-height:1.6;margin-bottom:8px">Event name, date, venue, “What to expect” and a primary Register button.</p><figure data-keep style="margin:14px 0 18px;display:flex;flex-direction:column;gap:6px">
+  <div style="width:681px;height:426px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative">
+    <iframe src="CanadianSME%20Homepage.dc.html#summit" title="Event detail — #summit" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:800px;border:0;transform:scale(0.5320);transform-origin:0 0;pointer-events:none"></iframe>
+  </div>
+  <figcaption style="font-size:9pt;color:#667085">Event detail — #summit</figcaption>
+</figure><h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:13pt;margin:22px 0 6px">Business resources</h3><p style="font-size:10.5pt;line-height:1.6;margin-bottom:8px">Guides grouped by topic: starting, funding, tax, HR, exporting.</p><figure data-keep style="margin:14px 0 18px;display:flex;flex-direction:column;gap:6px">
+  <div style="width:681px;height:426px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative">
+    <iframe src="CanadianSME%20Homepage.dc.html#resources" title="Business resources — #resources" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:800px;border:0;transform:scale(0.5320);transform-origin:0 0;pointer-events:none"></iframe>
+  </div>
+  <figcaption style="font-size:9pt;color:#667085">Business resources — #resources</figcaption>
+</figure><h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:13pt;margin:22px 0 6px">About</h3><p style="font-size:10.5pt;line-height:1.6;margin-bottom:8px">Mission, leadership, team, approach, and the events and titles Cmarketing runs. Sister titles are kept visually secondary.</p><figure data-keep style="margin:14px 0 18px;display:flex;flex-direction:column;gap:6px">
+  <div style="width:681px;height:426px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative">
+    <iframe src="CanadianSME%20Homepage.dc.html#about" title="About — #about" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:800px;border:0;transform:scale(0.5320);transform-origin:0 0;pointer-events:none"></iframe>
+  </div>
+  <figcaption style="font-size:9pt;color:#667085">About — #about</figcaption>
+</figure><h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:13pt;margin:22px 0 6px">Advertising</h3><p style="font-size:10.5pt;line-height:1.6;margin-bottom:8px">Display, sponsored content, magazine and event options. Media kit request form.</p><figure data-keep style="margin:14px 0 18px;display:flex;flex-direction:column;gap:6px">
+  <div style="width:681px;height:426px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative">
+    <iframe src="CanadianSME%20Homepage.dc.html#advertise" title="Advertising — #advertise" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:800px;border:0;transform:scale(0.5320);transform-origin:0 0;pointer-events:none"></iframe>
+  </div>
+  <figcaption style="font-size:9pt;color:#667085">Advertising — #advertise</figcaption>
+</figure><h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:13pt;margin:22px 0 6px">Contact</h3><p style="font-size:10.5pt;line-height:1.6;margin-bottom:8px">Contact form (name, email, topic, message) with inline validation.</p><figure data-keep style="margin:14px 0 18px;display:flex;flex-direction:column;gap:6px">
+  <div style="width:681px;height:426px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative">
+    <iframe src="CanadianSME%20Homepage.dc.html#contact" title="Contact — #contact" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:800px;border:0;transform:scale(0.5320);transform-origin:0 0;pointer-events:none"></iframe>
+  </div>
+  <figcaption style="font-size:9pt;color:#667085">Contact — #contact</figcaption>
+</figure><h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:13pt;margin:22px 0 6px">Contributor</h3><p style="font-size:10.5pt;line-height:1.6;margin-bottom:8px">Author bio, photo and recent work.</p><figure data-keep style="margin:14px 0 18px;display:flex;flex-direction:column;gap:6px">
+  <div style="width:681px;height:426px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative">
+    <iframe src="CanadianSME%20Homepage.dc.html#contributors" title="Contributor — #contributors" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:800px;border:0;transform:scale(0.5320);transform-origin:0 0;pointer-events:none"></iframe>
+  </div>
+  <figcaption style="font-size:9pt;color:#667085">Contributor — #contributors</figcaption>
+</figure><h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:13pt;margin:22px 0 6px">Subscribe</h3><p style="font-size:10.5pt;line-height:1.6;margin-bottom:8px">A single-purpose sign-up page with one clear benefit.</p><figure data-keep style="margin:14px 0 18px;display:flex;flex-direction:column;gap:6px">
+  <div style="width:681px;height:426px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative">
+    <iframe src="CanadianSME%20Homepage.dc.html#newsletter-page" title="Subscribe — #newsletter-page" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:800px;border:0;transform:scale(0.5320);transform-origin:0 0;pointer-events:none"></iframe>
+  </div>
+  <figcaption style="font-size:9pt;color:#667085">Subscribe — #newsletter-page</figcaption>
+</figure><h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:13pt;margin:22px 0 6px">404 page</h3><p style="font-size:10.5pt;line-height:1.6;margin-bottom:8px">Plain message with search and the main site links.</p><figure data-keep style="margin:14px 0 18px;display:flex;flex-direction:column;gap:6px">
+  <div style="width:681px;height:426px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative">
+    <iframe src="CanadianSME%20Homepage.dc.html#zzz-missing" title="404 page — #(any unknown URL)" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:800px;border:0;transform:scale(0.5320);transform-origin:0 0;pointer-events:none"></iframe>
+  </div>
+  <figcaption style="font-size:9pt;color:#667085">404 page — #(any unknown URL)</figcaption>
+</figure><h2 style="font-family:Sora,sans-serif;font-weight:700;font-size:18pt;margin:26px 0 10px;break-before:page">7. Tools (calculators)</h2><p style="font-size:10.5pt;line-height:1.6;margin-bottom:8px">A separate page with its own sticky header and calculator tabs, max width 1180px. Inputs on the left and results on the right. Every result shows the tax year and the sources of the rates. Warnings use the amber status colours. No sign-up is required.</p><h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:13pt;margin:22px 0 6px">Tools index</h3><figure data-keep style="margin:14px 0 18px;display:flex;flex-direction:column;gap:6px">
+  <div style="width:681px;height:458px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative">
+    <iframe src="CanadianSME%20Tools.dc.html" title="Tools index" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:860px;border:0;transform:scale(0.5320);transform-origin:0 0;pointer-events:none"></iframe>
+  </div>
+  <figcaption style="font-size:9pt;color:#667085">Tools index</figcaption>
+</figure><h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:13pt;margin:22px 0 6px">GST/HST Calculator</h3><figure data-keep style="margin:14px 0 18px;display:flex;flex-direction:column;gap:6px">
+  <div style="width:681px;height:458px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative">
+    <iframe src="CanadianSME%20Tools.dc.html#gst" title="GST/HST Calculator" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:860px;border:0;transform:scale(0.5320);transform-origin:0 0;pointer-events:none"></iframe>
+  </div>
+  <figcaption style="font-size:9pt;color:#667085">GST/HST Calculator</figcaption>
+</figure><h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:13pt;margin:22px 0 6px">Payroll Deductions Estimator</h3><figure data-keep style="margin:14px 0 18px;display:flex;flex-direction:column;gap:6px">
+  <div style="width:681px;height:458px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative">
+    <iframe src="CanadianSME%20Tools.dc.html#payroll" title="Payroll Deductions Estimator" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:860px;border:0;transform:scale(0.5320);transform-origin:0 0;pointer-events:none"></iframe>
+  </div>
+  <figcaption style="font-size:9pt;color:#667085">Payroll Deductions Estimator</figcaption>
+</figure><h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:13pt;margin:22px 0 6px">13-Week Cash-Flow Forecaster</h3><figure data-keep style="margin:14px 0 18px;display:flex;flex-direction:column;gap:6px">
+  <div style="width:681px;height:458px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative">
+    <iframe src="CanadianSME%20Tools.dc.html#cashflow" title="13-Week Cash-Flow Forecaster" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:860px;border:0;transform:scale(0.5320);transform-origin:0 0;pointer-events:none"></iframe>
+  </div>
+  <figcaption style="font-size:9pt;color:#667085">13-Week Cash-Flow Forecaster</figcaption>
+</figure><h3 style="font-family:Sora,sans-serif;font-weight:700;font-size:13pt;margin:22px 0 6px">Loan Payment Calculator</h3><figure data-keep style="margin:14px 0 18px;display:flex;flex-direction:column;gap:6px">
+  <div style="width:681px;height:458px;overflow:hidden;border:1px solid #D0D5DD;border-radius:6px;background:#F4F6F8;position:relative">
+    <iframe src="CanadianSME%20Tools.dc.html#loan" title="Loan Payment Calculator" scrolling="no" style="position:absolute;top:0;left:0;width:1280px;height:860px;border:0;transform:scale(0.5320);transform-origin:0 0;pointer-events:none"></iframe>
+  </div>
+  <figcaption style="font-size:9pt;color:#667085">Loan Payment Calculator</figcaption>
+</figure><h2 style="font-family:Sora,sans-serif;font-weight:700;font-size:18pt;margin:26px 0 10px;break-before:page">8. Content, imagery and accessibility rules</h2><ul style="margin:0 0 10px;padding-left:18px;font-size:10.5pt;line-height:1.6"><li>Write for an owner-operator: concrete Canadian topics such as CRA deadlines, BDC and EDC financing, provincial grants, tariffs and Bank of Canada decisions.</li><li>Use only real featured images from the article. No stock, AI-generated or illustrated substitutes. Leave the slot empty until a photo arrives.</li><li>Never invent quotes, names or numbers. Pull quotes must exist in the source article.</li><li>Dates follow the format “Aug 18, 2026”. Reading time is rounded to whole minutes.</li><li>Body text contrast must be at least 4.5:1. Never use grey on red, or red body text on Ink.</li><li>Every image needs real alt text. Decorative icons get none.</li><li>Keyboard: every menu, chip and button is reachable and shows the gold focus ring.</li><li>Mobile hit targets are at least 44px, and body text is at least 15px on mobile.</li></ul><h2 style="font-family:Sora,sans-serif;font-weight:700;font-size:18pt;margin:26px 0 10px">9. Open items before launch</h2><ul style="margin:0 0 10px;padding-left:18px;font-size:10.5pt;line-height:1.6"><li>Links for the Black Entrepreneurship articles (they currently point to the #black anchor).</li><li>Partner logos and sponsored content creative.</li><li>Photos for the sample articles in Latest Business Insights (sample copy is still to be replaced with real articles).</li><li>Current Bank of Canada policy rate, if it is to appear in the This week band.</li></ul><p style="font-size:10.5pt;line-height:1.6;margin-bottom:8px"><em>Note: the screenshots in this guide are live views of the prototype, so they always match the current build.</em></p>
+</doc-page>
+</x-dc>
+</body>
+</html>
