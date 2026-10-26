@@ -12,14 +12,14 @@
 <meta name="description" content="Free GST/HST, payroll, self-employed tax, import landed cost, pricing and break-even, cash-flow and loan calculators built on current 2026 Canadian federal and provincial rates. No sign-up." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" />
 <style>
   *, *::before, *::after { box-sizing: border-box; }
-  body { margin: 0; background: #fff; color: #101828; font-family: "IBM Plex Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  body { margin: 0; background: #fff; color: #14181D; font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif; -webkit-font-smoothing: antialiased; }
   h1, h2, h3, h4, p, ul, ol, li, figure, blockquote, table { margin: 0; padding: 0; }
   ul, ol { list-style: none; }
-  a { color: #D71920; text-decoration: none; }
-  a:hover { color: #A5121A; }
+  a { color: #004FB8; text-decoration: none; }
+  a:hover { color: #002364; }
   button, input, select { font: inherit; color: inherit; }
   table { border-collapse: collapse; width: 100%; }
 </style>
@@ -30,19 +30,19 @@
 <header style="position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid #E4E7EC">
   <div style="background:#101828;color:#C8CDD6">
     <div style="max-width:1180px;margin:0 auto;padding:9px 24px;display:flex;gap:16px;align-items:center;font-size:12px">
-      <span style="font-family:Sora,sans-serif;font-weight:600">Free for Canadian small business owners — no sign-up, no email required</span>
-      <a href="CanadianSME Homepage.dc.html" style="margin-left:auto;color:#C8CDD6;font-family:Sora,sans-serif;font-weight:600" style-hover="color:#fff">← Back to CanadianSME</a>
+      <span style="font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:600">Free for Canadian small business owners — no sign-up, no email required</span>
+      <a href="CanadianSME Homepage.dc.html" style="margin-left:auto;color:#C8CDD6;font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:600" style-hover="color:#fff">← Back to CanadianSME</a>
     </div>
   </div>
   <div style="max-width:1180px;margin:0 auto;padding:18px 24px;display:flex;align-items:center;gap:26px;flex-wrap:wrap">
-    <a href="CanadianSME Homepage.dc.html" style="display:flex;align-items:baseline;gap:2px;font-family:Sora,sans-serif;font-weight:800;font-size:20px;letter-spacing:-0.02em;color:#101828" style-hover="color:#101828"><span style="color:#D71920">Canadian</span><span>SME</span></a>
+    <a href="CanadianSME Homepage.dc.html" style="display:flex;align-items:baseline;gap:2px;font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:20px;letter-spacing:-0.02em;color:#14181D" style-hover="color:#14181D"><span style="color:#002364">Canadian</span><span>SME</span></a>
     <span style="width:1px;height:26px;background:#E4E7EC"></span>
-    <span style="font-family:Sora,sans-serif;font-weight:700;font-size:15px">Business Tools</span>
+    <span style="font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:15px">Business Tools</span>
   </div>
   <nav aria-label="Calculators" style="border-top:1px solid #F0F2F5">
     <div style="max-width:1180px;margin:0 auto;padding:0 24px;display:flex;gap:4px;overflow-x:auto">
       <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="5">
-        <a href="{{ t.hash }}" style="padding:14px 14px 12px;border-bottom:3px solid {{ t.border }};font-family:Sora,sans-serif;font-weight:600;font-size:13.5px;color:{{ t.color }};white-space:nowrap" style-hover="color:#D71920">{{ t.label }}</a>
+        <a href="{{ t.hash }}" style="padding:14px 14px 12px;border-bottom:3px solid {{ t.border }};font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:600;font-size:13.5px;color:{{ t.color }};white-space:nowrap" style-hover="color:#004FB8">{{ t.label }}</a>
       </sc-for>
     </div>
   </nav>
@@ -53,7 +53,7 @@
 <sc-if value="{{ showCalc }}" hint-placeholder-val="{{ false }}">
   <div role="note" style="background:#FFFAEB;border-bottom:1px solid #FEC84B">
     <div style="max-width:1180px;margin:0 auto;padding:16px 24px;display:flex;gap:13px;align-items:flex-start">
-      <span aria-hidden="true" style="font-family:Sora,sans-serif;font-weight:800;font-size:14px;color:#B54708;flex-shrink:0;line-height:1.5">!</span>
+      <span aria-hidden="true" style="font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:14px;color:#B54708;flex-shrink:0;line-height:1.5">!</span>
       <p style="font-size:14px;line-height:1.65;color:#7A2E0E;max-width:92ch;text-wrap:pretty"><strong style="font-weight:600">Example and reference only.</strong> This calculator produces illustrative estimates to help you plan. Figures are not exact, do not account for your full circumstances, and must not be used to file, remit, or make financial commitments. Confirm every amount with the CRA, Revenu Québec, or your accountant before acting on it. Nothing here is tax, accounting, or financial advice.</p>
     </div>
   </div>
@@ -63,24 +63,24 @@
   <div>
     <section style="border-bottom:1px solid #E4E7EC;background:#F4F6F8">
       <div style="max-width:1180px;margin:0 auto;padding:64px 24px">
-        <span style="display:block;font-family:Sora,sans-serif;font-weight:700;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#D71920;margin-bottom:12px">Free tools</span>
-        <h1 style="font-family:Sora,sans-serif;font-weight:700;font-size:clamp(30px,4vw,46px);line-height:1.08;letter-spacing:-0.025em;max-width:22ch;margin-bottom:16px;text-wrap:pretty">Calculators Built for Canadian Rules</h1>
-        <p style="font-size:17px;line-height:1.7;color:#667085;max-width:60ch;text-wrap:pretty">Every calculator here uses current federal and provincial rates — not a generic template with a Canadian flag on it. Nothing is stored, and nothing asks for your email. Results are illustrative examples for reference only.</p>
+        <span style="display:block;font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#002364;margin-bottom:12px">Free tools</span>
+        <h1 style="font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:clamp(30px,4vw,46px);line-height:1.08;letter-spacing:-0.025em;max-width:22ch;margin-bottom:16px;text-wrap:pretty">Calculators Built for Canadian Rules</h1>
+        <p style="font-size:17px;line-height:1.7;color:#5A6470;max-width:60ch;text-wrap:pretty">Every calculator here uses current federal and provincial rates — not a generic template with a Canadian flag on it. Nothing is stored, and nothing asks for your email. Results are illustrative examples for reference only.</p>
       </div>
     </section>
     <section style="max-width:1180px;margin:0 auto;padding:56px 24px 80px">
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:22px">
         <sc-for list="{{ tools }}" as="t" hint-placeholder-count="4">
           <a href="{{ t.hash }}" style="border:1px solid #E4E7EC;border-radius:10px;padding:26px;display:flex;flex-direction:column;gap:11px;background:#fff;transition:box-shadow .18s ease,transform .18s ease" style-hover="box-shadow:0 12px 28px rgba(16,24,40,0.10);transform:translateY(-3px);border-color:#D71920">
-            <span style="font-family:Sora,sans-serif;font-weight:800;font-size:24px;color:#D71920;line-height:1">{{ t.mark }}</span>
-            <h2 style="font-family:Sora,sans-serif;font-weight:700;font-size:17.5px;line-height:1.28;color:#101828;text-wrap:pretty">{{ t.title }}</h2>
-            <p style="font-size:14px;line-height:1.6;color:#667085;text-wrap:pretty">{{ t.desc }}</p>
-            <span style="margin-top:auto;padding-top:10px;font-family:Sora,sans-serif;font-weight:700;font-size:13px;color:#D71920">Open calculator →</span>
+            <span style="font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:24px;color:#002364;line-height:1">{{ t.mark }}</span>
+            <h2 style="font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:17.5px;line-height:1.28;color:#14181D;text-wrap:pretty">{{ t.title }}</h2>
+            <p style="font-size:14px;line-height:1.6;color:#5A6470;text-wrap:pretty">{{ t.desc }}</p>
+            <span style="margin-top:auto;padding-top:10px;font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:13px;color:#002364">Open calculator →</span>
           </a>
         </sc-for>
       </div>
       <div role="note" style="margin-top:44px;padding:24px 26px;background:#FFFAEB;border-left:3px solid #FEC84B;max-width:82ch">
-        <strong style="display:block;font-family:Sora,sans-serif;font-weight:700;font-size:13px;letter-spacing:0.06em;text-transform:uppercase;color:#B54708;margin-bottom:10px">Example and reference only</strong>
+        <strong style="display:block;font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:13px;letter-spacing:0.02em;text-transform:uppercase;color:#B54708;margin-bottom:10px">Example and reference only</strong>
         <p style="font-size:14.5px;line-height:1.7;color:#7A2E0E;text-wrap:pretty">These calculators are illustrative planning aids built on published {{ taxYear }} federal and provincial rates. They use simplified assumptions, do not account for your full circumstances, and their results are not exact. Do not use them to file a return, remit deductions, or commit to financing. Confirm payroll amounts against the CRA Payroll Deductions Online Calculator, and check any figure with your accountant or the relevant tax authority before you act on it. Nothing here is tax, accounting, or financial advice.</p>
       </div>
     </section>
@@ -89,168 +89,168 @@
 
 <sc-if value="{{ showGst }}" hint-placeholder-val="{{ false }}">
   <div style="max-width:1180px;margin:0 auto;padding:52px 24px 80px">
-    <span style="display:block;font-family:Sora,sans-serif;font-weight:700;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#D71920;margin-bottom:12px">Sales tax</span>
-    <h1 style="font-family:Sora,sans-serif;font-weight:700;font-size:clamp(28px,3.4vw,40px);line-height:1.1;letter-spacing:-0.02em;margin-bottom:14px;text-wrap:pretty">GST/HST Calculator</h1>
-    <p style="font-size:16.5px;line-height:1.7;color:#667085;max-width:62ch;margin-bottom:38px;text-wrap:pretty">Work out what to charge, or back out the tax from a total you have already been paid. Covers GST, HST, and the provinces that run a separate PST, RST, or QST.</p>
+    <span style="display:block;font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#002364;margin-bottom:12px">Sales tax</span>
+    <h1 style="font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:clamp(28px,3.4vw,40px);line-height:1.1;letter-spacing:-0.025em;margin-bottom:14px;text-wrap:pretty">GST/HST Calculator</h1>
+    <p style="font-size:16.5px;line-height:1.7;color:#5A6470;max-width:62ch;margin-bottom:38px;text-wrap:pretty">Work out what to charge, or back out the tax from a total you have already been paid. Covers GST, HST, and the provinces that run a separate PST, RST, or QST.</p>
 
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:34px;align-items:start">
       <form style="border:1px solid #E4E7EC;border-radius:10px;padding:26px;display:flex;flex-direction:column;gap:20px;background:#fff" onSubmit="{{ noSubmit }}">
         <label style="display:flex;flex-direction:column;gap:7px">
-          <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Province or territory</span>
+          <span style="font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470">Province or territory</span>
           <select value="{{ gstProv }}" onChange="{{ onGstProv }}" style="padding:12px 13px;border:1.5px solid #D0D5DD;border-radius:8px;font-size:15px;background:#fff">
             <sc-for list="{{ provinceNames }}" as="p" hint-placeholder-count="13"><option>{{ p }}</option></sc-for>
           </select>
         </label>
         <fieldset style="border:0;padding:0;margin:0;display:flex;flex-direction:column;gap:7px">
-          <legend style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085;padding:0;margin-bottom:2px">Amount entered is</legend>
+          <legend style="font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470;padding:0;margin-bottom:2px">Amount entered is</legend>
           <div style="display:flex;gap:8px">
-            <button type="button" onClick="{{ setGstAdd }}" aria-pressed="{{ gstAddOn }}" style="flex:1;padding:11px 10px;border-radius:8px;border:1.5px solid {{ gstAddBorder }};background:{{ gstAddBg }};color:{{ gstAddFg }};font-family:Sora,sans-serif;font-weight:600;font-size:13.5px;cursor:pointer">Before tax</button>
-            <button type="button" onClick="{{ setGstRemove }}" aria-pressed="{{ gstRemoveOn }}" style="flex:1;padding:11px 10px;border-radius:8px;border:1.5px solid {{ gstRemBorder }};background:{{ gstRemBg }};color:{{ gstRemFg }};font-family:Sora,sans-serif;font-weight:600;font-size:13.5px;cursor:pointer">Tax included</button>
+            <button type="button" onClick="{{ setGstAdd }}" aria-pressed="{{ gstAddOn }}" style="flex:1;padding:11px 10px;border-radius:8px;border:1.5px solid {{ gstAddBorder }};background:{{ gstAddBg }};color:{{ gstAddFg }};font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:600;font-size:13.5px;cursor:pointer">Before tax</button>
+            <button type="button" onClick="{{ setGstRemove }}" aria-pressed="{{ gstRemoveOn }}" style="flex:1;padding:11px 10px;border-radius:8px;border:1.5px solid {{ gstRemBorder }};background:{{ gstRemBg }};color:{{ gstRemFg }};font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:600;font-size:13.5px;cursor:pointer">Tax included</button>
           </div>
         </fieldset>
         <label style="display:flex;flex-direction:column;gap:7px">
-          <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Amount (CAD)</span>
+          <span style="font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470">Amount (CAD)</span>
           <input type="number" min="0" step="0.01" value="{{ gstAmount }}" onChange="{{ onGstAmount }}" onInput="{{ onGstAmount }}" style="padding:12px 13px;border:1.5px solid #D0D5DD;border-radius:8px;font-size:15px" />
         </label>
       </form>
 
       <div style="display:flex;flex-direction:column;gap:18px">
         <div style="background:#101828;color:#fff;border-radius:10px;padding:28px">
-          <span style="display:block;font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#98A2B3;margin-bottom:8px">{{ gstTotalLabel }}</span>
-          <strong style="display:block;font-family:Sora,sans-serif;font-weight:800;font-size:clamp(30px,4vw,44px);letter-spacing:-0.02em;line-height:1.05">{{ gstTotal }}</strong>
+          <span style="display:block;font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#98A2B3;margin-bottom:8px">{{ gstTotalLabel }}</span>
+          <strong style="display:block;font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:clamp(30px,4vw,44px);letter-spacing:-0.02em;line-height:1.05">{{ gstTotal }}</strong>
           <span style="display:block;margin-top:10px;font-size:14.5px;color:#C8CDD6">{{ gstRateNote }}</span>
         </div>
         <table style="border:1px solid #E4E7EC;border-radius:10px;overflow:hidden">
-          <caption style="text-align:left;padding:16px 20px;background:#F4F6F8;border-bottom:1px solid #E4E7EC;font-family:Sora,sans-serif;font-weight:700;font-size:13px;letter-spacing:0.04em;text-transform:uppercase;color:#101828">Breakdown</caption>
+          <caption style="text-align:left;padding:16px 20px;background:#F4F6F8;border-bottom:1px solid #E4E7EC;font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:13px;letter-spacing:0.02em;text-transform:uppercase;color:#14181D">Breakdown</caption>
           <tbody>
             <sc-for list="{{ gstRows }}" as="r" hint-placeholder-count="4">
               <tr style="border-bottom:1px solid #F0F2F5">
                 <th scope="row" style="text-align:left;padding:14px 20px;font-weight:{{ r.weight }};font-size:14.5px;color:#475467">{{ r.label }}</th>
-                <td style="text-align:right;padding:14px 20px;font-family:Sora,sans-serif;font-weight:{{ r.weight }};font-size:15px;color:#101828">{{ r.value }}</td>
+                <td style="text-align:right;padding:14px 20px;font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:{{ r.weight }};font-size:15px;color:#14181D">{{ r.value }}</td>
               </tr>
             </sc-for>
           </tbody>
         </table>
-        <p style="font-size:14px;line-height:1.7;color:#667085;text-wrap:pretty">{{ gstGuidance }}</p>
+        <p style="font-size:14px;line-height:1.7;color:#5A6470;text-wrap:pretty">{{ gstGuidance }}</p>
       </div>
     </div>
 
     <section style="margin-top:56px;border-top:1px solid #E4E7EC;padding-top:36px">
-      <h2 style="font-family:Sora,sans-serif;font-weight:700;font-size:21px;margin-bottom:18px">Rates across Canada</h2>
+      <h2 style="font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:21px;margin-bottom:18px">Rates across Canada</h2>
       <div style="border:1px solid #E4E7EC;border-radius:10px;overflow:hidden">
         <table>
           <thead>
             <tr style="background:#F4F6F8">
-              <th scope="col" style="text-align:left;padding:13px 18px;font-family:Sora,sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.08em;text-transform:uppercase;color:#667085;border-bottom:1px solid #E4E7EC">Province / territory</th>
-              <th scope="col" style="text-align:left;padding:13px 18px;font-family:Sora,sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.08em;text-transform:uppercase;color:#667085;border-bottom:1px solid #E4E7EC">System</th>
-              <th scope="col" style="text-align:right;padding:13px 18px;font-family:Sora,sans-serif;font-weight:700;font-size:11.5px;letter-spacing:0.08em;text-transform:uppercase;color:#667085;border-bottom:1px solid #E4E7EC">Total rate</th>
+              <th scope="col" style="text-align:left;padding:13px 18px;font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11.5px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470;border-bottom:1px solid #E4E7EC">Province / territory</th>
+              <th scope="col" style="text-align:left;padding:13px 18px;font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11.5px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470;border-bottom:1px solid #E4E7EC">System</th>
+              <th scope="col" style="text-align:right;padding:13px 18px;font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11.5px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470;border-bottom:1px solid #E4E7EC">Total rate</th>
             </tr>
           </thead>
           <tbody>
             <sc-for list="{{ gstTable }}" as="row" hint-placeholder-count="13">
               <tr style="border-bottom:1px solid #F0F2F5;background:{{ row.bg }}">
-                <th scope="row" style="text-align:left;padding:13px 18px;font-weight:600;font-size:14.5px;color:#101828">{{ row.name }}</th>
-                <td style="padding:13px 18px;font-size:14px;color:#667085">{{ row.system }}</td>
-                <td style="text-align:right;padding:13px 18px;font-family:Sora,sans-serif;font-weight:600;font-size:14.5px;color:#101828">{{ row.rate }}</td>
+                <th scope="row" style="text-align:left;padding:13px 18px;font-weight:600;font-size:14.5px;color:#14181D">{{ row.name }}</th>
+                <td style="padding:13px 18px;font-size:14px;color:#5A6470">{{ row.system }}</td>
+                <td style="text-align:right;padding:13px 18px;font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:600;font-size:14.5px;color:#14181D">{{ row.rate }}</td>
               </tr>
             </sc-for>
           </tbody>
         </table>
       </div>
-      <p style="margin-top:20px;font-size:14px;line-height:1.7;color:#667085;max-width:78ch;text-wrap:pretty">You must register for GST/HST once your worldwide taxable revenue passes $30,000 in a single calendar quarter or over four consecutive quarters. Registering voluntarily below that threshold lets you claim input tax credits on your own purchases.</p>
+      <p style="margin-top:20px;font-size:14px;line-height:1.7;color:#5A6470;max-width:78ch;text-wrap:pretty">You must register for GST/HST once your worldwide taxable revenue passes $30,000 in a single calendar quarter or over four consecutive quarters. Registering voluntarily below that threshold lets you claim input tax credits on your own purchases.</p>
     </section>
   </div>
 </sc-if>
 
 <sc-if value="{{ showPayroll }}" hint-placeholder-val="{{ false }}">
   <div style="max-width:1180px;margin:0 auto;padding:52px 24px 80px">
-    <span style="display:block;font-family:Sora,sans-serif;font-weight:700;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#D71920;margin-bottom:12px">Payroll</span>
-    <h1 style="font-family:Sora,sans-serif;font-weight:700;font-size:clamp(28px,3.4vw,40px);line-height:1.1;letter-spacing:-0.02em;margin-bottom:14px;text-wrap:pretty">Payroll Deductions Estimator</h1>
-    <p style="font-size:16.5px;line-height:1.7;color:#667085;max-width:64ch;margin-bottom:38px;text-wrap:pretty">Estimate CPP, EI, and income tax withheld per pay period, plus the employer contributions that land on top of the salary. Uses {{ taxYear }} ceilings.</p>
+    <span style="display:block;font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#002364;margin-bottom:12px">Payroll</span>
+    <h1 style="font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:clamp(28px,3.4vw,40px);line-height:1.1;letter-spacing:-0.025em;margin-bottom:14px;text-wrap:pretty">Payroll Deductions Estimator</h1>
+    <p style="font-size:16.5px;line-height:1.7;color:#5A6470;max-width:64ch;margin-bottom:38px;text-wrap:pretty">Estimate CPP, EI, and income tax withheld per pay period, plus the employer contributions that land on top of the salary. Uses {{ taxYear }} ceilings.</p>
 
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:34px;align-items:start">
       <form style="border:1px solid #E4E7EC;border-radius:10px;padding:26px;display:flex;flex-direction:column;gap:20px" onSubmit="{{ noSubmit }}">
         <fieldset style="border:0;padding:0;margin:0;display:flex;flex-direction:column;gap:7px">
-          <legend style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085;padding:0;margin-bottom:2px">This employee is paid</legend>
+          <legend style="font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470;padding:0;margin-bottom:2px">This employee is paid</legend>
           <div style="display:flex;gap:8px">
-            <button type="button" onClick="{{ setPaySalary }}" aria-pressed="{{ payIsSalary }}" style="flex:1;padding:11px 10px;border-radius:8px;border:1.5px solid {{ paySalBorder }};background:{{ paySalBg }};color:{{ paySalFg }};font-family:Sora,sans-serif;font-weight:600;font-size:13.5px;cursor:pointer">Salary</button>
-            <button type="button" onClick="{{ setPayHourly }}" aria-pressed="{{ payIsHourly }}" style="flex:1;padding:11px 10px;border-radius:8px;border:1.5px solid {{ payHrBorder }};background:{{ payHrBg }};color:{{ payHrFg }};font-family:Sora,sans-serif;font-weight:600;font-size:13.5px;cursor:pointer">Hourly</button>
+            <button type="button" onClick="{{ setPaySalary }}" aria-pressed="{{ payIsSalary }}" style="flex:1;padding:11px 10px;border-radius:8px;border:1.5px solid {{ paySalBorder }};background:{{ paySalBg }};color:{{ paySalFg }};font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:600;font-size:13.5px;cursor:pointer">Salary</button>
+            <button type="button" onClick="{{ setPayHourly }}" aria-pressed="{{ payIsHourly }}" style="flex:1;padding:11px 10px;border-radius:8px;border:1.5px solid {{ payHrBorder }};background:{{ payHrBg }};color:{{ payHrFg }};font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:600;font-size:13.5px;cursor:pointer">Hourly</button>
           </div>
         </fieldset>
         <sc-if value="{{ payIsSalary }}" hint-placeholder-val="{{ true }}">
           <label style="display:flex;flex-direction:column;gap:7px">
-            <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Annual gross salary (CAD)</span>
+            <span style="font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470">Annual gross salary (CAD)</span>
             <input type="number" min="0" step="500" value="{{ payGross }}" onChange="{{ onPayGross }}" onInput="{{ onPayGross }}" style="padding:12px 13px;border:1.5px solid #D0D5DD;border-radius:8px;font-size:15px" />
           </label>
         </sc-if>
         <sc-if value="{{ payIsHourly }}" hint-placeholder-val="{{ false }}">
           <div style="display:flex;gap:12px">
             <label style="display:flex;flex-direction:column;gap:7px;flex:1">
-              <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Hourly rate</span>
+              <span style="font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470">Hourly rate</span>
               <input type="number" min="0" step="0.25" value="{{ payRate }}" onChange="{{ onPayRate }}" onInput="{{ onPayRate }}" style="padding:12px 13px;border:1.5px solid #D0D5DD;border-radius:8px;font-size:15px" />
             </label>
             <label style="display:flex;flex-direction:column;gap:7px;flex:1">
-              <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Hours a week</span>
+              <span style="font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470">Hours a week</span>
               <input type="number" min="0" max="80" step="0.5" value="{{ payHours }}" onChange="{{ onPayHours }}" onInput="{{ onPayHours }}" style="padding:12px 13px;border:1.5px solid #D0D5DD;border-radius:8px;font-size:15px" />
             </label>
           </div>
-          <p style="font-size:13px;line-height:1.6;color:#667085;text-wrap:pretty">{{ payGrossNote }}</p>
+          <p style="font-size:13px;line-height:1.6;color:#5A6470;text-wrap:pretty">{{ payGrossNote }}</p>
         </sc-if>
         <label style="display:flex;flex-direction:column;gap:7px">
-          <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Province of employment</span>
+          <span style="font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470">Province of employment</span>
           <select value="{{ payProv }}" onChange="{{ onPayProv }}" style="padding:12px 13px;border:1.5px solid #D0D5DD;border-radius:8px;font-size:15px;background:#fff">
             <sc-for list="{{ provinceNames }}" as="p" hint-placeholder-count="13"><option>{{ p }}</option></sc-for>
           </select>
         </label>
         <label style="display:flex;flex-direction:column;gap:7px">
-          <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Pay frequency</span>
+          <span style="font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470">Pay frequency</span>
           <select value="{{ payFreq }}" onChange="{{ onPayFreq }}" style="padding:12px 13px;border:1.5px solid #D0D5DD;border-radius:8px;font-size:15px;background:#fff">
             <sc-for list="{{ freqNames }}" as="f" hint-placeholder-count="4"><option>{{ f }}</option></sc-for>
           </select>
         </label>
-        <p style="font-size:13px;line-height:1.65;color:#98A2B3;text-wrap:pretty">Assumes the basic personal amount only, no additional TD1 credits, no taxable benefits, and no employer pension or union deductions.</p>
+        <p style="font-size:13px;line-height:1.65;color:#5A6470;text-wrap:pretty">Assumes the basic personal amount only, no additional TD1 credits, no taxable benefits, and no employer pension or union deductions.</p>
       </form>
 
       <div style="display:flex;flex-direction:column;gap:18px">
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px">
           <div style="background:#101828;color:#fff;border-radius:10px;padding:24px">
-            <span style="display:block;font-family:Sora,sans-serif;font-weight:600;font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:#98A2B3;margin-bottom:8px">Net pay per period</span>
-            <strong style="display:block;font-family:Sora,sans-serif;font-weight:800;font-size:clamp(26px,3vw,34px);letter-spacing:-0.02em;line-height:1.05">{{ payNet }}</strong>
+            <span style="display:block;font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#98A2B3;margin-bottom:8px">Net pay per period</span>
+            <strong style="display:block;font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:clamp(26px,3vw,34px);letter-spacing:-0.02em;line-height:1.05">{{ payNet }}</strong>
             <span style="display:block;margin-top:8px;font-size:13.5px;color:#C8CDD6">{{ payPeriodNote }}</span>
             <span style="display:block;margin-top:4px;font-size:12.5px;color:#98A2B3">{{ payHourlyEquiv }}</span>
           </div>
           <div style="border:1px solid #E4E7EC;border-radius:10px;padding:24px">
-            <span style="display:block;font-family:Sora,sans-serif;font-weight:600;font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:#98A2B3;margin-bottom:8px">True cost to employer</span>
-            <strong style="display:block;font-family:Sora,sans-serif;font-weight:800;font-size:clamp(26px,3vw,34px);letter-spacing:-0.02em;line-height:1.05;color:#101828">{{ payEmployerCost }}</strong>
-            <span style="display:block;margin-top:8px;font-size:13.5px;color:#667085">{{ payEmployerNote }}</span>
+            <span style="display:block;font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470;margin-bottom:8px">True cost to employer</span>
+            <strong style="display:block;font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:clamp(26px,3vw,34px);letter-spacing:-0.02em;line-height:1.05;color:#14181D">{{ payEmployerCost }}</strong>
+            <span style="display:block;margin-top:8px;font-size:13.5px;color:#5A6470">{{ payEmployerNote }}</span>
           </div>
         </div>
 
         <table style="border:1px solid #E4E7EC;border-radius:10px;overflow:hidden">
-          <caption style="text-align:left;padding:16px 20px;background:#F4F6F8;border-bottom:1px solid #E4E7EC;font-family:Sora,sans-serif;font-weight:700;font-size:13px;letter-spacing:0.04em;text-transform:uppercase;color:#101828">Per pay period</caption>
+          <caption style="text-align:left;padding:16px 20px;background:#F4F6F8;border-bottom:1px solid #E4E7EC;font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:13px;letter-spacing:0.02em;text-transform:uppercase;color:#14181D">Per pay period</caption>
           <thead>
             <tr>
-              <th scope="col" style="text-align:left;padding:11px 20px;font-family:Sora,sans-serif;font-weight:700;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#98A2B3;border-bottom:1px solid #F0F2F5">Item</th>
-              <th scope="col" style="text-align:right;padding:11px 20px;font-family:Sora,sans-serif;font-weight:700;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#98A2B3;border-bottom:1px solid #F0F2F5">Employee</th>
-              <th scope="col" style="text-align:right;padding:11px 20px;font-family:Sora,sans-serif;font-weight:700;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#98A2B3;border-bottom:1px solid #F0F2F5">Employer</th>
+              <th scope="col" style="text-align:left;padding:11px 20px;font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470;border-bottom:1px solid #F0F2F5">Item</th>
+              <th scope="col" style="text-align:right;padding:11px 20px;font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470;border-bottom:1px solid #F0F2F5">Employee</th>
+              <th scope="col" style="text-align:right;padding:11px 20px;font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470;border-bottom:1px solid #F0F2F5">Employer</th>
             </tr>
           </thead>
           <tbody>
             <sc-for list="{{ payRows }}" as="r" hint-placeholder-count="6">
               <tr style="border-bottom:1px solid #F0F2F5;background:{{ r.bg }}">
                 <th scope="row" style="text-align:left;padding:13px 20px;font-weight:{{ r.weight }};font-size:14.5px;color:#475467">{{ r.label }}</th>
-                <td style="text-align:right;padding:13px 20px;font-family:Sora,sans-serif;font-weight:{{ r.weight }};font-size:14.5px;color:#101828">{{ r.employee }}</td>
-                <td style="text-align:right;padding:13px 20px;font-family:Sora,sans-serif;font-weight:{{ r.weight }};font-size:14.5px;color:#667085">{{ r.employer }}</td>
+                <td style="text-align:right;padding:13px 20px;font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:{{ r.weight }};font-size:14.5px;color:#14181D">{{ r.employee }}</td>
+                <td style="text-align:right;padding:13px 20px;font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:{{ r.weight }};font-size:14.5px;color:#5A6470">{{ r.employer }}</td>
               </tr>
             </sc-for>
           </tbody>
         </table>
 
         <div style="border:1px solid #E4E7EC;border-radius:10px;padding:22px 24px">
-          <h2 style="font-family:Sora,sans-serif;font-weight:700;font-size:14px;letter-spacing:0.04em;text-transform:uppercase;color:#101828;margin-bottom:14px">{{ taxYear }} ceilings used</h2>
+          <h2 style="font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:14px;letter-spacing:0.02em;text-transform:uppercase;color:#14181D;margin-bottom:14px">{{ taxYear }} ceilings used</h2>
           <ul style="display:flex;flex-direction:column;gap:9px">
             <sc-for list="{{ payCeilings }}" as="c" hint-placeholder-count="4">
-              <li style="display:flex;justify-content:space-between;gap:16px;font-size:14px;color:#475467;border-bottom:1px solid #F0F2F5;padding-bottom:9px"><span>{{ c.label }}</span><span style="font-family:Sora,sans-serif;font-weight:600;color:#101828;white-space:nowrap">{{ c.value }}</span></li>
+              <li style="display:flex;justify-content:space-between;gap:16px;font-size:14px;color:#475467;border-bottom:1px solid #F0F2F5;padding-bottom:9px"><span>{{ c.label }}</span><span style="font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:600;color:#14181D;white-space:nowrap">{{ c.value }}</span></li>
             </sc-for>
           </ul>
         </div>
@@ -263,30 +263,30 @@
 
 <sc-if value="{{ showCash }}" hint-placeholder-val="{{ false }}">
   <div style="max-width:1180px;margin:0 auto;padding:52px 24px 80px">
-    <span style="display:block;font-family:Sora,sans-serif;font-weight:700;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#D71920;margin-bottom:12px">Cash flow</span>
-    <h1 style="font-family:Sora,sans-serif;font-weight:700;font-size:clamp(28px,3.4vw,40px);line-height:1.1;letter-spacing:-0.02em;margin-bottom:14px;text-wrap:pretty">13-Week Cash-Flow Forecaster</h1>
-    <p style="font-size:16.5px;line-height:1.7;color:#667085;max-width:64ch;margin-bottom:38px;text-wrap:pretty">A quarter is the horizon most owners can actually see. This projects your bank balance week by week and flags the week you run out — including the remittances that catch people off guard.</p>
+    <span style="display:block;font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#002364;margin-bottom:12px">Cash flow</span>
+    <h1 style="font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:clamp(28px,3.4vw,40px);line-height:1.1;letter-spacing:-0.025em;margin-bottom:14px;text-wrap:pretty">13-Week Cash-Flow Forecaster</h1>
+    <p style="font-size:16.5px;line-height:1.7;color:#5A6470;max-width:64ch;margin-bottom:38px;text-wrap:pretty">A quarter is the horizon most owners can actually see. This projects your bank balance week by week and flags the week you run out — including the remittances that catch people off guard.</p>
 
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:34px;align-items:start">
       <form style="border:1px solid #E4E7EC;border-radius:10px;padding:26px;display:flex;flex-direction:column;gap:19px" onSubmit="{{ noSubmit }}">
         <label style="display:flex;flex-direction:column;gap:7px">
-          <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Opening bank balance</span>
+          <span style="font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470">Opening bank balance</span>
           <input type="number" step="500" value="{{ cashOpening }}" onChange="{{ onCashOpening }}" onInput="{{ onCashOpening }}" style="padding:12px 13px;border:1.5px solid #D0D5DD;border-radius:8px;font-size:15px" />
         </label>
         <label style="display:flex;flex-direction:column;gap:7px">
-          <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Average weekly collections</span>
+          <span style="font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470">Average weekly collections</span>
           <input type="number" min="0" step="250" value="{{ cashIn }}" onChange="{{ onCashIn }}" onInput="{{ onCashIn }}" style="padding:12px 13px;border:1.5px solid #D0D5DD;border-radius:8px;font-size:15px" />
         </label>
         <label style="display:flex;flex-direction:column;gap:7px">
-          <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Average weekly operating costs</span>
+          <span style="font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470">Average weekly operating costs</span>
           <input type="number" min="0" step="250" value="{{ cashOut }}" onChange="{{ onCashOut }}" onInput="{{ onCashOut }}" style="padding:12px 13px;border:1.5px solid #D0D5DD;border-radius:8px;font-size:15px" />
         </label>
         <label style="display:flex;flex-direction:column;gap:7px">
-          <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Payroll per run</span>
+          <span style="font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470">Payroll per run</span>
           <input type="number" min="0" step="250" value="{{ cashPayroll }}" onChange="{{ onCashPayroll }}" onInput="{{ onCashPayroll }}" style="padding:12px 13px;border:1.5px solid #D0D5DD;border-radius:8px;font-size:15px" />
         </label>
         <label style="display:flex;flex-direction:column;gap:7px">
-          <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Payroll runs</span>
+          <span style="font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470">Payroll runs</span>
           <select value="{{ cashPayrollFreq }}" onChange="{{ onCashPayrollFreq }}" style="padding:12px 13px;border:1.5px solid #D0D5DD;border-radius:8px;font-size:15px;background:#fff">
             <option>Weekly</option>
             <option>Every two weeks</option>
@@ -295,44 +295,44 @@
           </select>
         </label>
         <label style="display:flex;flex-direction:column;gap:7px">
-          <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Quarterly GST/HST remittance</span>
+          <span style="font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470">Quarterly GST/HST remittance</span>
           <input type="number" min="0" step="250" value="{{ cashGst }}" onChange="{{ onCashGst }}" onInput="{{ onCashGst }}" style="padding:12px 13px;border:1.5px solid #D0D5DD;border-radius:8px;font-size:15px" />
         </label>
         <label style="display:flex;flex-direction:column;gap:7px">
-          <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Other one-off cost</span>
+          <span style="font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470">Other one-off cost</span>
           <input type="number" min="0" step="250" value="{{ cashOneOff }}" onChange="{{ onCashOneOff }}" onInput="{{ onCashOneOff }}" style="padding:12px 13px;border:1.5px solid #D0D5DD;border-radius:8px;font-size:15px" />
         </label>
         <label style="display:flex;flex-direction:column;gap:7px">
-          <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Week it lands</span>
+          <span style="font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470">Week it lands</span>
           <input type="number" min="1" max="13" step="1" value="{{ cashOneOffWeek }}" onChange="{{ onCashOneOffWeek }}" onInput="{{ onCashOneOffWeek }}" style="padding:12px 13px;border:1.5px solid #D0D5DD;border-radius:8px;font-size:15px" />
         </label>
       </form>
 
       <div style="display:flex;flex-direction:column;gap:18px">
         <div style="background:{{ cashVerdictBg }};color:{{ cashVerdictFg }};border-radius:10px;padding:28px;border:1px solid {{ cashVerdictBorder }}">
-          <span style="display:block;font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;opacity:0.75;margin-bottom:8px">Lowest point in 13 weeks</span>
-          <strong style="display:block;font-family:Sora,sans-serif;font-weight:800;font-size:clamp(28px,3.6vw,40px);letter-spacing:-0.02em;line-height:1.05">{{ cashLow }}</strong>
+          <span style="display:block;font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;opacity:0.75;margin-bottom:8px">Lowest point in 13 weeks</span>
+          <strong style="display:block;font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:clamp(28px,3.6vw,40px);letter-spacing:-0.02em;line-height:1.05">{{ cashLow }}</strong>
           <span style="display:block;margin-top:10px;font-size:15px;line-height:1.6;text-wrap:pretty">{{ cashVerdict }}</span>
         </div>
 
         <div style="border:1px solid #E4E7EC;border-radius:10px;overflow:hidden">
           <table>
-            <caption style="text-align:left;padding:16px 20px;background:#F4F6F8;border-bottom:1px solid #E4E7EC;font-family:Sora,sans-serif;font-weight:700;font-size:13px;letter-spacing:0.04em;text-transform:uppercase;color:#101828">Week by week</caption>
+            <caption style="text-align:left;padding:16px 20px;background:#F4F6F8;border-bottom:1px solid #E4E7EC;font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:13px;letter-spacing:0.02em;text-transform:uppercase;color:#14181D">Week by week</caption>
             <thead>
               <tr>
-                <th scope="col" style="text-align:left;padding:11px 18px;font-family:Sora,sans-serif;font-weight:700;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#98A2B3;border-bottom:1px solid #F0F2F5">Week</th>
-                <th scope="col" style="text-align:right;padding:11px 18px;font-family:Sora,sans-serif;font-weight:700;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#98A2B3;border-bottom:1px solid #F0F2F5">In</th>
-                <th scope="col" style="text-align:right;padding:11px 18px;font-family:Sora,sans-serif;font-weight:700;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#98A2B3;border-bottom:1px solid #F0F2F5">Out</th>
-                <th scope="col" style="text-align:right;padding:11px 18px;font-family:Sora,sans-serif;font-weight:700;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#98A2B3;border-bottom:1px solid #F0F2F5">Balance</th>
+                <th scope="col" style="text-align:left;padding:11px 18px;font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470;border-bottom:1px solid #F0F2F5">Week</th>
+                <th scope="col" style="text-align:right;padding:11px 18px;font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470;border-bottom:1px solid #F0F2F5">In</th>
+                <th scope="col" style="text-align:right;padding:11px 18px;font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470;border-bottom:1px solid #F0F2F5">Out</th>
+                <th scope="col" style="text-align:right;padding:11px 18px;font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470;border-bottom:1px solid #F0F2F5">Balance</th>
               </tr>
             </thead>
             <tbody>
               <sc-for list="{{ cashRows }}" as="w" hint-placeholder-count="13">
                 <tr style="border-bottom:1px solid #F0F2F5;background:{{ w.bg }}">
-                  <th scope="row" style="text-align:left;padding:12px 18px;font-weight:600;font-size:14px;color:#101828">{{ w.week }}<span style="display:block;font-weight:400;font-size:12px;color:#98A2B3">{{ w.note }}</span></th>
-                  <td style="text-align:right;padding:12px 18px;font-family:Sora,sans-serif;font-size:14px;color:#12805C">{{ w.inflow }}</td>
-                  <td style="text-align:right;padding:12px 18px;font-family:Sora,sans-serif;font-size:14px;color:#667085">{{ w.outflow }}</td>
-                  <td style="text-align:right;padding:12px 18px;font-family:Sora,sans-serif;font-weight:700;font-size:14.5px;color:{{ w.color }}">{{ w.balance }}</td>
+                  <th scope="row" style="text-align:left;padding:12px 18px;font-weight:600;font-size:14px;color:#14181D">{{ w.week }}<span style="display:block;font-weight:400;font-size:12px;color:#5A6470">{{ w.note }}</span></th>
+                  <td style="text-align:right;padding:12px 18px;font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-size:14px;color:#12805C">{{ w.inflow }}</td>
+                  <td style="text-align:right;padding:12px 18px;font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-size:14px;color:#5A6470">{{ w.outflow }}</td>
+                  <td style="text-align:right;padding:12px 18px;font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:14.5px;color:{{ w.color }}">{{ w.balance }}</td>
                 </tr>
               </sc-for>
             </tbody>
@@ -346,30 +346,30 @@
 
 <sc-if value="{{ showLoan }}" hint-placeholder-val="{{ false }}">
   <div style="max-width:1180px;margin:0 auto;padding:52px 24px 80px">
-    <span style="display:block;font-family:Sora,sans-serif;font-weight:700;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#D71920;margin-bottom:12px">Financing</span>
-    <h1 style="font-family:Sora,sans-serif;font-weight:700;font-size:clamp(28px,3.4vw,40px);line-height:1.1;letter-spacing:-0.02em;margin-bottom:14px;text-wrap:pretty">Loan Payment Calculator</h1>
-    <p style="font-size:16.5px;line-height:1.7;color:#667085;max-width:64ch;margin-bottom:38px;text-wrap:pretty">Compare what the same borrowing costs as a term loan, an operating line, or equipment financing — and what each does to your monthly cash requirement.</p>
+    <span style="display:block;font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#002364;margin-bottom:12px">Financing</span>
+    <h1 style="font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:clamp(28px,3.4vw,40px);line-height:1.1;letter-spacing:-0.025em;margin-bottom:14px;text-wrap:pretty">Loan Payment Calculator</h1>
+    <p style="font-size:16.5px;line-height:1.7;color:#5A6470;max-width:64ch;margin-bottom:38px;text-wrap:pretty">Compare what the same borrowing costs as a term loan, an operating line, or equipment financing — and what each does to your monthly cash requirement.</p>
 
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:34px;align-items:start">
       <form style="border:1px solid #E4E7EC;border-radius:10px;padding:26px;display:flex;flex-direction:column;gap:20px" onSubmit="{{ noSubmit }}">
         <label style="display:flex;flex-direction:column;gap:7px">
-          <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Amount borrowed</span>
+          <span style="font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470">Amount borrowed</span>
           <input type="number" min="0" step="1000" value="{{ loanAmount }}" onChange="{{ onLoanAmount }}" onInput="{{ onLoanAmount }}" style="padding:12px 13px;border:1.5px solid #D0D5DD;border-radius:8px;font-size:15px" />
         </label>
         <label style="display:flex;flex-direction:column;gap:7px">
-          <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Annual interest rate — {{ loanRateLabel }}</span>
+          <span style="font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470">Annual interest rate — {{ loanRateLabel }}</span>
           <input type="range" min="3" max="16" step="0.25" value="{{ loanRate }}" onChange="{{ onLoanRate }}" onInput="{{ onLoanRate }}" style="accent-color:#D71920" />
         </label>
         <label style="display:flex;flex-direction:column;gap:7px">
-          <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Term — {{ loanTermLabel }}</span>
+          <span style="font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470">Term — {{ loanTermLabel }}</span>
           <input type="range" min="1" max="15" step="1" value="{{ loanYears }}" onChange="{{ onLoanYears }}" onInput="{{ onLoanYears }}" style="accent-color:#D71920" />
         </label>
         <div style="border-top:1px solid #F0F2F5;padding-top:18px;display:flex;flex-direction:column;gap:10px">
-          <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Typical starting points</span>
+          <span style="font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470">Typical starting points</span>
           <sc-for list="{{ loanPresets }}" as="p" hint-placeholder-count="3">
             <button type="button" onClick="{{ p.apply }}" style="text-align:left;padding:13px 15px;border:1.5px solid #E4E7EC;border-radius:8px;background:#fff;cursor:pointer;display:flex;flex-direction:column;gap:3px" style-hover="border-color:#D71920">
-              <span style="font-family:Sora,sans-serif;font-weight:700;font-size:13.5px;color:#101828">{{ p.label }}</span>
-              <span style="font-size:12.5px;color:#667085">{{ p.detail }}</span>
+              <span style="font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:13.5px;color:#14181D">{{ p.label }}</span>
+              <span style="font-size:12.5px;color:#5A6470">{{ p.detail }}</span>
             </button>
           </sc-for>
         </div>
@@ -378,44 +378,44 @@
       <div style="display:flex;flex-direction:column;gap:18px">
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:14px">
           <div style="background:#101828;color:#fff;border-radius:10px;padding:24px">
-            <span style="display:block;font-family:Sora,sans-serif;font-weight:600;font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:#98A2B3;margin-bottom:8px">Monthly payment</span>
-            <strong style="display:block;font-family:Sora,sans-serif;font-weight:800;font-size:clamp(24px,2.8vw,32px);letter-spacing:-0.02em;line-height:1.05">{{ loanMonthly }}</strong>
+            <span style="display:block;font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#98A2B3;margin-bottom:8px">Monthly payment</span>
+            <strong style="display:block;font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:clamp(24px,2.8vw,32px);letter-spacing:-0.02em;line-height:1.05">{{ loanMonthly }}</strong>
           </div>
           <div style="border:1px solid #E4E7EC;border-radius:10px;padding:24px">
-            <span style="display:block;font-family:Sora,sans-serif;font-weight:600;font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:#98A2B3;margin-bottom:8px">Total interest</span>
-            <strong style="display:block;font-family:Sora,sans-serif;font-weight:800;font-size:clamp(24px,2.8vw,32px);letter-spacing:-0.02em;line-height:1.05;color:#101828">{{ loanInterest }}</strong>
+            <span style="display:block;font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470;margin-bottom:8px">Total interest</span>
+            <strong style="display:block;font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:clamp(24px,2.8vw,32px);letter-spacing:-0.02em;line-height:1.05;color:#14181D">{{ loanInterest }}</strong>
           </div>
           <div style="border:1px solid #E4E7EC;border-radius:10px;padding:24px">
-            <span style="display:block;font-family:Sora,sans-serif;font-weight:600;font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:#98A2B3;margin-bottom:8px">Total repaid</span>
-            <strong style="display:block;font-family:Sora,sans-serif;font-weight:800;font-size:clamp(24px,2.8vw,32px);letter-spacing:-0.02em;line-height:1.05;color:#101828">{{ loanTotal }}</strong>
+            <span style="display:block;font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470;margin-bottom:8px">Total repaid</span>
+            <strong style="display:block;font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:clamp(24px,2.8vw,32px);letter-spacing:-0.02em;line-height:1.05;color:#14181D">{{ loanTotal }}</strong>
           </div>
         </div>
 
         <table style="border:1px solid #E4E7EC;border-radius:10px;overflow:hidden">
-          <caption style="text-align:left;padding:16px 20px;background:#F4F6F8;border-bottom:1px solid #E4E7EC;font-family:Sora,sans-serif;font-weight:700;font-size:13px;letter-spacing:0.04em;text-transform:uppercase;color:#101828">Same money, three structures</caption>
+          <caption style="text-align:left;padding:16px 20px;background:#F4F6F8;border-bottom:1px solid #E4E7EC;font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:13px;letter-spacing:0.02em;text-transform:uppercase;color:#14181D">Same money, three structures</caption>
           <thead>
             <tr>
-              <th scope="col" style="text-align:left;padding:11px 18px;font-family:Sora,sans-serif;font-weight:700;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#98A2B3;border-bottom:1px solid #F0F2F5">Structure</th>
-              <th scope="col" style="text-align:right;padding:11px 18px;font-family:Sora,sans-serif;font-weight:700;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#98A2B3;border-bottom:1px solid #F0F2F5">Monthly</th>
-              <th scope="col" style="text-align:right;padding:11px 18px;font-family:Sora,sans-serif;font-weight:700;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#98A2B3;border-bottom:1px solid #F0F2F5">Interest cost</th>
+              <th scope="col" style="text-align:left;padding:11px 18px;font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470;border-bottom:1px solid #F0F2F5">Structure</th>
+              <th scope="col" style="text-align:right;padding:11px 18px;font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470;border-bottom:1px solid #F0F2F5">Monthly</th>
+              <th scope="col" style="text-align:right;padding:11px 18px;font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470;border-bottom:1px solid #F0F2F5">Interest cost</th>
             </tr>
           </thead>
           <tbody>
             <sc-for list="{{ loanCompare }}" as="c" hint-placeholder-count="3">
               <tr style="border-bottom:1px solid #F0F2F5">
-                <th scope="row" style="text-align:left;padding:14px 18px;font-weight:600;font-size:14.5px;color:#101828">{{ c.name }}<span style="display:block;font-weight:400;font-size:12.5px;color:#667085;line-height:1.5;margin-top:3px;text-wrap:pretty">{{ c.note }}</span></th>
-                <td style="text-align:right;padding:14px 18px;font-family:Sora,sans-serif;font-weight:700;font-size:14.5px;color:#101828;vertical-align:top">{{ c.monthly }}</td>
-                <td style="text-align:right;padding:14px 18px;font-family:Sora,sans-serif;font-size:14.5px;color:#667085;vertical-align:top">{{ c.interest }}</td>
+                <th scope="row" style="text-align:left;padding:14px 18px;font-weight:600;font-size:14.5px;color:#14181D">{{ c.name }}<span style="display:block;font-weight:400;font-size:12.5px;color:#5A6470;line-height:1.5;margin-top:3px;text-wrap:pretty">{{ c.note }}</span></th>
+                <td style="text-align:right;padding:14px 18px;font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:14.5px;color:#14181D;vertical-align:top">{{ c.monthly }}</td>
+                <td style="text-align:right;padding:14px 18px;font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-size:14.5px;color:#5A6470;vertical-align:top">{{ c.interest }}</td>
               </tr>
             </sc-for>
           </tbody>
         </table>
 
         <div style="border:1px solid #E4E7EC;border-radius:10px;padding:24px">
-          <h2 style="font-family:Sora,sans-serif;font-weight:700;font-size:14px;letter-spacing:0.04em;text-transform:uppercase;color:#101828;margin-bottom:14px">Before you sign</h2>
+          <h2 style="font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:14px;letter-spacing:0.02em;text-transform:uppercase;color:#14181D;margin-bottom:14px">Before you sign</h2>
           <ul style="display:flex;flex-direction:column;gap:11px">
             <sc-for list="{{ loanChecklist }}" as="c" hint-placeholder-count="4">
-              <li style="display:flex;gap:11px;font-size:14.5px;line-height:1.65;color:#475467;text-wrap:pretty"><span style="color:#D71920;font-family:Sora,sans-serif;font-weight:700;flex-shrink:0">→</span><span>{{ c }}</span></li>
+              <li style="display:flex;gap:11px;font-size:14.5px;line-height:1.65;color:#475467;text-wrap:pretty"><span style="color:#002364;font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:700;flex-shrink:0">→</span><span>{{ c }}</span></li>
             </sc-for>
           </ul>
         </div>
@@ -426,49 +426,49 @@
 
 <sc-if value="{{ showSelf }}" hint-placeholder-val="{{ false }}">
   <div style="max-width:1180px;margin:0 auto;padding:52px 24px 80px">
-    <span style="display:block;font-family:Sora,sans-serif;font-weight:700;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#D71920;margin-bottom:12px">Self-employed</span>
-    <h1 style="font-family:Sora,sans-serif;font-weight:700;font-size:clamp(28px,3.4vw,40px);line-height:1.1;letter-spacing:-0.02em;margin-bottom:14px;text-wrap:pretty">Self-Employed Tax and Instalment Estimator</h1>
-    <p style="font-size:16.5px;line-height:1.7;color:#667085;max-width:64ch;margin-bottom:38px;text-wrap:pretty">For sole proprietors and freelancers: how much of your profit goes to income tax and both halves of CPP, how much to set aside each month, and whether the CRA will expect quarterly instalments.</p>
+    <span style="display:block;font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#002364;margin-bottom:12px">Self-employed</span>
+    <h1 style="font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:clamp(28px,3.4vw,40px);line-height:1.1;letter-spacing:-0.025em;margin-bottom:14px;text-wrap:pretty">Self-Employed Tax and Instalment Estimator</h1>
+    <p style="font-size:16.5px;line-height:1.7;color:#5A6470;max-width:64ch;margin-bottom:38px;text-wrap:pretty">For sole proprietors and freelancers: how much of your profit goes to income tax and both halves of CPP, how much to set aside each month, and whether the CRA will expect quarterly instalments.</p>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:34px;align-items:start">
       <form style="border:1px solid #E4E7EC;border-radius:10px;padding:26px;display:flex;flex-direction:column;gap:19px" onSubmit="{{ noSubmit }}">
         <label style="display:flex;flex-direction:column;gap:7px">
-          <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Net business income for the year (after expenses)</span>
+          <span style="font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470">Net business income for the year (after expenses)</span>
           <input type="number" min="0" step="1000" value="{{ selfIncome }}" onChange="{{ onSelfIncome }}" onInput="{{ onSelfIncome }}" style="padding:12px 13px;border:1.5px solid #D0D5DD;border-radius:8px;font-size:15px" />
         </label>
         <label style="display:flex;flex-direction:column;gap:7px">
-          <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Province or territory of residence</span>
+          <span style="font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470">Province or territory of residence</span>
           <select value="{{ selfProv }}" onChange="{{ onSelfProv }}" style="padding:12px 13px;border:1.5px solid #D0D5DD;border-radius:8px;font-size:15px;background:#fff">
             <sc-for list="{{ provinceNames }}" as="o" hint-placeholder-count="13"><option>{{ o }}</option></sc-for>
           </select>
         </label>
         <label style="display:flex;flex-direction:column;gap:7px">
-          <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Other employment income (T4), if any</span>
+          <span style="font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470">Other employment income (T4), if any</span>
           <input type="number" min="0" step="1000" value="{{ selfT4 }}" onChange="{{ onSelfT4 }}" onInput="{{ onSelfT4 }}" style="padding:12px 13px;border:1.5px solid #D0D5DD;border-radius:8px;font-size:15px" />
         </label>
-        <p style="font-size:13px;line-height:1.65;color:#98A2B3;text-wrap:pretty">Assumes the basic personal amount only and no RRSP or other deductions. Employment income is assumed to have had CPP and EI withheld already. Optional EI for the self-employed is not included.</p>
+        <p style="font-size:13px;line-height:1.65;color:#5A6470;text-wrap:pretty">Assumes the basic personal amount only and no RRSP or other deductions. Employment income is assumed to have had CPP and EI withheld already. Optional EI for the self-employed is not included.</p>
       </form>
       <div style="display:flex;flex-direction:column;gap:18px">
         <div style="background:#101828;color:#fff;border-radius:10px;padding:28px">
-          <span style="display:block;font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#98A2B3;margin-bottom:8px">Set aside each month</span>
-          <strong style="display:block;font-family:Sora,sans-serif;font-weight:800;font-size:clamp(30px,4vw,44px);letter-spacing:-0.02em;line-height:1.05">{{ selfMonthly }}</strong>
+          <span style="display:block;font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#98A2B3;margin-bottom:8px">Set aside each month</span>
+          <strong style="display:block;font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:clamp(30px,4vw,44px);letter-spacing:-0.02em;line-height:1.05">{{ selfMonthly }}</strong>
           <span style="display:block;margin-top:10px;font-size:14.5px;line-height:1.6;color:#C8CDD6">{{ selfNote }}</span>
         </div>
         <table style="border:1px solid #E4E7EC;border-radius:10px;overflow:hidden">
-          <caption style="text-align:left;padding:16px 20px;background:#F4F6F8;border-bottom:1px solid #E4E7EC;font-family:Sora,sans-serif;font-weight:700;font-size:13px;letter-spacing:0.04em;text-transform:uppercase;color:#101828">For the year</caption>
+          <caption style="text-align:left;padding:16px 20px;background:#F4F6F8;border-bottom:1px solid #E4E7EC;font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:13px;letter-spacing:0.02em;text-transform:uppercase;color:#14181D">For the year</caption>
           <tbody>
             <sc-for list="{{ selfRows }}" as="r" hint-placeholder-count="7">
               <tr style="border-bottom:1px solid #F0F2F5;background:{{ r.bg }}">
                 <th scope="row" style="text-align:left;padding:13px 20px;font-weight:{{ r.weight }};font-size:14.5px;color:#475467">{{ r.label }}</th>
-                <td style="text-align:right;padding:13px 20px;font-family:Sora,sans-serif;font-weight:{{ r.weight }};font-size:15px;color:#101828;white-space:nowrap">{{ r.value }}</td>
+                <td style="text-align:right;padding:13px 20px;font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:{{ r.weight }};font-size:15px;color:#14181D;white-space:nowrap">{{ r.value }}</td>
               </tr>
             </sc-for>
           </tbody>
         </table>
         <div style="border:1px solid #E4E7EC;border-radius:10px;padding:24px">
-          <h2 style="font-family:Sora,sans-serif;font-weight:700;font-size:14px;letter-spacing:0.04em;text-transform:uppercase;color:#101828;margin-bottom:14px">Instalments and deadlines</h2>
+          <h2 style="font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:14px;letter-spacing:0.02em;text-transform:uppercase;color:#14181D;margin-bottom:14px">Instalments and deadlines</h2>
           <ul style="display:flex;flex-direction:column;gap:11px">
             <sc-for list="{{ selfTips }}" as="c" hint-placeholder-count="4">
-              <li style="display:flex;gap:11px;font-size:14.5px;line-height:1.65;color:#475467;text-wrap:pretty"><span style="color:#D71920;font-family:Sora,sans-serif;font-weight:700;flex-shrink:0">→</span><span>{{ c }}</span></li>
+              <li style="display:flex;gap:11px;font-size:14.5px;line-height:1.65;color:#475467;text-wrap:pretty"><span style="color:#002364;font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:700;flex-shrink:0">→</span><span>{{ c }}</span></li>
             </sc-for>
           </ul>
         </div>
@@ -478,79 +478,79 @@
 </sc-if>
 <sc-if value="{{ showImport }}" hint-placeholder-val="{{ false }}">
   <div style="max-width:1180px;margin:0 auto;padding:52px 24px 80px">
-    <span style="display:block;font-family:Sora,sans-serif;font-weight:700;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#D71920;margin-bottom:12px">Importing</span>
-    <h1 style="font-family:Sora,sans-serif;font-weight:700;font-size:clamp(28px,3.4vw,40px);line-height:1.1;letter-spacing:-0.02em;margin-bottom:14px;text-wrap:pretty">Import Landed Cost and Tariff Calculator</h1>
-    <p style="font-size:16.5px;line-height:1.7;color:#667085;max-width:64ch;margin-bottom:38px;text-wrap:pretty">What an imported shipment really costs once it reaches you: exchange, freight, duty, any surtax or counter-tariff, brokerage, and the GST or HST collected at the border, per unit and with a price that protects your margin.</p>
+    <span style="display:block;font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#002364;margin-bottom:12px">Importing</span>
+    <h1 style="font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:clamp(28px,3.4vw,40px);line-height:1.1;letter-spacing:-0.025em;margin-bottom:14px;text-wrap:pretty">Import Landed Cost and Tariff Calculator</h1>
+    <p style="font-size:16.5px;line-height:1.7;color:#5A6470;max-width:64ch;margin-bottom:38px;text-wrap:pretty">What an imported shipment really costs once it reaches you: exchange, freight, duty, any surtax or counter-tariff, brokerage, and the GST or HST collected at the border, per unit and with a price that protects your margin.</p>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:34px;align-items:start">
       <form style="border:1px solid #E4E7EC;border-radius:10px;padding:26px;display:flex;flex-direction:column;gap:19px" onSubmit="{{ noSubmit }}">
         <label style="display:flex;flex-direction:column;gap:7px">
-          <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Supplier invoice total (foreign currency)</span>
+          <span style="font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470">Supplier invoice total (foreign currency)</span>
           <input type="number" min="0" step="100" value="{{ impValue }}" onChange="{{ onImpValue }}" onInput="{{ onImpValue }}" style="padding:12px 13px;border:1.5px solid #D0D5DD;border-radius:8px;font-size:15px" />
         </label>
         <label style="display:flex;flex-direction:column;gap:7px">
-          <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Invoice currency</span>
+          <span style="font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470">Invoice currency</span>
           <select value="{{ impCur }}" onChange="{{ onImpCur }}" style="padding:12px 13px;border:1.5px solid #D0D5DD;border-radius:8px;font-size:15px;background:#fff">
             <sc-for list="{{ impCurrencies }}" as="o" hint-placeholder-count="5"><option>{{ o }}</option></sc-for>
           </select>
         </label>
         <label style="display:flex;flex-direction:column;gap:7px">
-          <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Exchange rate (CAD per 1 unit of currency)</span>
+          <span style="font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470">Exchange rate (CAD per 1 unit of currency)</span>
           <input type="number" min="0" step="0.0001" value="{{ impFx }}" onChange="{{ onImpFx }}" onInput="{{ onImpFx }}" style="padding:12px 13px;border:1.5px solid #D0D5DD;border-radius:8px;font-size:15px" />
         </label>
         <label style="display:flex;flex-direction:column;gap:7px">
-          <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Freight and insurance to your door (CAD)</span>
+          <span style="font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470">Freight and insurance to your door (CAD)</span>
           <input type="number" min="0" step="50" value="{{ impFreight }}" onChange="{{ onImpFreight }}" onInput="{{ onImpFreight }}" style="padding:12px 13px;border:1.5px solid #D0D5DD;border-radius:8px;font-size:15px" />
         </label>
         <label style="display:flex;flex-direction:column;gap:7px">
-          <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Customs duty rate (%)</span>
+          <span style="font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470">Customs duty rate (%)</span>
           <input type="number" min="0" step="0.5" value="{{ impDuty }}" onChange="{{ onImpDuty }}" onInput="{{ onImpDuty }}" style="padding:12px 13px;border:1.5px solid #D0D5DD;border-radius:8px;font-size:15px" />
         </label>
         <label style="display:flex;flex-direction:column;gap:7px">
-          <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Surtax or counter-tariff (%)</span>
+          <span style="font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470">Surtax or counter-tariff (%)</span>
           <input type="number" min="0" step="1" value="{{ impSurtax }}" onChange="{{ onImpSurtax }}" onInput="{{ onImpSurtax }}" style="padding:12px 13px;border:1.5px solid #D0D5DD;border-radius:8px;font-size:15px" />
         </label>
         <label style="display:flex;flex-direction:column;gap:7px">
-          <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Customs broker and other fees (CAD)</span>
+          <span style="font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470">Customs broker and other fees (CAD)</span>
           <input type="number" min="0" step="25" value="{{ impBroker }}" onChange="{{ onImpBroker }}" onInput="{{ onImpBroker }}" style="padding:12px 13px;border:1.5px solid #D0D5DD;border-radius:8px;font-size:15px" />
         </label>
         <label style="display:flex;flex-direction:column;gap:7px">
-          <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Province the goods are imported into</span>
+          <span style="font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470">Province the goods are imported into</span>
           <select value="{{ impProv }}" onChange="{{ onImpProv }}" style="padding:12px 13px;border:1.5px solid #D0D5DD;border-radius:8px;font-size:15px;background:#fff">
             <sc-for list="{{ provinceNames }}" as="o" hint-placeholder-count="13"><option>{{ o }}</option></sc-for>
           </select>
         </label>
         <label style="display:flex;flex-direction:column;gap:7px">
-          <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Units in the shipment</span>
+          <span style="font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470">Units in the shipment</span>
           <input type="number" min="1" step="1" value="{{ impUnits }}" onChange="{{ onImpUnits }}" onInput="{{ onImpUnits }}" style="padding:12px 13px;border:1.5px solid #D0D5DD;border-radius:8px;font-size:15px" />
         </label>
         <label style="display:flex;flex-direction:column;gap:7px">
-          <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Target gross margin on resale (%)</span>
+          <span style="font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470">Target gross margin on resale (%)</span>
           <input type="number" min="0" step="1" value="{{ impMargin }}" onChange="{{ onImpMargin }}" onInput="{{ onImpMargin }}" style="padding:12px 13px;border:1.5px solid #D0D5DD;border-radius:8px;font-size:15px" />
         </label>
-        <p style="font-size:13px;line-height:1.65;color:#98A2B3;text-wrap:pretty">Duty and surtax are applied to the invoice value converted to CAD (simplified value for duty). Look up your tariff classification and any surtax order with the CBSA before you buy. Use the Bank of Canada daily rate or your bank’s rate.</p>
+        <p style="font-size:13px;line-height:1.65;color:#5A6470;text-wrap:pretty">Duty and surtax are applied to the invoice value converted to CAD (simplified value for duty). Look up your tariff classification and any surtax order with the CBSA before you buy. Use the Bank of Canada daily rate or your bank’s rate.</p>
       </form>
       <div style="display:flex;flex-direction:column;gap:18px">
         <div style="background:#101828;color:#fff;border-radius:10px;padding:28px">
-          <span style="display:block;font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#98A2B3;margin-bottom:8px">Landed cost per unit</span>
-          <strong style="display:block;font-family:Sora,sans-serif;font-weight:800;font-size:clamp(30px,4vw,44px);letter-spacing:-0.02em;line-height:1.05">{{ impPerUnit }}</strong>
+          <span style="display:block;font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#98A2B3;margin-bottom:8px">Landed cost per unit</span>
+          <strong style="display:block;font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:clamp(30px,4vw,44px);letter-spacing:-0.02em;line-height:1.05">{{ impPerUnit }}</strong>
           <span style="display:block;margin-top:10px;font-size:14.5px;line-height:1.6;color:#C8CDD6">{{ impNote }}</span>
         </div>
         <table style="border:1px solid #E4E7EC;border-radius:10px;overflow:hidden">
-          <caption style="text-align:left;padding:16px 20px;background:#F4F6F8;border-bottom:1px solid #E4E7EC;font-family:Sora,sans-serif;font-weight:700;font-size:13px;letter-spacing:0.04em;text-transform:uppercase;color:#101828">Shipment breakdown</caption>
+          <caption style="text-align:left;padding:16px 20px;background:#F4F6F8;border-bottom:1px solid #E4E7EC;font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:13px;letter-spacing:0.02em;text-transform:uppercase;color:#14181D">Shipment breakdown</caption>
           <tbody>
             <sc-for list="{{ impRows }}" as="r" hint-placeholder-count="9">
               <tr style="border-bottom:1px solid #F0F2F5;background:{{ r.bg }}">
                 <th scope="row" style="text-align:left;padding:13px 20px;font-weight:{{ r.weight }};font-size:14.5px;color:#475467">{{ r.label }}</th>
-                <td style="text-align:right;padding:13px 20px;font-family:Sora,sans-serif;font-weight:{{ r.weight }};font-size:15px;color:#101828;white-space:nowrap">{{ r.value }}</td>
+                <td style="text-align:right;padding:13px 20px;font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:{{ r.weight }};font-size:15px;color:#14181D;white-space:nowrap">{{ r.value }}</td>
               </tr>
             </sc-for>
           </tbody>
         </table>
         <div style="border:1px solid #E4E7EC;border-radius:10px;padding:24px">
-          <h2 style="font-family:Sora,sans-serif;font-weight:700;font-size:14px;letter-spacing:0.04em;text-transform:uppercase;color:#101828;margin-bottom:14px">Before you place the order</h2>
+          <h2 style="font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:14px;letter-spacing:0.02em;text-transform:uppercase;color:#14181D;margin-bottom:14px">Before you place the order</h2>
           <ul style="display:flex;flex-direction:column;gap:11px">
             <sc-for list="{{ impTips }}" as="c" hint-placeholder-count="4">
-              <li style="display:flex;gap:11px;font-size:14.5px;line-height:1.65;color:#475467;text-wrap:pretty"><span style="color:#D71920;font-family:Sora,sans-serif;font-weight:700;flex-shrink:0">→</span><span>{{ c }}</span></li>
+              <li style="display:flex;gap:11px;font-size:14.5px;line-height:1.65;color:#475467;text-wrap:pretty"><span style="color:#002364;font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:700;flex-shrink:0">→</span><span>{{ c }}</span></li>
             </sc-for>
           </ul>
         </div>
@@ -560,66 +560,66 @@
 </sc-if>
 <sc-if value="{{ showPricing }}" hint-placeholder-val="{{ false }}">
   <div style="max-width:1180px;margin:0 auto;padding:52px 24px 80px">
-    <span style="display:block;font-family:Sora,sans-serif;font-weight:700;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#D71920;margin-bottom:12px">Pricing</span>
-    <h1 style="font-family:Sora,sans-serif;font-weight:700;font-size:clamp(28px,3.4vw,40px);line-height:1.1;letter-spacing:-0.02em;margin-bottom:14px;text-wrap:pretty">Pricing, Break-Even and Margin Calculator</h1>
-    <p style="font-size:16.5px;line-height:1.7;color:#667085;max-width:64ch;margin-bottom:38px;text-wrap:pretty">Find the sales you need to cover your fixed costs, see the difference between markup and margin, and work out how much to raise prices when fuel, materials or wages go up.</p>
+    <span style="display:block;font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#002364;margin-bottom:12px">Pricing</span>
+    <h1 style="font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:clamp(28px,3.4vw,40px);line-height:1.1;letter-spacing:-0.025em;margin-bottom:14px;text-wrap:pretty">Pricing, Break-Even and Margin Calculator</h1>
+    <p style="font-size:16.5px;line-height:1.7;color:#5A6470;max-width:64ch;margin-bottom:38px;text-wrap:pretty">Find the sales you need to cover your fixed costs, see the difference between markup and margin, and work out how much to raise prices when fuel, materials or wages go up.</p>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:34px;align-items:start">
       <form style="border:1px solid #E4E7EC;border-radius:10px;padding:26px;display:flex;flex-direction:column;gap:19px" onSubmit="{{ noSubmit }}">
         <label style="display:flex;flex-direction:column;gap:7px">
-          <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Selling price per unit or job (CAD)</span>
+          <span style="font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470">Selling price per unit or job (CAD)</span>
           <input type="number" min="0" step="1" value="{{ prPrice }}" onChange="{{ onPrPrice }}" onInput="{{ onPrPrice }}" style="padding:12px 13px;border:1.5px solid #D0D5DD;border-radius:8px;font-size:15px" />
         </label>
         <label style="display:flex;flex-direction:column;gap:7px">
-          <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Variable cost per unit or job (CAD)</span>
+          <span style="font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470">Variable cost per unit or job (CAD)</span>
           <input type="number" min="0" step="1" value="{{ prVar }}" onChange="{{ onPrVar }}" onInput="{{ onPrVar }}" style="padding:12px 13px;border:1.5px solid #D0D5DD;border-radius:8px;font-size:15px" />
         </label>
         <label style="display:flex;flex-direction:column;gap:7px">
-          <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Fixed costs per month (rent, salaries, insurance, loan payments)</span>
+          <span style="font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470">Fixed costs per month (rent, salaries, insurance, loan payments)</span>
           <input type="number" min="0" step="100" value="{{ prFixed }}" onChange="{{ onPrFixed }}" onInput="{{ onPrFixed }}" style="padding:12px 13px;border:1.5px solid #D0D5DD;border-radius:8px;font-size:15px" />
         </label>
         <label style="display:flex;flex-direction:column;gap:7px">
-          <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Units or jobs sold per month</span>
+          <span style="font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470">Units or jobs sold per month</span>
           <input type="number" min="0" step="1" value="{{ prUnits }}" onChange="{{ onPrUnits }}" onInput="{{ onPrUnits }}" style="padding:12px 13px;border:1.5px solid #D0D5DD;border-radius:8px;font-size:15px" />
         </label>
         <label style="display:flex;flex-direction:column;gap:7px">
-          <span style="font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.09em;text-transform:uppercase;color:#667085">Expected increase in your variable costs (%)</span>
+          <span style="font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#5A6470">Expected increase in your variable costs (%)</span>
           <input type="number" min="0" step="0.5" value="{{ prRise }}" onChange="{{ onPrRise }}" onInput="{{ onPrRise }}" style="padding:12px 13px;border:1.5px solid #D0D5DD;border-radius:8px;font-size:15px" />
         </label>
-        <p style="font-size:13px;line-height:1.65;color:#98A2B3;text-wrap:pretty">Prices exclude GST/HST. Variable costs are the costs that rise with each sale: materials, fuel, merchant fees, commissions, direct labour.</p>
+        <p style="font-size:13px;line-height:1.65;color:#5A6470;text-wrap:pretty">Prices exclude GST/HST. Variable costs are the costs that rise with each sale: materials, fuel, merchant fees, commissions, direct labour.</p>
       </form>
       <div style="display:flex;flex-direction:column;gap:18px">
         <div style="background:#101828;color:#fff;border-radius:10px;padding:28px">
-          <span style="display:block;font-family:Sora,sans-serif;font-weight:600;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#98A2B3;margin-bottom:8px">Break-even point</span>
-          <strong style="display:block;font-family:Sora,sans-serif;font-weight:800;font-size:clamp(30px,4vw,44px);letter-spacing:-0.02em;line-height:1.05">{{ prBreakEven }}</strong>
+          <span style="display:block;font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#98A2B3;margin-bottom:8px">Break-even point</span>
+          <strong style="display:block;font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:clamp(30px,4vw,44px);letter-spacing:-0.02em;line-height:1.05">{{ prBreakEven }}</strong>
           <span style="display:block;margin-top:10px;font-size:14.5px;line-height:1.6;color:#C8CDD6">{{ prNote }}</span>
         </div>
         <table style="border:1px solid #E4E7EC;border-radius:10px;overflow:hidden">
-          <caption style="text-align:left;padding:16px 20px;background:#F4F6F8;border-bottom:1px solid #E4E7EC;font-family:Sora,sans-serif;font-weight:700;font-size:13px;letter-spacing:0.04em;text-transform:uppercase;color:#101828">This month</caption>
+          <caption style="text-align:left;padding:16px 20px;background:#F4F6F8;border-bottom:1px solid #E4E7EC;font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:13px;letter-spacing:0.02em;text-transform:uppercase;color:#14181D">This month</caption>
           <tbody>
             <sc-for list="{{ prRows }}" as="r" hint-placeholder-count="6">
               <tr style="border-bottom:1px solid #F0F2F5;background:{{ r.bg }}">
                 <th scope="row" style="text-align:left;padding:13px 20px;font-weight:{{ r.weight }};font-size:14.5px;color:#475467">{{ r.label }}</th>
-                <td style="text-align:right;padding:13px 20px;font-family:Sora,sans-serif;font-weight:{{ r.weight }};font-size:15px;color:#101828;white-space:nowrap">{{ r.value }}</td>
+                <td style="text-align:right;padding:13px 20px;font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:{{ r.weight }};font-size:15px;color:#14181D;white-space:nowrap">{{ r.value }}</td>
               </tr>
             </sc-for>
           </tbody>
         </table>
         <table style="border:1px solid #E4E7EC;border-radius:10px;overflow:hidden">
-          <caption style="text-align:left;padding:16px 20px;background:#F4F6F8;border-bottom:1px solid #E4E7EC;font-family:Sora,sans-serif;font-weight:700;font-size:13px;letter-spacing:0.04em;text-transform:uppercase;color:#101828">If your costs rise</caption>
+          <caption style="text-align:left;padding:16px 20px;background:#F4F6F8;border-bottom:1px solid #E4E7EC;font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:13px;letter-spacing:0.02em;text-transform:uppercase;color:#14181D">If your costs rise</caption>
           <tbody>
             <sc-for list="{{ prRiseRows }}" as="r" hint-placeholder-count="4">
               <tr style="border-bottom:1px solid #F0F2F5;background:{{ r.bg }}">
                 <th scope="row" style="text-align:left;padding:13px 20px;font-weight:{{ r.weight }};font-size:14.5px;color:#475467">{{ r.label }}</th>
-                <td style="text-align:right;padding:13px 20px;font-family:Sora,sans-serif;font-weight:{{ r.weight }};font-size:15px;color:#101828;white-space:nowrap">{{ r.value }}</td>
+                <td style="text-align:right;padding:13px 20px;font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:{{ r.weight }};font-size:15px;color:#14181D;white-space:nowrap">{{ r.value }}</td>
               </tr>
             </sc-for>
           </tbody>
         </table>
         <div style="border:1px solid #E4E7EC;border-radius:10px;padding:24px">
-          <h2 style="font-family:Sora,sans-serif;font-weight:700;font-size:14px;letter-spacing:0.04em;text-transform:uppercase;color:#101828;margin-bottom:14px">Reading the numbers</h2>
+          <h2 style="font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:14px;letter-spacing:0.02em;text-transform:uppercase;color:#14181D;margin-bottom:14px">Reading the numbers</h2>
           <ul style="display:flex;flex-direction:column;gap:11px">
             <sc-for list="{{ prTips }}" as="c" hint-placeholder-count="4">
-              <li style="display:flex;gap:11px;font-size:14.5px;line-height:1.65;color:#475467;text-wrap:pretty"><span style="color:#D71920;font-family:Sora,sans-serif;font-weight:700;flex-shrink:0">→</span><span>{{ c }}</span></li>
+              <li style="display:flex;gap:11px;font-size:14.5px;line-height:1.65;color:#475467;text-wrap:pretty"><span style="color:#002364;font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:700;flex-shrink:0">→</span><span>{{ c }}</span></li>
             </sc-for>
           </ul>
         </div>
@@ -632,7 +632,7 @@
 <footer style="background:#101828;color:#98A2B3;margin-top:auto">
   <div style="max-width:1180px;margin:0 auto;padding:44px 24px;display:flex;gap:30px;flex-wrap:wrap;justify-content:space-between;align-items:flex-start">
     <div style="max-width:52ch">
-      <span style="display:block;font-family:Sora,sans-serif;font-weight:800;font-size:16px;color:#fff;margin-bottom:10px">CanadianSME Business Tools</span>
+      <span style="display:block;font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:16px;color:#fff;margin-bottom:10px">CanadianSME Business Tools</span>
       <p style="font-size:13.5px;line-height:1.7;text-wrap:pretty">For example and reference only. Illustrative estimates based on published {{ taxYear }} federal and provincial rates, using simplified assumptions — not exact figures. Do not use them to file, remit, or commit to financing. Confirm payroll amounts against the CRA Payroll Deductions Online Calculator and check any figure with your accountant. Not tax, accounting, or financial advice.</p>
     </div>
     <div style="display:flex;flex-direction:column;gap:9px">
@@ -856,7 +856,7 @@ class Component extends DCLogic {
         inflow: this.money0(inflow),
         outflow: this.money0(out),
         balance: this.money0(bal),
-        color: bal < 0 ? '#D71920' : bal < inflow ? '#B54708' : '#101828',
+        color: bal < 0 ? '#B42318' : bal < inflow ? '#B54708' : '#14181D',
         bg: bal < 0 ? '#FEF3F2' : w % 2 === 0 ? '#FCFCFD' : '#fff'
       });
     }
@@ -959,8 +959,8 @@ class Component extends DCLogic {
       Component.TOOLS.map(t => ({ key: t.key, label: t.title.replace(' Calculator', '').replace(' Estimator', '').replace(' Forecaster', ''), hash: '#' + t.key }))
     ).map(t => ({
       label: t.label, hash: t.hash,
-      border: t.key === v ? '#D71920' : 'transparent',
-      color: t.key === v ? '#D71920' : '#667085'
+      border: t.key === v ? '#004FB8' : 'transparent',
+      color: t.key === v ? '#004FB8' : '#5A6470'
     }));
 
     const g = this.gst();
@@ -1039,10 +1039,10 @@ class Component extends DCLogic {
       gstRemoveOn: this.state.gstMode === 'remove',
       gstAddBorder: this.state.gstMode === 'add' ? '#D71920' : '#D0D5DD',
       gstAddBg: this.state.gstMode === 'add' ? '#D71920' : '#fff',
-      gstAddFg: this.state.gstMode === 'add' ? '#fff' : '#475467',
+      gstAddFg: this.state.gstMode === 'add' ? '#fff' : '#14181D',
       gstRemBorder: this.state.gstMode === 'remove' ? '#D71920' : '#D0D5DD',
       gstRemBg: this.state.gstMode === 'remove' ? '#D71920' : '#fff',
-      gstRemFg: this.state.gstMode === 'remove' ? '#fff' : '#475467',
+      gstRemFg: this.state.gstMode === 'remove' ? '#fff' : '#14181D',
       gstTotalLabel: this.state.gstMode === 'add' ? 'Total to charge the customer' : 'Tax inside that total',
       gstTotal: this.state.gstMode === 'add' ? this.money(g.total) : this.money(g.tax),
       gstRateNote: g.p.system + ' — ' + g.totalRate.toFixed(g.totalRate % 1 === 0 ? 0 : 3) + '% combined',
@@ -1068,10 +1068,10 @@ class Component extends DCLogic {
       payIsSalary: !pay.hourly,
       paySalBorder: pay.hourly ? '#D0D5DD' : '#D71920',
       paySalBg: pay.hourly ? '#fff' : '#D71920',
-      paySalFg: pay.hourly ? '#475467' : '#fff',
+      paySalFg: pay.hourly ? '#14181D' : '#fff',
       payHrBorder: pay.hourly ? '#D71920' : '#D0D5DD',
       payHrBg: pay.hourly ? '#D71920' : '#fff',
-      payHrFg: pay.hourly ? '#fff' : '#475467',
+      payHrFg: pay.hourly ? '#fff' : '#14181D',
       setPaySalary: () => this.setState({ payBasis: 'salary' }),
       setPayHourly: () => this.setState({ payBasis: 'hourly' }),
       onPayRate: e => this.setState({ payRate: this.num(e) }),
