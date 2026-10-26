@@ -109,6 +109,7 @@
     'html.a11y-contrast body a, html.a11y-contrast body a *{color:#FFE14D!important}',
     'html.a11y-contrast body button, html.a11y-contrast body input, html.a11y-contrast body select{border:1.5px solid #fff!important}',
     'html.a11y-contrast .csme-reading{background:#3B2F00!important;box-shadow:0 0 0 6px #3B2F00}',
+    'html.a11y-contrast .csme-a11y-panel [aria-pressed="true"]{background-color:#FFE14D!important;color:#000!important}',
     'html.a11y-motion *, html.a11y-motion *:before, html.a11y-motion *:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}',
     'html.a11y-cursor, html.a11y-cursor *{cursor:url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'40\' height=\'40\'><path d=\'M4 2l26 14-11 3-5 11z\' fill=\'black\' stroke=\'white\' stroke-width=\'2\'/></svg>") 4 2, auto!important}',
     '*:focus-visible{outline:3px solid #004FB8;outline-offset:2px}',
@@ -198,10 +199,19 @@
     var item = speech.queue[speech.i];
     highlight(item.node);
     var u = new SpeechSynthesisUtterance(item.text);
-    var v = pickVoice(); if (v) { u.voice = v; u.lang = v.lang; } else u.lang = 'en-CA';
+    var v = speech.noVoice ? null : pickVoice();
+    if (v) { u.voice = v; u.lang = v.lang; } else u.lang = 'en-CA';
     u.rate = speech.rate;
-    u.onend = function () { if (!speech.playing || speech.paused) return; speech.i++; updateUi(); speakNext(); };
-    u.onerror = function (e) { if (e.error === 'interrupted' || e.error === 'canceled') return; speech.i++; speakNext(); };
+    u.onend = function () { if (!speech.playing || speech.paused) return; speech.fails = 0; speech.i++; updateUi(); speakNext(); };
+    u.onerror = function (e) {
+      if (e.error === 'interrupted' || e.error === 'canceled') return;
+      // A network voice can fail before it has loaded: retry this chunk with
+      // the system default voice, and give up only after repeated failures.
+      speech.fails = (speech.fails || 0) + 1;
+      if (speech.fails === 1 && !speech.noVoice) { speech.noVoice = true; setTimeout(speakNext, 80); return; }
+      if (speech.fails > 3) { stopSpeech(); speech.ui && (speech.ui.status.textContent = 'Audio is not available in this browser'); return; }
+      speech.i++; setTimeout(speakNext, 80);
+    };
     speechSynthesis.speak(u);
     updateUi();
   }
@@ -215,8 +225,8 @@
     }
     speechSynthesis.cancel();                         // start
     speech.queue = buildQueue(article, column);
-    speech.i = 0; speech.playing = true; speech.paused = false;
-    speakNext();
+    speech.i = 0; speech.fails = 0; speech.playing = true; speech.paused = false;
+    setTimeout(speakNext, 80);
   }
 
   function stopSpeech() {
