@@ -9,7 +9,9 @@
   <url><loc>https://canadiansme.ca/awards/</loc><lastmod>2026-10-25</lastmod></url>
   <url><loc>https://canadiansme.ca/show/</loc><lastmod>2026-10-25</lastmod></url>
   <url><loc>https://canadiansme.ca/resources/</loc><lastmod>2026-10-25</lastmod></url>
+  <!-- Exclusive offers hidden for now; restore when OFFERS_ENABLED = true
   <url><loc>https://canadiansme.ca/exclusive-offers/</loc><lastmod>2026-10-25</lastmod></url>
+  -->
   <url><loc>https://canadiansme.ca/about/</loc><lastmod>2026-10-25</lastmod></url>
   <url><loc>https://canadiansme.ca/advertise-with-us/</loc><lastmod>2026-10-25</lastmod></url>
   <url><loc>https://canadiansme.ca/contact/</loc><lastmod>2026-10-25</lastmod></url>

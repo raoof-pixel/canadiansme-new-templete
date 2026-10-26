@@ -537,6 +537,7 @@
 
 
 
+<sc-if value="{{ offersEnabled }}" hint-placeholder-val="{{ false }}">
 <section id="offers" aria-labelledby="offers-heading" style="background:#FDF2F2;padding:72px max(24px,calc((100% - 1232px) / 2));scroll-margin-top:96px">
   <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:28px">
     <div style="display:flex;flex-direction:column;gap:12px;max-width:640px">
@@ -570,6 +571,7 @@
   <a href="#exclusive-offers" style="display:inline-flex;margin-top:24px;padding:12px 20px;border-radius:8px;background:#101828;color:#fff;font-family:Sora,sans-serif;font-weight:700;font-size:14px" style-hover="background:#D71920;text-decoration:none">See all exclusive offers →</a>
   <p style="margin-top:18px;font-size:12.5px;line-height:1.6;color:#667085">Offers are provided by our partners and subject to their terms. CanadianSME may receive a commission. <a href="#become-partner" style="color:#1E5AA8;text-decoration:underline">List an offer for our readers →</a></p>
 </section>
+</sc-if>
 
 <section aria-label="Sponsor banners" style="background:#F4F6F8;border-top:1px solid #E4E7EC;border-bottom:1px solid #E4E7EC">
   <div style="max-width:1280px;margin:0 auto;padding:36px 24px">
@@ -2712,7 +2714,7 @@ class Component extends DCLogic {
       legalTitle: p.title, legalLabel: p.label, legalIntro: p.intro,
       legalSections: p.sections.map(sec => ({ ...sec, hasItems: sec.items.length > 0, paras: sec.ps.map(t => ({ c: md(t) })), list: sec.items.map(t => ({ c: md(t) })), go: () => { const el = document.getElementById(sec.id); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 110, behavior: 'smooth' }); } })),
       legalOthers: Object.keys(Component.LEGAL).filter(k => Component.LEGAL[k] !== p).map(k => ({ label: Component.LEGAL[k].label, href: '#' + k })),
-      sitemapGroups: Component.SITEMAP.map(([title, links]) => ({ title, links: (links || provs).map(([label, href]) => ({ label, href })) }))
+      sitemapGroups: Component.siteMap().map(([title, links]) => ({ title, links: (links || provs).map(([label, href]) => ({ label, href })) }))
     };
   }
 
@@ -2724,7 +2726,7 @@ class Component extends DCLogic {
     for (const [k, p] of Object.entries(Component.PROVINCE_PAGES)) out.push({ kind: 'Province guide', meta: 'Start a business · statistics · resources', title: p.name + ': business guide', desc: (p.about && p.about.ind) || '', href: '#' + k, body: JSON.stringify(p) });
     for (const [k, p] of Object.entries(Component.LEGAL)) out.push({ kind: 'Policy', meta: 'Legal', title: p.title, desc: p.intro.slice(0, 160) + '…', href: '#' + k, body: JSON.stringify(p.sections) });
     const seen = new Set(out.map(o => o.href));
-    for (const [group, links] of Component.SITEMAP) for (const [label, href] of (links || [])) if (!seen.has(href)) { seen.add(href); out.push({ kind: 'Page', meta: group, title: label, desc: '', href, body: group }); }
+    for (const [group, links] of Component.siteMap()) for (const [label, href] of (links || [])) if (!seen.has(href)) { seen.add(href); out.push({ kind: 'Page', meta: group, title: label, desc: '', href, body: group }); }
     out.forEach(o => { o.hay = { t: o.title.toLowerCase(), m: (o.meta + ' ' + o.desc).toLowerCase(), b: o.body.toLowerCase() }; });
     return (this._idx = out);
   }
@@ -3214,6 +3216,26 @@ class Component extends DCLogic {
       pvOthers: Object.keys(Component.PROVINCE_PAGES).filter(k => k !== slug).map(k => ({ href: '#' + k, label: Component.PROVINCE_PAGES[k].name }))
     };
   }
+  // ────────────────────────────────────────────────────────────────
+  // EXCLUSIVE OFFERS ON/OFF SWITCH
+  // false = the homepage offers section and the #exclusive-offers page are
+  // not rendered, every link to them is removed (menus, sitemap, search),
+  // and the page URL shows "not found". Set to true to switch it all back on
+  // (also restore the exclusive-offers line in seo/sitemap.xml).
+  // ────────────────────────────────────────────────────────────────
+  static OFFERS_ENABLED = false;
+  static isOfferHref(h) { return h === '#exclusive-offers' || h === '#all-offers' || h === '#offers'; }
+  static siteMap() {
+    return Component.OFFERS_ENABLED ? Component.SITEMAP
+      : Component.SITEMAP.map(([t, links]) => [t, links ? links.filter(([, h]) => !Component.isOfferHref(h)) : links]);
+  }
+  static menuFor(menu) {
+    if (!menu || Component.OFFERS_ENABLED) return menu;
+    const cols = menu.cols.map(c => ({ ...c, links: c.links.filter(l => !Component.isOfferHref(l.href)) }));
+    const off = Component.isOfferHref(menu.featuredHref);
+    return { ...menu, cols, featured: off ? 'Read the latest issue of CanadianSME Small Business Magazine' : menu.featured, featuredHref: off ? '#magazine' : menu.featuredHref };
+  }
+
   static OFFERS = [
     { cat: 'Banking', partner: 'Partner name', value: 'No fees for 12 months', title: 'Business chequing with no monthly fees', desc: 'Open a business account and skip monthly fees for your first year.', expires: 'Ends Dec 31, 2026', code: 'CSME-BANK', href: '#' , slot: 'offer-1' },
     { cat: 'Software', partner: 'Partner name', value: '30% off', title: 'Accounting software for growing teams', desc: 'Save on annual plans with bookkeeping, payroll and GST/HST filing built in.', expires: 'Ends Dec 31, 2026', code: 'CSME-BOOKS30', href: '#', slot: 'offer-2' },
@@ -3528,6 +3550,7 @@ class Component extends DCLogic {
     const h = this.state.hash || '';
     if (h.indexOf('post-') === 0 && Component.POSTS[h.slice(5)]) return 'post';
     const R = Component.ROUTES;
+    if (!Component.OFFERS_ENABLED && R.offersPage.indexOf(h) !== -1) return 'notFound';
     for (const key of Object.keys(R)) if (R[key].indexOf(h) !== -1) return key;
     return 'notFound';
   }
@@ -3611,7 +3634,7 @@ class Component extends DCLogic {
     const slideN = Component.SLIDES.length;
     const slideI = ((this.state.slide || 0) % slideN + slideN) % slideN;
     const rt = this.route(), on = {}; ["home","post","article","category","search","magArchive","issue","podArchive","episode","events","event","resources","province","offersPage","about","advertising","contact","contributor","upsPage","subscribe","legal","sitemap","news","notFound"].forEach(k => { on[k + 'On'] = rt === k; });
-    return { ...on, ...this.finderVals(), ...this.legalVals(), ...this.searchVals(), ...this.uiVals(), ...this.gateVals(), ...this.offerVals(), topicCards: this.topicCards(), ...this.newsVals(), ...this.advVals(),
+    return { ...on, offersEnabled: Component.OFFERS_ENABLED, ...this.finderVals(), ...this.legalVals(), ...this.searchVals(), ...this.uiVals(), ...this.gateVals(), ...this.offerVals(), topicCards: this.topicCards(), ...this.newsVals(), ...this.advVals(),
       morePosts,
       moreHeading: same.length ? 'More in ' + catShort : 'More from CanadianSME',
       slides: Component.SLIDES.map((sl, i) => ({ ...sl, bg: sl.bg || 'transparent', onRead: ev => { ev.preventDefault(); this.popShown = true; this.setState({ pop: true, popLink: sl.href, popDone: false, popMsg: '' }); }, lineItems: sl.lines.map(t => ({ t })), active: i === slideI ? 'true' : 'false', hidden: i !== slideI, dotBg: i === slideI ? '#D71920' : 'rgba(255,255,255,0.35)', dotW: i === slideI ? '28px' : '10px', go: () => this.goSlide(i), label: 'Go to slide ' + (i + 1) })),
@@ -3686,10 +3709,10 @@ class Component extends DCLogic {
       secondaryCtaDisplay: this.state.w < 640 ? 'none' : 'inline-block',
       drawerOpen: this.state.drawer,
       megaDisplay: menu && !compact ? 'block' : 'none',
-      megaCols: menu ? menu.cols : [],
+      megaCols: menu ? Component.menuFor(menu).cols : [],
       megaBadge: menu ? menu.badge : '',
-      megaFeatured: menu ? menu.featured : '',
-      megaFeaturedHref: menu ? menu.featuredHref : '#',
+      megaFeatured: menu ? Component.menuFor(menu).featured : '',
+      megaFeaturedHref: menu ? Component.menuFor(menu).featuredHref : '#',
       drawerDisplay: this.state.drawer ? 'block' : 'none',
       latest: this.visibleArticles(),
       communities: Component.COMMUNITIES,
