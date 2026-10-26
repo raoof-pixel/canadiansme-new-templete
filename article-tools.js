@@ -73,6 +73,7 @@
     '.csme-ls-bar{height:4px;border-radius:2px;background:#E4E7EC;margin-top:8px;overflow:hidden}',
     '.csme-ls-bar i{display:block;height:100%;width:0;background:#D71920;transition:width .3s}',
     '.csme-ls-stop{all:unset;box-sizing:border-box;width:34px;height:34px;border-radius:8px;border:1.5px solid #D0D5DD;background:#fff;color:#14181D;display:flex;align-items:center;justify-content:center;cursor:pointer}',
+    '.csme-ls-stop[hidden]{display:none}',
     '.csme-ls select{font:600 13px Sora,"Helvetica Neue",Arial,sans-serif;padding:7px 8px;border:1.5px solid #D0D5DD;border-radius:8px;background:#fff;color:#14181D;cursor:pointer}',
     '.csme-reading{background:#FFF4CC!important;box-shadow:0 0 0 6px #FFF4CC;border-radius:4px;transition:background .2s}',
     '.csme-sr{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}',
@@ -315,8 +316,8 @@
       while (host.firstChild) host.removeChild(host.firstChild);
       if (!key) return;
       var column = host.parentElement;
-      var meta = article.querySelector('h1 ~ div span[style*="color:#5A6470"]');
-      var rt = meta && (meta.textContent.match(/(\d+)\s*min read/) || [])[1];
+      var head = article.querySelector('h1');
+      var rt = head && (head.parentElement.textContent.match(/(\d+)\s*min read/) || [])[1];
       var qr = quickRead(key);
       if (qr) host.appendChild(qr);
       if (TTS) host.appendChild(listenBar(article, column, rt ? rt + ' min' : ''));
