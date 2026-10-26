@@ -3741,9 +3741,12 @@ class Component extends DCLogic {
     }
     // pull quote near the middle, before a heading where possible; verbatim only
     if (enh.pull && !hasQuote && fullText.indexOf(enh.pull) !== -1 && out.length >= 8) {
-      let at = Math.floor(out.length * 0.45);
-      for (let k = at; k < Math.min(out.length, at + 6); k++) if (/^<h2/.test(out[k])) { at = k; break; }
-      out.splice(at, 0, '<blockquote data-csme-noread aria-hidden="true" style="' + S.PULL + '">“' + esc(enh.pull.replace(/^[“"]|[”"]$/g, '')) + '”</blockquote>');
+      // keep it at least 4 blocks away from the paragraph it repeats
+      const src = out.findIndex(b => plain(b).indexOf(enh.pull) !== -1);
+      const place = start => { let a = start; for (let k = start; k < Math.min(out.length, start + 6); k++) if (/^<h2/.test(out[k])) { a = k; break; } return a; };
+      let at = place(Math.floor(out.length * 0.45));
+      if (src !== -1 && Math.abs(at - src) < 4) at = place(src > out.length / 2 ? Math.floor(out.length * 0.2) : Math.floor(out.length * 0.72));
+      if (src === -1 || Math.abs(at - src) >= 4) out.splice(at, 0, '<blockquote data-csme-noread aria-hidden="true" style="' + S.PULL + '">“' + esc(enh.pull.replace(/^[“"]|[”"]$/g, '')) + '”</blockquote>');
     }
     return { html: out.join(''), toc };
   }
