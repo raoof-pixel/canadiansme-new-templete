@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-CA">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
+<script src="./quick-reads.js" defer></script>
+<script src="./article-tools.js" defer></script>
 </head>
 <body>
 <x-dc>
@@ -1083,8 +1085,9 @@
     </sc-if>
     <div style="display:grid;grid-template-columns:{{ postCols }};gap:48px;align-items:start">
       <div style="max-width:68ch;min-width:0;font-size:18px;line-height:30px;color:#14181D;display:flex;flex-direction:column;gap:0">
+        <div data-csme-tools="post"></div>
         {{ postBody }}
-        <div style="display:flex;gap:18px;align-items:flex-start;padding:22px;border:1px solid #E4E7EC;border-radius:10px;margin-top:14px">
+        <div data-csme-noread style="display:flex;gap:18px;align-items:flex-start;padding:22px;border:1px solid #E4E7EC;border-radius:10px;margin-top:14px">
           <div aria-hidden="true" style="width:96px;height:96px;border-radius:50%;overflow:hidden;flex-shrink:0;background:#101828;color:#fff;display:flex;align-items:center;justify-content:center;font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:28px;letter-spacing:0.02em">{{ post.initials }}</div>
           <div>
             <span style="display:block;font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:16px;margin-bottom:6px">{{ post.authorName }}</span>
@@ -1174,6 +1177,7 @@
     <p style="font-size:12.5px;color:#5A6470;margin-bottom:40px">A Toronto logistics team maps its first AI pilot. Photograph for CanadianSME.</p>
     <div style="display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:48px;align-items:start">
       <div style="max-width:68ch;font-size:18px;line-height:30px;color:#14181D;display:flex;flex-direction:column;gap:22px">
+        <div data-csme-tools="a1"></div>
         <p style="font-size:18px;line-height:30px;color:#14181D">Most Canadian small businesses are no longer asking whether artificial intelligence matters. They are asking a harder question: where does it actually pay off?</p>
         <p>The gap between experimentation and results is rarely technical. It is operational. Teams that see returns start with a narrow, expensive, repetitive problem — quoting, scheduling, intake, reconciliation — and measure the outcome in hours or dollars before expanding.</p>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:20px;padding:24px;background:#F4F6F8;border-radius:10px;margin:6px 0">
@@ -1189,14 +1193,14 @@
         <p>Set a review cadence — monthly for the first quarter — and retire pilots that do not clear their target. A short list of working systems beats a long list of trials.</p>
         <h2 style="font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:28px;line-height:1.2;margin-top:14px;letter-spacing:-0.015em">Measure in business terms</h2>
         <p>Report outcomes the way you report everything else: hours recovered, quote turnaround, error rate, revenue per employee. Executives and lenders understand those numbers; model benchmarks mean nothing to them.</p>
-        <div style="border:1px solid #E4E7EC;border-radius:10px;overflow:hidden;margin-top:10px">
+        <div data-csme-noread style="border:1px solid #E4E7EC;border-radius:10px;overflow:hidden;margin-top:10px">
           <div style="height:220px;position:relative"><image-slot id="ap-embed" shape="rect" placeholder="Podcast episode artwork"></image-slot></div>
           <div style="padding:16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap">
             <div><span style="display:block;font-family:'IBM Plex Sans','Helvetica Neue',Arial,sans-serif;font-weight:500;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#002364;margin-bottom:5px">Listen · Episode 142</span><span style="font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:600;font-size:16px">Turning AI into a Practical Small Business Advantage</span></div>
             <a href="#ep1" style="margin-left:auto;padding:10px 16px;border-radius:8px;background:#101828;color:#fff;font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:600;font-size:13px" style-hover="background:#000;text-decoration:none">Play episode</a>
           </div>
         </div>
-        <div style="display:flex;gap:18px;align-items:flex-start;padding:22px;border:1px solid #E4E7EC;border-radius:10px;margin-top:14px">
+        <div data-csme-noread style="display:flex;gap:18px;align-items:flex-start;padding:22px;border:1px solid #E4E7EC;border-radius:10px;margin-top:14px">
           <div style="width:96px;height:96px;border-radius:50%;overflow:hidden;flex-shrink:0"><image-slot id="ap-bio" shape="circle" placeholder="Author portrait"></image-slot></div>
           <div>
             <span style="display:block;font-family:Sora,'Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:16px;margin-bottom:6px">SK Uddin</span>
