@@ -1040,102 +1040,97 @@
 
 </div></sc-if>
 <sc-if value="{{ postOn }}" hint-placeholder-val="{{ false }}"><article style="display:{{ postDisplay }}">
-  <div style="background:#101828;color:#fff">
-  <div style="max-width:1280px;margin:0 auto;padding:28px 24px 48px">
-    <nav aria-label="Breadcrumb" style="display:flex;gap:8px;flex-wrap:wrap;font-size:13px;color:#D0D5DD;margin-bottom:26px">
-      <a href="#home" style="color:#D0D5DD" style-hover="color:#fff">Home</a><span aria-hidden="true">/</span><span style="color:#fff;font-weight:500">{{ post.catShort }}</span>
-    </nav>
-    <div style="display:flex;flex-wrap:wrap;gap:44px;align-items:center">
-      <div style="flex:1 1 440px;min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:16px">
-        <sc-if value="{{ post.sponsored }}" hint-placeholder-val="{{ false }}"><span style="font-family:Sora,sans-serif;font-weight:700;font-size:10.5px;letter-spacing:0.16em;text-transform:uppercase;color:#8A6A12;background:#FDF8EC;border:1px solid #E8D79B;padding:5px 10px;border-radius:4px">Sponsored content</span></sc-if>
-        <h1 style="font-family:Sora,sans-serif;font-weight:600;font-size:clamp(26px,2.6vw,36px);line-height:1.2;letter-spacing:-0.01em;color:#fff;text-wrap:pretty">{{ post.title }}</h1>
-        <p style="font-size:17px;line-height:1.6;color:#D0D5DD;text-wrap:pretty">{{ post.excerpt }}</p>
-        <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-size:13.5px;color:#D0D5DD">
-          <span style="background:#D71920;color:#fff;font-family:Sora,sans-serif;font-weight:700;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;padding:5px 10px;border-radius:4px">{{ post.catShort }}</span>
-          <span>{{ post.date }}</span><span aria-hidden="true">·</span><span>{{ post.read }}</span>
+  <nav aria-label="Breadcrumb" style="background:#F4F6F8;border-bottom:1px solid #E4E7EC">
+    <div style="max-width:1280px;margin:0 auto;padding:12px 24px;font-size:12.5px;color:#667085;display:flex;gap:8px;flex-wrap:wrap">
+      <a href="#home" style="color:#667085" style-hover="color:#D71920">Home</a><span aria-hidden="true">/</span>
+      <a href="{{ post.catHref }}" style="color:#667085" style-hover="color:#D71920">{{ post.catShort }}</a><span aria-hidden="true">/</span>
+      <span style="color:#101828">{{ post.crumb }}</span>
+    </div>
+  </nav>
+  <div style="max-width:1280px;margin:0 auto;padding:44px 24px 20px">
+    <div style="max-width:760px">
+      <span style="display:inline-block;background:#D71920;color:#fff;font-family:Sora,sans-serif;font-weight:700;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;padding:5px 10px;border-radius:6px;margin-bottom:16px">{{ post.pill }}</span>
+      <h1 style="font-family:Sora,sans-serif;font-weight:600;font-size:clamp(32px,3.8vw,50px);line-height:1.08;letter-spacing:-0.02em;text-wrap:pretty;margin-bottom:16px">{{ post.title }}</h1>
+      <p style="font-size:19px;line-height:1.6;color:#475467;text-wrap:pretty;margin-bottom:24px">{{ post.excerpt }}</p>
+      <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding-bottom:22px;border-bottom:1px solid #E4E7EC">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div aria-hidden="true" style="width:46px;height:46px;border-radius:50%;flex-shrink:0;background:#101828;color:#fff;display:flex;align-items:center;justify-content:center;font-family:Sora,sans-serif;font-weight:700;font-size:14.5px;letter-spacing:0.02em">{{ post.initials }}</div>
+          <div style="font-size:13.5px;line-height:1.45">
+            <a href="#contributors" style="display:block;font-family:Sora,sans-serif;font-weight:600;color:#101828" style-hover="color:#D71920">{{ post.authorName }}</a>
+            <span style="color:#667085">{{ post.metaLine }}</span>
+          </div>
+        </div>
+        <div style="margin-left:auto;display:flex;gap:8px;flex-wrap:wrap">
+          <button type="button" onClick="{{ share }}" data-share="LinkedIn" style="padding:8px 13px;border:1.5px solid #D0D5DD;border-radius:8px;background:#fff;font-family:Sora,sans-serif;font-weight:600;font-size:12.5px;cursor:pointer" style-hover="border-color:#101828">Share</button>
+          <button type="button" onClick="{{ share }}" data-share="X" style="padding:8px 13px;border:1.5px solid #D0D5DD;border-radius:8px;background:#fff;font-family:Sora,sans-serif;font-weight:600;font-size:12.5px;cursor:pointer" style-hover="border-color:#101828">Post</button>
+          <button type="button" onClick="{{ share }}" data-share="link" style="padding:8px 13px;border:1.5px solid #D0D5DD;border-radius:8px;background:#fff;font-family:Sora,sans-serif;font-weight:600;font-size:12.5px;cursor:pointer" style-hover="border-color:#101828">Copy link</button>
+          <button type="button" onClick="{{ toggleBookmark }}" aria-pressed="false" aria-label="Bookmark this article" style="padding:8px 13px;border:1.5px solid #D0D5DD;border-radius:8px;background:#fff;color:#98A2B3;font-size:14px;cursor:pointer" style-hover="border-color:#101828">♡</button>
         </div>
       </div>
-      <sc-if value="{{ post.img }}" hint-placeholder-val="{{ false }}"><div style="flex:1 1 440px;min-width:0;border-radius:12px;overflow:hidden;background:#22283A;border:1px solid #33394A"><img sc-camel-src="{{ post.img }}" alt="{{ post.alt }}" style="width:100%;height:auto;display:block" /></div></sc-if>
+      <span aria-live="polite" style="display:block;min-height:18px;font-size:12.5px;color:#667085;padding-top:10px">{{ shareMessage }}</span>
     </div>
   </div>
-  </div>
-  <div style="max-width:1280px;margin:0 auto;padding:44px 24px 64px;display:flex;flex-wrap:wrap;gap:44px;align-items:flex-start">
-    <aside aria-label="Article details" style="flex:0 1 220px;min-width:200px;display:flex;flex-direction:column;gap:22px;position:sticky;top:96px">
-      <div style="display:flex;flex-direction:column;gap:6px;padding-bottom:20px;border-bottom:1px solid #E4E7EC">
-        <span style="font-family:Sora,sans-serif;font-weight:700;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#D71920">You’re reading</span>
-        <span style="font-family:Sora,sans-serif;font-weight:700;font-size:14.5px;line-height:1.35;color:#101828">{{ post.title }}</span>
-        <span style="font-size:12.5px;color:#667085">{{ post.read }}</span>
-      </div>
-      <div style="display:flex;gap:12px;align-items:center;padding-bottom:20px;border-bottom:1px solid #E4E7EC">
-        <span aria-hidden="true" style="flex:0 0 auto;width:44px;height:44px;border-radius:50%;background:#101828;color:#fff;display:flex;align-items:center;justify-content:center;font-family:Sora,sans-serif;font-weight:700;font-size:16px">{{ post.initials }}</span>
-        <div style="display:flex;flex-direction:column;gap:2px;min-width:0">
-          <span style="font-family:Sora,sans-serif;font-weight:700;font-size:14px;color:#101828">{{ post.authorName }}</span>
-          <span style="font-size:12.5px;color:#475467">{{ post.authorRole }}</span>
-          <span style="font-size:12.5px;color:#667085">Published on {{ post.shortDate }}</span>
-        </div>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:10px">
-        <span style="font-family:Sora,sans-serif;font-weight:700;font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#667085">Share this story</span>
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
-            <button type="button" onClick="{{ share }}" data-share="Facebook" aria-label="Share on Facebook" title="Share on Facebook" style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;padding:0;border:1.5px solid #D0D5DD;border-radius:8px;background:#fff;color:#101828;cursor:pointer" style-hover="border-color:#101828;background:#101828;color:#fff"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="pointer-events:none"><path d="M14 8h3V4h-3c-2.8 0-4 1.7-4 4.2V10H7v4h3v8h4v-8h3l1-4h-4V8.6c0-.4.3-.6.6-.6z" fill="currentColor"></path></svg></button>
-            <button type="button" onClick="{{ share }}" data-share="X" aria-label="Share on X" title="Share on X" style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;padding:0;border:1.5px solid #D0D5DD;border-radius:8px;background:#fff;color:#101828;cursor:pointer" style-hover="border-color:#101828;background:#101828;color:#fff"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="pointer-events:none"><path d="M17.5 3h3.3l-7.2 8.2L22 21h-6.6l-5.2-6.7L4.3 21H1l7.7-8.8L.7 3h6.8l4.7 6.2L17.5 3zm-1.2 16h1.8L6.8 4.9H4.9L16.3 19z" fill="currentColor"></path></svg></button>
-            <button type="button" onClick="{{ share }}" data-share="LinkedIn" aria-label="Share on LinkedIn" title="Share on LinkedIn" style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;padding:0;border:1.5px solid #D0D5DD;border-radius:8px;background:#fff;color:#101828;cursor:pointer" style-hover="border-color:#101828;background:#101828;color:#fff"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="pointer-events:none"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.7h.1c.5-1 1.8-2 3.7-2 4 0 4.7 2.6 4.7 6V21h-4v-5.1c0-1.2 0-2.8-1.7-2.8s-2 1.3-2 2.7V21h-4z" fill="currentColor"></path></svg></button>
-            <button type="button" onClick="{{ share }}" data-share="WhatsApp" aria-label="Share on WhatsApp" title="Share on WhatsApp" style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;padding:0;border:1.5px solid #D0D5DD;border-radius:8px;background:#fff;color:#101828;cursor:pointer" style-hover="border-color:#101828;background:#101828;color:#fff"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="pointer-events:none"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2c0 1.3 1 2.6 1.1 2.8.1.2 1.9 2.9 4.6 4 1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2l-.5-.3z" fill="currentColor"></path></svg></button>
-            <button type="button" onClick="{{ share }}" data-share="link" aria-label="Copy link" title="Copy link" style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;padding:0;border:1.5px solid #D0D5DD;border-radius:8px;background:#fff;color:#101828;cursor:pointer" style-hover="border-color:#101828;background:#101828;color:#fff"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="pointer-events:none"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3.2-3.2a4.5 4.5 0 0 0-6.4-6.4L12 5.6M14 10a4.5 4.5 0 0 0-6.4 0l-3.2 3.2a4.5 4.5 0 0 0 6.4 6.4l1.2-1.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg></button>
+  <div style="max-width:1280px;margin:0 auto;padding:0 24px 64px">
+    <sc-if value="{{ post.img }}" hint-placeholder-val="{{ false }}">
+      <div style="height:min(52vw,520px);border-radius:10px;overflow:hidden;border:1px solid #E4E7EC;margin-bottom:14px;background:#F4F6F8"><img sc-camel-src="{{ post.img }}" alt="{{ post.alt }}" style="width:100%;height:100%;object-fit:cover;display:block" /></div>
+      <p style="font-size:12.5px;color:#667085;margin-bottom:40px">{{ post.caption }}</p>
+    </sc-if>
+    <div style="display:grid;grid-template-columns:{{ postCols }};gap:48px;align-items:start">
+      <div style="max-width:70ch;min-width:0;font-size:17.5px;line-height:1.75;color:#1D2939;display:flex;flex-direction:column;gap:0">
+        {{ postBody }}
+        <div style="display:flex;gap:18px;align-items:flex-start;padding:22px;border:1px solid #E4E7EC;border-radius:10px;margin-top:14px">
+          <div aria-hidden="true" style="width:96px;height:96px;border-radius:50%;overflow:hidden;flex-shrink:0;background:#101828;color:#fff;display:flex;align-items:center;justify-content:center;font-family:Sora,sans-serif;font-weight:700;font-size:28px;letter-spacing:0.02em">{{ post.initials }}</div>
+          <div>
+            <span style="display:block;font-family:Sora,sans-serif;font-weight:700;font-size:16px;margin-bottom:6px">{{ post.authorName }}</span>
+            <p style="font-size:14.5px;line-height:1.65;color:#667085">{{ post.authorBio }}</p>
+            <a href="#contributors" style="display:inline-block;margin-top:10px;font-family:Sora,sans-serif;font-weight:600;font-size:13.5px">View profile →</a>
           </div>
-        <span aria-live="polite" style="font-size:12.5px;color:#667085;min-height:16px">{{ shareMessage }}</span>
-      </div>
-    </aside>
-    <div style="flex:1 1 560px;min-width:0;max-width:720px">
-      {{ postBody }}
-      <div style="display:flex;gap:16px;align-items:flex-start;padding:24px;margin-top:36px;border:1px solid #E4E7EC;border-radius:12px;background:#F9FAFB">
-        <span aria-hidden="true" style="flex:0 0 auto;width:56px;height:56px;border-radius:50%;background:#101828;color:#fff;display:flex;align-items:center;justify-content:center;font-family:Sora,sans-serif;font-weight:700;font-size:20px">{{ post.initials }}</span>
-        <div style="display:flex;flex-direction:column;gap:6px;min-width:0">
-          <span style="font-family:Sora,sans-serif;font-weight:700;font-size:16px;color:#101828">{{ post.authorName }}</span>
-          <span style="font-size:13px;color:#475467">{{ post.authorRole }}</span>
-          <p style="font-size:15px;line-height:1.6;color:#344054;margin-top:4px">{{ post.authorBio }}</p>
         </div>
       </div>
+      <aside style="display:flex;flex-direction:column;gap:22px">
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <span style="font-family:Sora,sans-serif;font-weight:700;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#98A2B3">Advertisement</span>
+          <a href="https://www.wsib.ca" target="_blank" rel="sponsored noopener" style="display:block;border:1px solid #E4E7EC;border-radius:8px;overflow:hidden;background:#fff" style-hover="border-color:#D71920"><img src="assets/ads/wsib-300x250.png" alt="WSIB Ontario — Visit wsib.ca to make your workplace safer" loading="lazy" style="width:100%;height:auto;display:block" /></a>
+        </div>
+        <sc-if value="{{ postHasToc }}" hint-placeholder-val="{{ false }}">
+        <div style="border:1px solid #E4E7EC;border-radius:10px;padding:18px">
+          <h2 style="font-family:Sora,sans-serif;font-weight:600;font-size:13px;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:14px">In this article</h2>
+          <ul style="display:flex;flex-direction:column;gap:10px;font-size:14px">
+            <sc-for list="{{ postToc }}" as="t" hint-placeholder-count="3">
+              <li><a href="{{ t.href }}" onClick="{{ t.go }}" style="color:#101828" style-hover="color:#D71920">{{ t.label }}</a></li>
+            </sc-for>
+          </ul>
+        </div>
+        </sc-if>
+        <div style="border:1px solid #E4E7EC;border-radius:10px;padding:18px;background:#101828;color:#fff">
+          <h2 style="font-family:Sora,sans-serif;font-weight:600;font-size:19px;line-height:1.25;margin-bottom:10px">Get the weekly briefing</h2>
+          <p style="font-size:13.5px;line-height:1.6;color:#C8CDD6;margin-bottom:14px">Practical insight for Canadian business owners, every Tuesday.</p>
+          <a href="#newsletter" style="display:block;text-align:center;padding:11px;border-radius:8px;background:#D71920;color:#fff;font-family:Sora,sans-serif;font-weight:700;font-size:13.5px" style-hover="background:#A5121A;text-decoration:none">Subscribe free</a>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <span style="font-family:Sora,sans-serif;font-weight:700;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#98A2B3">Advertisement</span>
+          <a href="https://www.adp.ca" target="_blank" rel="sponsored noopener" style="display:block;border:1px solid #E4E7EC;border-radius:8px;overflow:hidden;background:#fff" style-hover="border-color:#D71920"><img src="assets/ads/adp-300x234.png" alt="ADP — Trusted by over 40,000 small businesses across Canada. Preferred HR and payroll partner of CanadianSME." loading="lazy" style="width:100%;height:auto;display:block" /></a>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <span style="font-family:Sora,sans-serif;font-weight:700;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#98A2B3">Advertisement</span>
+          <a href="https://www.ups.com/ca" target="_blank" rel="sponsored noopener" style="display:block;border:1px solid #E4E7EC;border-radius:8px;overflow:hidden;background:#fff" style-hover="border-color:#D71920"><img src="assets/ads/ups-300x600.png" alt="UPS — Turn challenges into opportunities. Start with 55% savings on UPS Small Package Shipping." loading="lazy" style="width:100%;height:auto;display:block" /></a>
+        </div>
+      </aside>
     </div>
-    <aside aria-label="Advertisements" style="flex:0 1 300px;max-width:300px;display:flex;flex-direction:column;gap:22px">
-      <div style="display:flex;flex-direction:column;gap:8px">
-            <span style="font-family:Sora,sans-serif;font-weight:700;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#98A2B3">Advertisement</span>
-            <a href="https://www.ups.com/ca" target="_blank" rel="sponsored noopener" style="display:block;border:1px solid #E4E7EC;border-radius:8px;overflow:hidden;background:#fff" style-hover="border-color:#D71920"><img src="assets/ads/ups-300x600.png" alt="UPS — Turn challenges into opportunities. Start with 55% savings on UPS Small Package Shipping." loading="lazy" style="width:100%;height:auto;display:block" /></a>
-          </div>
-      <div style="display:flex;flex-direction:column;gap:8px">
-            <span style="font-family:Sora,sans-serif;font-weight:700;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#98A2B3">Advertisement</span>
-            <a href="https://www.wsib.ca" target="_blank" rel="sponsored noopener" style="display:block;border:1px solid #E4E7EC;border-radius:8px;overflow:hidden;background:#fff" style-hover="border-color:#D71920"><img src="assets/ads/wsib-300x250.png" alt="WSIB Ontario — Visit wsib.ca to make your workplace safer" loading="lazy" style="width:100%;height:auto;display:block" /></a>
-          </div>
-      <div style="display:flex;flex-direction:column;gap:8px">
-            <span style="font-family:Sora,sans-serif;font-weight:700;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#98A2B3">Advertisement</span>
-            <a href="https://www.adp.ca" target="_blank" rel="sponsored noopener" style="display:block;border:1px solid #E4E7EC;border-radius:8px;overflow:hidden;background:#fff" style-hover="border-color:#D71920"><img src="assets/ads/adp-300x234.png" alt="ADP — Trusted by over 40,000 small businesses across Canada." loading="lazy" style="width:100%;height:auto;display:block" /></a>
-          </div>
-    </aside>
   </div>
-  <section aria-labelledby="more-heading" style="border-top:1px solid #E4E7EC;background:#F9FAFB">
-    <div style="max-width:1280px;margin:0 auto;padding:56px 24px 64px">
-      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:26px">
-        <h2 id="more-heading" style="font-family:Sora,sans-serif;font-weight:600;font-size:28px;letter-spacing:-0.01em;color:#101828">{{ moreHeading }}</h2>
-        <a href="#latest" style="font-family:Sora,sans-serif;font-weight:700;font-size:14px;color:#D71920">View all →</a>
-      </div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:24px">
-        <sc-for list="{{ morePosts }}" as="m" hint-placeholder-count="4">
-          <article style="display:flex;flex-direction:column;gap:12px;background:#fff;border:1px solid #E4E7EC;border-radius:10px;overflow:hidden">
-            <a href="{{ m.href }}" style="display:block;aspect-ratio:7/5;background:#F4F6F8"><img sc-camel-src="{{ m.img }}" alt="{{ m.alt }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block" /></a>
-            <div style="padding:4px 18px 20px;display:flex;flex-direction:column;gap:10px">
-              <span style="font-family:Sora,sans-serif;font-weight:700;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:#D71920">{{ m.cat }}</span>
-              <h3 style="font-family:Sora,sans-serif;font-weight:600;font-size:17px;line-height:1.3;text-wrap:pretty"><a href="{{ m.href }}" style="color:#101828" style-hover="color:#D71920">{{ m.title }}</a></h3>
-              <p style="font-size:14px;line-height:1.55;color:#475467">{{ m.excerpt }}</p>
-              <div style="display:flex;align-items:center;gap:8px;font-size:12.5px;color:#667085;margin-top:4px">
-                <span aria-hidden="true" style="width:26px;height:26px;border-radius:50%;background:#101828;color:#fff;display:flex;align-items:center;justify-content:center;font-family:Sora,sans-serif;font-weight:700;font-size:10px">{{ m.initials }}</span>
-                <span style="font-weight:600;color:#344054">{{ m.author }}</span><span>{{ m.meta }}</span>
-              </div>
-            </div>
-          </article>
+  <div style="background:#F4F6F8;border-top:1px solid #E4E7EC">
+    <div style="max-width:1280px;margin:0 auto;padding:56px 24px">
+      <h2 style="font-family:Sora,sans-serif;font-weight:600;font-size:28px;margin-bottom:24px">Related articles</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px">
+        <sc-for list="{{ morePosts }}" as="m" hint-placeholder-count="3">
+        <article style="background:#fff;border:1px solid #E4E7EC;border-radius:10px;overflow:hidden">
+          <a href="{{ m.href }}" style="display:block;height:150px;background:#F4F6F8"><img sc-camel-src="{{ m.img }}" alt="{{ m.alt }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block" /></a>
+          <div style="padding:16px;display:flex;flex-direction:column;gap:8px"><span style="font-family:Sora,sans-serif;font-weight:700;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:#D71920">{{ m.cat }}</span><h3 style="font-family:Sora,sans-serif;font-weight:600;font-size:18px;line-height:1.25"><a href="{{ m.href }}" style="color:#101828" style-hover="color:#D71920">{{ m.title }}</a></h3></div>
+        </article>
         </sc-for>
       </div>
     </div>
-  </section>
+  </div>
 </article></sc-if>
 <sc-if value="{{ articleOn }}" hint-placeholder-val="{{ false }}"><article style="display:{{ articleDisplay }}">
   <nav aria-label="Breadcrumb" style="background:#F4F6F8;border-bottom:1px solid #E4E7EC">
@@ -3618,6 +3613,49 @@ class Component extends DCLogic {
       finderCount: list.length + (list.length === 1 ? ' programme' : ' programmes') + ' for ' + provName
     };
   }
+  // ────────────────────────────────────────────────────────────────
+  // POST PAGES — every #post-… page uses the #a1 article layout.
+  // postExtras: header fields; postBodyVals: restyles the imported
+  // WordPress HTML to the #a1 type scale and builds "In this article".
+  // ────────────────────────────────────────────────────────────────
+  static CAT_ROUTES = [[/artificial intelligence|\bai\b|technology/i, '#technology'], [/cyber/i, '#cyber'], [/financ|funding/i, '#finance'], [/wom[ae]n/i, '#women'], [/leadership|succession/i, '#leadership'], [/indigenous|lgbtq|black|divers/i, '#diversity'], [/economy/i, '#economy'], [/news/i, '#latest']];
+  static postExtras(p, catShort) {
+    const t = p.title || '';
+    let crumb = t;
+    if (crumb.length > 60) { crumb = crumb.slice(0, 60); crumb = crumb.slice(0, crumb.lastIndexOf(' ')) + '…'; }
+    const hit = Component.CAT_ROUTES.find(([re]) => re.test(catShort));
+    const sponsored = /^Sponsored/.test(p.cat || '');
+    return {
+      crumb,
+      catHref: hit ? hit[1] : '#business',
+      pill: sponsored ? 'Sponsored · ' + catShort : catShort,
+      metaLine: ['Published ' + (p.date || ''), p.read].filter(Boolean).join(' · '),
+      caption: p.alt && p.alt.trim() !== t.trim() ? p.alt : ''
+    };
+  }
+  postBodyVals(html) {
+    const H2 = 'font-family:Sora,sans-serif;font-weight:600;font-size:28px;line-height:1.2;color:#101828;margin:36px 0 18px;text-wrap:pretty;scroll-margin-top:110px';
+    const QUOTE = 'margin:8px 0 26px;border-left:3px solid #D71920;padding:6px 0 6px 24px;font-family:Sora,sans-serif;font-style:italic;font-weight:400;font-size:23px;line-height:1.5;color:#101828';
+    const LEAD = 'font-size:19px;line-height:1.7;color:#101828;margin:0 0 22px';
+    const toc = [];
+    let n = 0, lead = false;
+    let out = (html || '')
+      .replace(/<h2\b[^>]*>([\s\S]*?)<\/h2>/g, (m, inner) => {
+        const label = inner.replace(/<[^>]+>/g, '').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').trim();
+        if (!label) return '';
+        const id = 'sec-' + (++n);
+        toc.push({ label, id });
+        return '<h2 id="' + id + '" style="' + H2 + '">' + inner + '</h2>';
+      })
+      .replace(/<blockquote\b[^>]*>/g, '<blockquote style="' + QUOTE + '">')
+      .replace(/<p style="font-size:17\.5px;line-height:1\.75;color:#1D2939;margin:0 0 22px">/, m => { lead = true; return '<p style="' + LEAD + '">'; });
+    return {
+      postBody: React.createElement('div', { style: { maxWidth: '70ch' }, dangerouslySetInnerHTML: { __html: out } }),
+      postHasToc: toc.length > 1,
+      postToc: toc.slice(0, 8).map(t => ({ label: t.label, href: '#post-' + ((this.state.hash || '').slice(5)), go: ev => { ev.preventDefault(); const el = document.getElementById(t.id); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 100, behavior: 'smooth' }); } }))
+    };
+  }
+
   renderVals() {
     const compact = this.state.w < 1240;
     const h = this.state.hash || '';
@@ -3627,10 +3665,11 @@ class Component extends DCLogic {
     const post0 = Component.POSTS[postKey] || { title: '', cat: '', date: '', author: '', read: '', img: '', alt: '', excerpt: '', html: '', source: '' };
     const au = Component.AUTHORS[post0.author] || Component.AUTHORS.CanadianSME;
     const catShort = (post0.cat || '').replace(/^Sponsored · /, '');
-    const post = { ...post0, catShort, sponsored: /^Sponsored/.test(post0.cat || ''), authorName: au.name, authorRole: au.role, authorBio: au.bio, initials: au.name.split(/\s+/).filter(w => /^[A-Z]/.test(w)).slice(0, 2).map(w => w[0]).join(''), shortDate: post0.date ? new Date(post0.date).toLocaleDateString('en-CA', { month: 'short', day: 'numeric', year: 'numeric' }) : '' };
+    const post = { ...post0, catShort, sponsored: /^Sponsored/.test(post0.cat || ''), authorName: au.name, authorRole: au.role, authorBio: au.bio, initials: au.name.split(/\s+/).filter(w => /^[A-Z]/.test(w)).slice(0, 2).map(w => w[0]).join(''), shortDate: post0.date ? new Date(post0.date).toLocaleDateString('en-CA', { month: 'short', day: 'numeric', year: 'numeric' }) : '' , ...Component.postExtras(post0, catShort) };
     const allPosts = Object.entries(Component.POSTS).filter(([k]) => k !== postKey);
     const same = allPosts.filter(([, p]) => (p.cat || '').replace(/^Sponsored · /, '') === catShort);
-    const morePosts = same.concat(allPosts.filter(x => same.indexOf(x) < 0)).slice(0, 4).map(([k, p]) => { const a2 = Component.AUTHORS[p.author] || Component.AUTHORS.CanadianSME; return { href: '#post-' + k, title: p.title, cat: (p.cat || '').replace(/^Sponsored · /, ''), excerpt: p.excerpt, img: p.img, alt: p.alt, author: a2.name, initials: a2.name.split(/\s+/).filter(w => /^[A-Z]/.test(w)).slice(0, 2).map(w => w[0]).join(''), meta: (p.date ? new Date(p.date).toLocaleDateString('en-CA', { month: 'short', day: 'numeric', year: 'numeric' }) : '') + ' · ' + p.read }; });
+    const morePosts = same.concat(allPosts.filter(x => same.indexOf(x) < 0))
+      .slice(0, 3).map(([k, p]) => { const a2 = Component.AUTHORS[p.author] || Component.AUTHORS.CanadianSME; return { href: '#post-' + k, title: p.title, cat: (p.cat || '').replace(/^Sponsored · /, ''), excerpt: p.excerpt, img: p.img, alt: p.alt, author: a2.name, initials: a2.name.split(/\s+/).filter(w => /^[A-Z]/.test(w)).slice(0, 2).map(w => w[0]).join(''), meta: (p.date ? new Date(p.date).toLocaleDateString('en-CA', { month: 'short', day: 'numeric', year: 'numeric' }) : '') + ' · ' + p.read }; });
     const slideN = Component.SLIDES.length;
     const slideI = ((this.state.slide || 0) % slideN + slideN) % slideN;
     const rt = this.route(), on = {}; ["home","post","article","category","search","magArchive","issue","podArchive","episode","events","event","resources","province","offersPage","about","advertising","contact","contributor","upsPage","subscribe","legal","sitemap","news","notFound"].forEach(k => { on[k + 'On'] = rt === k; });
@@ -3646,7 +3685,8 @@ class Component extends DCLogic {
       resumeSlides: () => { this.slidePaused = false; },
       post,
       postDisplay: this.d('post'),
-      postBody: React.createElement('div', { style: { maxWidth: '70ch' }, dangerouslySetInnerHTML: { __html: post.html } }),
+      ...this.postBodyVals(post.html),
+      postCols: this.state.w < 960 ? 'minmax(0,1fr)' : 'minmax(0,1fr) 300px',
       nextDeadline,
       today: this.today(),
       homeDisplay: this.d('home'),
