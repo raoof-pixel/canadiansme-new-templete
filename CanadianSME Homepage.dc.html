@@ -1080,7 +1080,7 @@
   </div>
   <div style="max-width:1280px;margin:0 auto;padding:0 24px 64px">
     <sc-if value="{{ post.img }}" hint-placeholder-val="{{ false }}">
-      <div style="height:min(52vw,520px);border-radius:10px;overflow:hidden;border:1px solid #E4E7EC;margin-bottom:14px;background:#F4F6F8"><img sc-camel-src="{{ post.img }}" alt="{{ post.alt }}" style="width:100%;height:100%;object-fit:cover;display:block" /></div>
+      <div style="border-radius:10px;overflow:hidden;border:1px solid #E4E7EC;margin-bottom:14px;background:#F4F6F8;display:flex;justify-content:center;align-items:center"><img sc-camel-src="{{ post.img }}" alt="{{ post.alt }}" style="display:block;width:auto;max-width:100%;height:auto;max-height:680px" /></div>
       <p style="font-size:12.5px;color:#5A6470;margin-bottom:40px">{{ post.caption }}</p>
     </sc-if>
     <div style="display:grid;grid-template-columns:{{ postCols }};gap:48px;align-items:start">
@@ -2597,7 +2597,9 @@ class Component extends DCLogic {
     { logo: Component.R('sl1', 'https://canadiansme.ca/wp-content/uploads/2023/09/Mag-logo-white-Copy-300x48-1.png'), logoAlt: 'CanadianSME Small Business Magazine', lines: ['Grow Locally or Globally', 'UPS is here to Help!'], bg: 'linear-gradient(110deg, #24130D 0%, #3F2318 42%, #7A5119 76%, #C98E1F 100%)', cta: 'Learn More', href: 'https://www.membersonlyprogram.com/canadiansme', img: Component.R('sl5', 'https://canadiansme.ca/wp-content/uploads/2026/10/CanadianSME-Small-Business-Magazine-October-2026.jpg'), alt: 'Grow locally or globally — UPS is here to help. 55% savings for the CanadianSME community on UPS Small Package shipping.' },
     { logo: Component.R('sl1', 'https://canadiansme.ca/wp-content/uploads/2023/09/Mag-logo-white-Copy-300x48-1.png'), logoAlt: 'CanadianSME Small Business Magazine', lines: ['Empowering Canadian', 'Small & Medium', 'Businesses'], cta: 'Read Now', href: 'https://issuu.com/canadiansme', bg: 'linear-gradient(115deg, #0B1B33 0%, #15305A 45%, #6E1A2E 80%, #B3162A 100%)', img: Component.R('sl6', 'https://canadiansme.ca/wp-content/uploads/2023/09/CanadianSME-Magazine-April-Edition_Page_1-768x994-1-1.jpeg'), alt: 'CanadianSME Small Business Magazine cover' }
   ];
+  static ENHANCE = {};
   static AUTHORS = {
+    'SK Uddin': { name: 'SK Uddin', role: 'Editor & Publisher, CanadianSME', bio: 'Editor & Publisher of CanadianSME Small Business Magazine. He leads editorial across the magazine, podcast, awards, and events, and writes on entrepreneurship, technology adoption, and small business growth in Canada.' },
     'CanadianSME': { name: 'CanadianSME Newsroom', role: 'Editorial team', bio: 'The CanadianSME editorial team covers the news, people and programmes shaping Canada’s small and medium-sized businesses.' },
     'Maheen Bari': { name: 'Maheen Bari', role: 'Client Manager, CanadianSME', bio: 'Maheen conducts interviews, coordinates events and works with business experts across Canada, bringing a hands-on view of what running a small business looks like day to day.' },
     'DUCA Financial Services Credit Union Ltd.': { name: 'DUCA Financial Services Credit Union Ltd.', role: 'Sponsored partner', bio: 'DUCA is a member-owned, full-service credit union providing banking services and financial guidance to Ontario individuals and businesses.' }
@@ -3663,26 +3665,93 @@ class Component extends DCLogic {
       caption: p.alt && p.alt.trim() !== t.trim() ? p.alt : ''
     };
   }
-  postBodyVals(html) {
-    const H2 = 'font-family:Sora,Helvetica Neue,Arial,sans-serif;font-weight:700;font-size:32px;line-height:38px;letter-spacing:-0.015em;color:#14181D;margin:40px 0 16px;text-wrap:pretty;scroll-margin-top:110px';
-    const QUOTE = 'margin:8px 0 26px;border-left:3px solid #002364;padding:6px 0 6px 24px;font-family:IBM Plex Sans,Helvetica Neue,Arial,sans-serif;font-style:italic;font-weight:400;font-size:24px;line-height:34px;color:#14181D';
-    const LEAD = 'font-size:18px;line-height:30px;color:#14181D;margin:0 0 24px';
-    const toc = [];
-    let n = 0, lead = false;
-    let out = (html || '')
-      .replace(/<h2\b[^>]*>([\s\S]*?)<\/h2>/g, (m, inner) => {
-        const label = inner.replace(/<[^>]+>/g, '').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').trim();
-        if (!label) return '';
-        const id = 'sec-' + (++n);
-        toc.push({ label, id });
-        return '<h2 id="' + id + '" style="' + H2 + '">' + inner + '</h2>';
-      })
-      .replace(/<blockquote\b[^>]*>/g, '<blockquote style="' + QUOTE + '">')
-      .replace(/<p style="font-size:17\.5px;line-height:1\.75;color:#1D2939;margin:0 0 22px">/, m => { lead = true; return '<p style="' + LEAD + '">'; });
+  // ────────────────────────────────────────────────────────────────
+  // ARTICLE FORMATTER — gives any imported WordPress post the #a1
+  // structure without changing its words. The same rules run in the
+  // import script for all ~9,000 articles.
+  //  1. clean stray markdown (**, *) and style "Interview by …" credits
+  //  2. bold interview questions / short bold lines → headings
+  //  3. AI extras from Component.ENHANCE (checked against the text):
+  //     section headings for posts without any, short sidebar labels,
+  //     a verbatim pull quote, verbatim key figures
+  // ────────────────────────────────────────────────────────────────
+  static STY = {
+    H2: 'font-family:Sora,Helvetica Neue,Arial,sans-serif;font-weight:700;font-size:30px;line-height:37px;letter-spacing:-0.015em;color:#14181D;margin:40px 0 16px;text-wrap:pretty;scroll-margin-top:110px',
+    Q: 'font-family:Sora,Helvetica Neue,Arial,sans-serif;font-weight:700;font-size:24px;line-height:33px;letter-spacing:-0.01em;color:#14181D;margin:40px 0 14px;text-wrap:pretty;scroll-margin-top:110px',
+    H3: 'font-family:Sora,Helvetica Neue,Arial,sans-serif;font-weight:700;font-size:22px;line-height:30px;color:#14181D;margin:28px 0 12px;text-wrap:pretty',
+    LEAD: 'font-family:Sora,Helvetica Neue,Arial,sans-serif;font-weight:600;font-size:21px;line-height:32px;color:#14181D;margin:0 0 24px;text-wrap:pretty',
+    CREDIT: 'font-size:14px;line-height:22px;color:#5A6470;font-style:italic;margin:0 0 24px',
+    QUOTE: 'margin:8px 0 26px;border-left:3px solid #002364;padding:6px 0 6px 24px;font-family:IBM Plex Sans,Helvetica Neue,Arial,sans-serif;font-style:italic;font-weight:400;font-size:22px;line-height:33px;color:#14181D',
+    PULL: 'margin:14px 0 30px;border-left:3px solid #D71920;padding:6px 0 6px 24px;font-family:Sora,Helvetica Neue,Arial,sans-serif;font-style:italic;font-weight:600;font-size:23px;line-height:1.5;color:#14181D;text-wrap:pretty',
+    STATS: 'display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:20px;padding:24px;background:#F4F6F8;border-radius:10px;margin:6px 0 28px',
+    STATV: 'display:block;font-family:Sora,Helvetica Neue,Arial,sans-serif;font-weight:700;font-size:30px;color:#002364;line-height:1.1;margin-bottom:6px',
+    STATL: 'display:block;font-size:13.5px;line-height:1.5;color:#5A6470'
+  };
+  static plain(h) {
+    return (h || '').replace(/<[^>]+>/g, '').replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&#8217;/g, '’').replace(/&#8216;/g, '‘').replace(/&#8220;/g, '“').replace(/&#8221;/g, '”').replace(/&#8211;/g, '–').replace(/&#8212;/g, '—').replace(/\s+/g, ' ').trim();
+  }
+  static esc(t) { return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+  static creditAuthor(html) {
+    const m = Component.plain(html).match(/\*?\s*Interview(?:ed)? by ([A-Z][A-Za-z.'’-]+(?: [A-Z][A-Za-z.'’-]+){0,2})/i);
+    if (!m) return '';
+    const name = m[1].trim().toLowerCase();
+    return Object.keys(Component.AUTHORS).find(k => Component.AUTHORS[k].name.toLowerCase() === name || k.toLowerCase() === name) || '';
+  }
+  static formatPost(html, enh) {
+    const S = Component.STY, plain = Component.plain, esc = Component.esc;
+    enh = enh || {};
+    const blocks = (html || '').match(/<(p|h2|h3|h4|ul|ol|blockquote|figure|div|table)\b[\s\S]*?<\/\1>/g) || [];
+    const fullText = plain(html);
+    const boldOnly = b => {
+      const inner = b.replace(/^<p[^>]*>|<\/p>$/g, '').trim();
+      return /^<(strong|b)\b/.test(inner) && plain(inner.replace(/<(strong|b)\b[^>]*>[\s\S]*?<\/\1>/g, '')) === '';
+    };
+    const sections = {};
+    (enh.sections || []).forEach(x => { if (blocks[x.before] && /^<p/.test(blocks[x.before])) sections[x.before] = x.text; });
+    const labels = enh.labels || {};
+    const toc = [], out = [];
+    let n = 0, hasQuote = blocks.some(b => /^<blockquote/.test(b));
+    const heading = (text, inner, ix, style) => {
+      const id = 'sec-' + (++n);
+      const label = labels[ix] || (text.length > 60 ? text.slice(0, 56).replace(/\s+\S*$/, '') + '…' : text);
+      toc.push({ label, id });
+      return '<h2 id="' + id + '" style="' + style + '">' + inner + '</h2>';
+    };
+    blocks.forEach((b, ix) => {
+      const tag = b.match(/^<(\w+)/)[1];
+      const t = plain(b).replace(/\*+/g, '').trim();
+      if (sections[ix]) out.push(heading(sections[ix], esc(sections[ix]), 'ai-' + ix, S.H2));
+      if (tag === 'p' && /^\*?\s*Interview(?:ed)? by /i.test(plain(b))) { out.push('<p style="' + S.CREDIT + '">' + esc(t) + '</p>'); return; }
+      if (tag === 'h2') { const inner = b.replace(/^<h2\b[^>]*>|<\/h2>$/g, ''); if (!t) return; out.push(heading(t, inner.replace(/\*+/g, ''), ix, /\?$/.test(t) ? S.Q : S.H2)); return; }
+      if (tag === 'h3' || tag === 'h4') { out.push('<h3 style="' + S.H3 + '">' + esc(t) + '</h3>'); return; }
+      if (tag === 'blockquote') { out.push(b.replace(/^<blockquote\b[^>]*>/, '<blockquote style="' + S.QUOTE + '">')); return; }
+      if (tag === 'p' && boldOnly(b) && t) {
+        if (ix === 0) { out.push('<p style="' + S.LEAD + '">' + esc(t) + '</p>'); return; }
+        const q = /\?$/.test(t) && t.length <= 170;
+        if (q || (t.length <= 90 && !/[.:;,]$/.test(t) && !/^[“"]/.test(t))) { out.push(heading(t, esc(t), ix, q ? S.Q : S.H2)); return; }
+      }
+      out.push(b.replace(/\*\*/g, ''));
+    });
+    // key figures after the second paragraph, only when every value is in the text
+    const stats = (enh.stats || []).filter(x => x && x.value && fullText.indexOf(x.value) !== -1).slice(0, 3);
+    if (stats.length >= 2) {
+      const at = Math.min(2, out.length);
+      out.splice(at, 0, '<div data-csme-noread aria-label="Key figures" role="group" style="' + S.STATS + '">' + stats.map(x => '<div><span style="' + S.STATV + '">' + esc(x.value) + '</span><span style="' + S.STATL + '">' + esc(x.label) + '</span></div>').join('') + '</div>');
+    }
+    // pull quote near the middle, before a heading where possible; verbatim only
+    if (enh.pull && !hasQuote && fullText.indexOf(enh.pull) !== -1 && out.length >= 8) {
+      let at = Math.floor(out.length * 0.45);
+      for (let k = at; k < Math.min(out.length, at + 6); k++) if (/^<h2/.test(out[k])) { at = k; break; }
+      out.splice(at, 0, '<blockquote data-csme-noread aria-hidden="true" style="' + S.PULL + '">“' + esc(enh.pull.replace(/^[“"]|[”"]$/g, '')) + '”</blockquote>');
+    }
+    return { html: out.join(''), toc };
+  }
+  postBodyVals(html, key) {
+    const r = Component.formatPost(html, Component.ENHANCE[key]);
     return {
-      postBody: React.createElement('div', { style: { maxWidth: '68ch' }, dangerouslySetInnerHTML: { __html: out } }),
-      postHasToc: toc.length > 1,
-      postToc: toc.slice(0, 8).map(t => ({ label: t.label, href: '#post-' + ((this.state.hash || '').slice(5)), go: ev => { ev.preventDefault(); const el = document.getElementById(t.id); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 100, behavior: 'smooth' }); } }))
+      postBody: React.createElement('div', { 'data-csme-body': '', style: { maxWidth: '68ch' }, dangerouslySetInnerHTML: { __html: r.html } }),
+      postHasToc: r.toc.length > 1,
+      postToc: r.toc.slice(0, 10).map(t => ({ label: t.label, href: '#post-' + ((this.state.hash || '').slice(5)), go: ev => { ev.preventDefault(); const el = document.getElementById(t.id); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 100, behavior: 'smooth' }); } }))
     };
   }
 
@@ -3693,7 +3762,7 @@ class Component extends DCLogic {
     const nextDeadline = this.nextDeadline();
     const postKey = h.indexOf('post-') === 0 ? h.slice(5) : '';
     const post0 = Component.POSTS[postKey] || { title: '', cat: '', date: '', author: '', read: '', img: '', alt: '', excerpt: '', html: '', source: '' };
-    const au = Component.AUTHORS[post0.author] || Component.AUTHORS.CanadianSME;
+    const au = Component.AUTHORS[Component.creditAuthor(post0.html) || post0.author] || Component.AUTHORS.CanadianSME;
     const catShort = (post0.cat || '').replace(/^Sponsored · /, '');
     const post = { ...post0, catShort, sponsored: /^Sponsored/.test(post0.cat || ''), authorName: au.name, authorRole: au.role, authorBio: au.bio, initials: au.name.split(/\s+/).filter(w => /^[A-Z]/.test(w)).slice(0, 2).map(w => w[0]).join(''), shortDate: post0.date ? new Date(post0.date).toLocaleDateString('en-CA', { month: 'short', day: 'numeric', year: 'numeric' }) : '' , ...Component.postExtras(post0, catShort) };
     const allPosts = Object.entries(Component.POSTS).filter(([k]) => k !== postKey);
@@ -3715,7 +3784,7 @@ class Component extends DCLogic {
       resumeSlides: () => { this.slidePaused = false; },
       post,
       postDisplay: this.d('post'),
-      ...this.postBodyVals(post.html),
+      ...this.postBodyVals(post.html, postKey),
       postCols: this.state.w < 960 ? 'minmax(0,1fr)' : 'minmax(0,1fr) 300px',
       nextDeadline,
       today: this.today(),
